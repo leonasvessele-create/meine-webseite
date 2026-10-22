@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Mein Webdesign-Business</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #0f0817;
+      color: #222;
+    }
+    header {
+      background: linear-gradient(135deg, #4a0080, #9b00ff, #d966ff, #9b00ff, #4a0080);
+      background-size: 300% 300%;
+      animation: glow 5s ease infinite;
+      color: white;
+      padding: 60px 20px;
+      text-align: center;
+      box-shadow: 0 0 80px rgba(217, 102, 255, 0.6);
+      position: relative;
+      overflow: hidden;
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle, rgba(255,255,255,0.15) 0%, transparent 60%);
+      animation: shine 4s ease-in-out infinite;
+    }
+    @keyframes shine {
+      0%, 100% { transform: translate(-10%, -10%); }
+      50% { transform: translate(10%, 10%); }
+    }
+    @keyframes glow {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    header h1 {
+      margin: 0;
+      font-size: 2.6em;
+      font-weight: 700;
+      letter-spacing: 1px;
+      position: relative;
+      z-index: 1;
+      text-shadow: 0 0 20px rgba(255,255,255,0.5);
+    }
+    header p {
+      font-size: 1.15em;
+      color: #f0e6ff;
+      position: relative;
+      z-index: 1;
+    }
+    section {
+      padding: 50px 20px;
+      max-width: 800px;
+      margin: 0 auto;
+      color: #f0e6ff;
+    }
+    .leistungen {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .box {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(217, 102, 255, 0.3);
+      padding: 25px;
+      border-radius: 16px;
+      box-shadow: 0 8px 32px rgba(155, 0, 255, 0.25);
+      flex: 1;
+      min-width: 200px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .box:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(217, 102, 255, 0.4);
+    }
+    .box h3 {
+      color: #d966ff;
+    }
+    .ueber-mich {
+      background: rgba(255, 255, 255, 0.06);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(217, 102, 255, 0.25);
+      border-radius: 16px;
+      padding: 30px;
+    }
+    footer {
+      text-align: center;
+      padding: 25px;
+      background-color: #0f0817;
+      color: #aaa;
+      border-top: 1px solid rgba(217, 102, 255, 0.2);
+    }
+    button {
+      background: linear-gradient(135deg, #9b00ff, #d966ff);
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 50px;
+      font-size: 1em;
+      font-weight: 600;
+      cursor: pointer;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 20px rgba(217, 102, 255, 0.5);
+    }
+    button:hover {
+      transform: scale(1.06);
+      box-shadow: 0 6px 30px rgba(217, 102, 255, 0.8);
+    }
+    button:active {
+      transform: scale(0.97);
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>orvanta.agency</h1>
+    <p>Ich helfe Brillenläden und Fitnessstudios, online mehr Kunden zu gewinnen</p>
+  </header>
+
+  <section>
+    <div class="ueber-mich">
+      <h2>Warum ich das mache</h2>
+      <p style="line-height: 1.6; font-size: 1.05em;">
+        Ich interessiere mich für Webdesign und digitales Marketing und möchte genau das nutzen,
+        um kleinen, lokalen Läden zu helfen. Viele Brillenläden und Fitnessstudios haben tolle
+        Angebote, sind online aber kaum sichtbar. Genau da will ich ansetzen: mit modernen
+        Webseiten und kurzen Videos, die zeigen, was ein Geschäft besonders macht — damit mehr
+        Kunden den Weg dorthin finden.
+      </p>
+    </div>
+  </section>
+
+  <section>
+      <section>
+    <h2 style="text-align:center;">Meine Leistungen</h2>
+    <div class="leistungen">
+      <div class="box">
+        <h3>🌐 Webdesign</h3>
+        <p>
+          Eine moderne, schnelle Webseite, die zu deinem Geschäft passt und bei Google
+          gefunden wird. Das Ergebnis: mehr Besucher auf deiner Seite, mehr Anfragen
+          und ein professionellerer Eindruck gegenüber der Konkurrenz. Viele Kunden
+          entscheiden sich schon anhand der Webseite, ob sie dir vertrauen — hier
+          zählt der erste Eindruck.
+        </p>
+      </div>
+      <div class="box">
+        <h3>🎬 Marketing-Videos</h3>
+        <p>
+          Kurze, auffällige Videos für Instagram, TikTok oder deine Webseite, die
+          zeigen, was dein Geschäft besonders macht. Das Ergebnis: mehr Reichweite,
+          mehr Aufmerksamkeit für dein Angebot und neue Kunden, die sonst nie von
+          dir erfahren hätten. Bewegtbild bleibt einfach besser im Kopf als ein
+          reines Foto oder ein Text.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section   <section>
+    <h2 style="text-align:center;">So läuft's ab</h2>
+    <div class="leistungen">
+      <div class="box">
+        <h3>1️⃣ Du schreibst mir</h3>
+        <p>
+          Erzähl mir kurz, was dein Geschäft macht und was dir wichtig ist.
+          Das reicht schon, um loszulegen — ganz unkompliziert.
+        </p>
+      </div>
+      <div class="box">
+        <h3>2️⃣ Du bekommst eine Kostprobe</h3>
+        <p>
+          Ich erstelle dir kostenlos und unverbindlich ein erstes kleines Beispiel,
+          wie deine Webseite oder dein Video aussehen könnte.
+        </p>
+      </div>
+      <div class="box">
+        <h3>3️⃣ Du entscheidest</h3>
+        <p>
+          Gefällt's dir? Dann legen wir los. Falls nicht, war's unverbindlich —
+          keine Kosten, kein Risiko für dich.
+        </p>
+      </div>
+    </div>
+  </section>
+  </section>
+
+  <footer>
+    <p>&copy; 2026 leonas vessele — Webdesign & Marketing</p>
+  </footer>  <section style="text-align:center; padding: 60px 20px; background: linear-gradient(135deg, #ff006e, #d966ff, #9b00ff); border-radius: 20px; margin: 40px auto; max-width: 700px; box-shadow: 0 0 60px rgba(255, 0, 110, 0.5);">
+    <h2 style="color: white; font-size: 1.8em; margin-bottom: 10px; text-shadow: 0 0 20px rgba(255,255,255,0.4);">
+      Bereit für mehr Kunden?
+    </h2>
+    <p style="color: #fff0f8; font-size: 1.1em; margin-bottom: 30px;">
+      Schreib mir jetzt und sichere dir deine kostenlose Kostprobe
+    </p>
+    <a href="mailto:deine-email@beispiel.de" style="text-decoration: none;">
+      <button style="
+        background: white;
+        color: #ff006e;
+        border: none;
+        padding: 18px 40px;
+        border-radius: 50px;
+        font-size: 1.3em;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: 0 6px 25px rgba(0,0,0,0.3);
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+      " onmouseover="this.style.transform='scale(1.08)'" onmouseout="this.style.transform='scale(1)'">
+        📩 Jetzt melden: deine-email@beispiel.de
+      </button>
+    </a>
+  </section>
+
+</body>
+</html>
