@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Bad &amp; Raum Vogt – Badsanierung in Musterstadt</title>
+  <meta name="description" content="Badsanierung aus einer Hand in Musterstadt und Umgebung: Komplettbad, barrierefreie Bäder, Dusche statt Wanne. Festpreis und fester Termin.">
+  <!-- Beispielseite von Rework Web. Bad & Raum Vogt ist ein ausgedachtes Unternehmen. -->
+  <style>
+    /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
+    :root {
+      --wasser: #12343b;
+      --wasser-hell: #1f5560;
+      --sand: #f6f1ea;
+      --sand-dunkel: #e8dfd2;
+      --kupfer: #c4692d;
+      --kupfer-dunkel: #a4541f;
+      --text: #1d2426;
+      --text-leise: #5a6568;
+      --weiss: #ffffff;
+      --radius: 14px;
+      --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --schrift-titel: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--schrift);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--sand);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--schrift-titel);
+      line-height: 1.2;
+      margin: 0 0 0.5em;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .beispiel-hinweis {
+      background: var(--text);
+      color: #d7dcdd;
+      text-align: center;
+      font-size: 0.85em;
+      padding: 8px 16px;
+    }
+
+    /* Kopfzeile */
+    .kopf {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(246, 241, 234, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--sand-dunkel);
+    }
+    .kopf .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 68px;
+    }
+    .logo {
+      font-family: var(--schrift-titel);
+      font-size: 1.35em;
+      font-weight: 700;
+      color: var(--wasser);
+      text-decoration: none;
+    }
+    .logo span { color: var(--kupfer); }
+    .nav {
+      display: flex;
+      gap: 28px;
+      font-size: 0.95em;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--text-leise);
+    }
+    .nav a:hover { color: var(--wasser); }
+
+    .knopf {
+      display: inline-block;
+      background: var(--kupfer);
+      color: var(--weiss);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1em;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 150ms ease, transform 100ms ease-out;
+    }
+    .knopf:hover { background: var(--kupfer-dunkel); }
+    .knopf:active { transform: scale(0.97); }
+    .knopf-hell {
+      background: transparent;
+      color: var(--wasser);
+      border: 2px solid var(--wasser);
+    }
+    .knopf-hell:hover { background: var(--wasser); color: var(--weiss); }
+
+    /* Startbereich */
+    .start {
+      padding: 72px 0 80px;
+    }
+    .start .container {
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .start-marke {
+      display: inline-block;
+      color: var(--kupfer-dunkel);
+      font-weight: 600;
+      font-size: 0.9em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .start h1 {
+      font-size: clamp(2.2em, 5vw, 3.4em);
+      color: var(--wasser);
+    }
+    .start p {
+      font-size: 1.15em;
+      color: var(--text-leise);
+      max-width: 34em;
+      margin: 0 0 28px;
+    }
+    .start-knoepfe {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .start-bild {
+      position: relative;
+      aspect-ratio: 4 / 5;
+      border-radius: 22px;
+      overflow: hidden;
+      /* Platzhalter: großformatige Fliesen. Später durch ein echtes Projektfoto ersetzen */
+      background:
+        linear-gradient(160deg, rgba(18, 52, 59, 0) 40%, rgba(18, 52, 59, 0.55)),
+        repeating-linear-gradient(0deg, transparent 0 119px, rgba(255,255,255,0.7) 119px 121px),
+        repeating-linear-gradient(90deg, transparent 0 59px, rgba(255,255,255,0.7) 59px 61px),
+        linear-gradient(160deg, #d9d2c7, #b9b0a3);
+    }
+    .start-karte {
+      position: absolute;
+      left: 20px;
+      right: 20px;
+      bottom: 20px;
+      background: var(--weiss);
+      border-radius: var(--radius);
+      padding: 18px 20px;
+      display: flex;
+      gap: 16px;
+      align-items: center;
+      box-shadow: 0 12px 30px rgba(18, 52, 59, 0.2);
+    }
+    .start-karte strong {
+      font-family: var(--schrift-titel);
+      font-size: 2em;
+      color: var(--kupfer);
+      line-height: 1;
+      white-space: nowrap;
+    }
+    .start-karte span {
+      font-size: 0.95em;
+      color: var(--text-leise);
+    }
+
+    /* Vertrauensleiste */
+    .vertrauen {
+      background: var(--wasser);
+      color: var(--weiss);
+      padding: 28px 0;
+    }
+    .vertrauen .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    .vertrauen strong {
+      display: block;
+      font-family: var(--schrift-titel);
+      font-size: 1.6em;
+    }
+    .vertrauen span {
+      color: #b8cdd1;
+      font-size: 0.9em;
+    }
+
+    /* Abschnitte */
+    .abschnitt { padding: 88px 0; }
+    .abschnitt-weiss { background: var(--weiss); }
+    .abschnitt-kopf {
+      max-width: 640px;
+      margin-bottom: 44px;
+    }
+    .abschnitt-kopf h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+      color: var(--wasser);
+    }
+    .abschnitt-kopf p {
+      color: var(--text-leise);
+      margin: 0;
+    }
+
+    /* Leistungen */
+    .raster {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .leistung {
+      background: var(--sand);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: transform 200ms cubic-bezier(.23, 1, .32, 1), box-shadow 200ms cubic-bezier(.23, 1, .32, 1);
+    }
+    .leistung:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(18, 52, 59, 0.1);
+    }
+    .leistung-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 10px;
+      background: var(--wasser);
+      color: var(--weiss);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+    }
+    .leistung h3 {
+      font-size: 1.25em;
+      color: var(--wasser);
+    }
+    .leistung p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.97em;
+    }
+
+    /* Ablauf */
+    .ablauf {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      counter-reset: schritt;
+    }
+    .schritt {
+      border-top: 3px solid var(--kupfer);
+      padding-top: 18px;
+    }
+    .schritt::before {
+      counter-increment: schritt;
+      content: "0" counter(schritt);
+      font-family: var(--schrift-titel);
+      font-size: 1.8em;
+      color: var(--kupfer);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .schritt h3 {
+      font-size: 1.15em;
+      color: var(--wasser);
+    }
+    .schritt p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.97em;
+    }
+
+    /* Vorher / Nachher */
+    .projekte {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .projekt-bilder {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .projekt-bilder div {
+      aspect-ratio: 3 / 4;
+      position: relative;
+    }
+    .projekt-bilder em {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-style: normal;
+      font-size: 0.8em;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    /* Platzhalter-Muster: kleine alte Fliesen vorher, große helle Fliesen nachher */
+    .vorher {
+      background:
+        repeating-linear-gradient(0deg, transparent 0 28px, #8f8676 28px 30px),
+        repeating-linear-gradient(90deg, transparent 0 28px, #8f8676 28px 30px),
+        #b9a98a;
+    }
+    .vorher.gruen { background-color: #8fa58f; }
+    .nachher {
+      background:
+        repeating-linear-gradient(0deg, transparent 0 99px, rgba(255,255,255,0.8) 99px 101px),
+        repeating-linear-gradient(90deg, transparent 0 49px, rgba(255,255,255,0.8) 49px 51px),
+        linear-gradient(180deg, #e4ded4, #cfc6b8);
+    }
+    .nachher.dunkel {
+      background:
+        repeating-linear-gradient(0deg, transparent 0 99px, rgba(255,255,255,0.25) 99px 101px),
+        repeating-linear-gradient(90deg, transparent 0 49px, rgba(255,255,255,0.25) 49px 51px),
+        linear-gradient(180deg, #4f5b5d, #343e40);
+    }
+    .projekt h3 {
+      margin-top: 16px;
+      font-size: 1.15em;
+      color: var(--wasser);
+    }
+    .projekt p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .platzhalter-hinweis {
+      margin-top: 28px;
+      font-size: 0.85em;
+      color: var(--text-leise);
+    }
+
+    /* Kundenstimmen */
+    .stimme {
+      background: var(--weiss);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin: 0;
+    }
+    .stimme p {
+      margin: 0 0 16px;
+      font-family: var(--schrift-titel);
+      font-size: 1.15em;
+      color: var(--wasser);
+    }
+    .stimme footer {
+      color: var(--text-leise);
+      font-size: 0.9em;
+    }
+    .sterne { color: var(--kupfer); letter-spacing: 2px; }
+
+    /* Karriere */
+    .karriere {
+      background: var(--wasser);
+      color: var(--weiss);
+      border-radius: 22px;
+      padding: 56px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .karriere h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+    }
+    .karriere p { color: #c7d8db; margin: 0 0 24px; }
+    .karriere ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .karriere li {
+      background: var(--wasser-hell);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .karriere li::before {
+      content: "✓ ";
+      color: #f0a774;
+      font-weight: 700;
+    }
+
+    /* Kontakt */
+    .kontakt {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+    }
+    .kontakt-info p { color: var(--text-leise); }
+    .kontakt-info a { color: var(--wasser); font-weight: 600; white-space: nowrap; }
+    .kontakt-info dl { margin: 24px 0 0; }
+    .kontakt-info dt {
+      font-weight: 600;
+      color: var(--wasser);
+    }
+    .kontakt-info dd {
+      margin: 0 0 14px;
+      color: var(--text-leise);
+    }
+    form {
+      background: var(--weiss);
+      box-shadow: 0 12px 30px rgba(18, 52, 59, 0.08);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+    }
+    label {
+      display: grid;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 0.95em;
+      color: var(--wasser);
+    }
+    input, select, textarea {
+      font: inherit;
+      font-weight: 400;
+      color: var(--text);
+      padding: 12px 14px;
+      border: 1px solid #cfc5b6;
+      border-radius: 10px;
+      background: var(--weiss);
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--kupfer);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+    .zwei-spalten {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .einwilligung {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-weight: 400;
+      color: var(--text-leise);
+      font-size: 0.88em;
+    }
+    .einwilligung input { width: auto; margin-top: 4px; }
+    .formular-danke {
+      display: none;
+      background: var(--wasser);
+      color: var(--weiss);
+      padding: 14px 18px;
+      border-radius: 10px;
+    }
+
+    /* Fußzeile */
+    .fuss {
+      background: var(--text);
+      color: #aab3b5;
+      padding: 40px 0 96px;
+      font-size: 0.9em;
+    }
+    .fuss .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .fuss nav { display: flex; gap: 20px; }
+
+    /* Anruf-Knopf nur auf dem Handy */
+    .anruf-mobil {
+      display: none;
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 20;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .start { padding: 40px 0 56px; }
+      .start .container,
+      .kontakt,
+      .karriere { grid-template-columns: 1fr; }
+      .start-bild { aspect-ratio: 4 / 3; }
+      .vertrauen .container,
+      .ablauf { grid-template-columns: 1fr 1fr; }
+      .karriere { padding: 36px 24px; }
+      .abschnitt { padding: 64px 0; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .kopf .knopf { display: none; }
+      .ablauf,
+      .zwei-spalten { grid-template-columns: 1fr; }
+      .anruf-mobil { display: block; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="beispiel-hinweis">
+    Beispielseite von Rework Web – „Bad &amp; Raum Vogt“ ist ein ausgedachtes Unternehmen.
+  </div>
+
+  <header class="kopf">
+    <div class="container">
+      <a class="logo" href="#">Bad <span>&amp;</span> Raum Vogt</a>
+      <nav class="nav">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#ablauf">Ablauf</a>
+        <a href="#projekte">Projekte</a>
+        <a href="#karriere">Karriere</a>
+      </nav>
+      <a class="knopf" href="tel:+49123456789">0123 456 789</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="start">
+      <div class="container">
+        <div>
+          <span class="start-marke">Meisterbetrieb in Musterstadt</span>
+          <h1>Ihr neues Bad. Aus einer Hand, zum Festpreis.</h1>
+          <p>
+            Von der Planung bis zur letzten Fuge: Wir sanieren Ihr Bad komplett,
+            mit einem festen Ansprechpartner, einem verbindlichen Termin und
+            ohne böse Überraschungen auf der Rechnung.
+          </p>
+          <div class="start-knoepfe">
+            <a class="knopf" href="#kontakt">Kostenlose Beratung anfragen</a>
+            <a class="knopf knopf-hell" href="#projekte">Projekte ansehen</a>
+          </div>
+        </div>
+        <div class="start-bild" role="img" aria-label="Platzhalter für ein Foto eines fertigen Badezimmers">
+          <div class="start-karte">
+            <strong>3–4</strong>
+            <span>Wochen dauert eine Komplettsanierung bei uns im Schnitt</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="vertrauen" aria-label="Zahlen und Fakten">
+      <div class="container">
+        <div><strong>25 Jahre</strong><span>Erfahrung im Handwerk</span></div>
+        <div><strong>400+</strong><span>sanierte Bäder</span></div>
+        <div><strong>Festpreis</strong><span>vor Baubeginn</span></div>
+        <div><strong>30 km</strong><span>rund um Musterstadt</span></div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="leistungen">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>Was wir für Sie machen</h2>
+          <p>Ob kleines Gästebad oder großes Familienbad: Wir übernehmen alle Gewerke selbst und koordinieren alles für Sie.</p>
+        </div>
+        <div class="raster">
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M6 12V5a2 2 0 0 1 4 0"/></svg>
+            </div>
+            <h3>Komplettsanierung</h3>
+            <p>Alles raus, alles neu: Leitungen, Fliesen, Sanitär, Licht. Sie bekommen ein fertiges Bad, schlüsselfertig übergeben.</p>
+          </article>
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M10 22v-6l-2-4 4-3 4 3-2 4v6"/></svg>
+            </div>
+            <h3>Barrierefreies Bad</h3>
+            <p>Bodengleiche Dusche, Haltegriffe, mehr Bewegungsfläche. Wir beraten Sie auch zu Zuschüssen der Pflegekasse.</p>
+          </article>
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 3"/><path d="M8 4v16"/><path d="M14 10v.01M17 13v.01M14 16v.01M20 16v.01M17 19v.01"/></svg>
+            </div>
+            <h3>Dusche statt Wanne</h3>
+            <p>Die alte Wanne raus, eine moderne Walk-in-Dusche rein. Meist in nur wenigen Tagen erledigt.</p>
+          </article>
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
+            </div>
+            <h3>Fliesen &amp; Oberflächen</h3>
+            <p>Großformatige Fliesen, fugenlose Wände oder Naturstein: Wir zeigen Ihnen Muster direkt bei Ihnen zu Hause.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="ablauf">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>So einfach geht's</h2>
+          <p>Vier Schritte, ein Ansprechpartner. Sie wissen immer, was als Nächstes passiert.</p>
+        </div>
+        <div class="ablauf">
+          <div class="schritt">
+            <h3>Anfrage</h3>
+            <p>Sie rufen an oder schreiben uns. Wir melden uns innerhalb von zwei Werktagen.</p>
+          </div>
+          <div class="schritt">
+            <h3>Beratung vor Ort</h3>
+            <p>Wir messen aus, hören zu und zeigen Ihnen Ideen und Materialien.</p>
+          </div>
+          <div class="schritt">
+            <h3>Festpreis-Angebot</h3>
+            <p>Sie bekommen ein klares Angebot mit festem Preis und festem Termin.</p>
+          </div>
+          <div class="schritt">
+            <h3>Ihr neues Bad</h3>
+            <p>Wir bauen sauber und pünktlich. Am Ende übergeben wir Ihnen ein fertiges Bad.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="projekte">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>Vorher und nachher</h2>
+          <p>Ein paar unserer letzten Projekte aus Musterstadt und Umgebung.</p>
+        </div>
+        <div class="projekte">
+          <article class="projekt">
+            <div class="projekt-bilder">
+              <div class="vorher" role="img" aria-label="Platzhalter: Bad vorher"><em>Vorher</em></div>
+              <div class="nachher" role="img" aria-label="Platzhalter: Bad nachher"><em>Nachher</em></div>
+            </div>
+            <h3>Familienbad, 9 m²</h3>
+            <p>Komplettsanierung mit bodengleicher Dusche und Doppelwaschtisch. Bauzeit: 3 Wochen.</p>
+          </article>
+          <article class="projekt">
+            <div class="projekt-bilder">
+              <div class="vorher gruen" role="img" aria-label="Platzhalter: Bad vorher"><em>Vorher</em></div>
+              <div class="nachher dunkel" role="img" aria-label="Platzhalter: Bad nachher"><em>Nachher</em></div>
+            </div>
+            <h3>Gästebad, 4 m²</h3>
+            <p>Aus dem grünen 80er-Jahre-Bad wurde ein modernes Gäste-WC mit dunklen Fliesen. Bauzeit: 8 Tage.</p>
+          </article>
+        </div>
+        <p class="platzhalter-hinweis">Hinweis: Die Bildflächen sind Platzhalter. Hier kommen die echten Projektfotos des Betriebs hin.</p>
+      </div>
+    </section>
+
+    <section class="abschnitt">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>Das sagen unsere Kunden</h2>
+          <p>Beispieltexte: Auf einer echten Seite stehen hier echte Bewertungen, zum Beispiel aus Google.</p>
+        </div>
+        <div class="raster">
+          <blockquote class="stimme">
+            <p>„Pünktlich fertig, alles sauber hinterlassen und der Preis war genau wie abgesprochen.“</p>
+            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkundin aus Musterstadt</footer>
+          </blockquote>
+          <blockquote class="stimme">
+            <p>„Endlich eine Dusche ohne Stufe. Die Beratung zu den Zuschüssen hat uns sehr geholfen.“</p>
+            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkunde aus dem Umland</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="karriere">
+      <div class="container">
+        <div class="karriere">
+          <div>
+            <h2>Wir suchen Verstärkung</h2>
+            <p>
+              Du arbeitest gern mit den Händen und willst am Ende des Tages sehen,
+              was du geschafft hast? Dann komm in unser Team.
+            </p>
+            <a class="knopf" href="mailto:info@beispiel.de?subject=Bewerbung">Jetzt einfach bewerben</a>
+          </div>
+          <ul>
+            <li>Anlagenmechaniker SHK (m/w/d)</li>
+            <li>Fliesenleger (m/w/d)</li>
+            <li>Azubi SHK für 2027 (m/w/d)</li>
+            <li>Bewerbung auch per WhatsApp möglich</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="kontakt">
+      <div class="container kontakt">
+        <div class="kontakt-info">
+          <div class="abschnitt-kopf">
+            <h2>Lassen Sie sich beraten</h2>
+            <p>Die Beratung bei Ihnen zu Hause ist kostenlos und unverbindlich.</p>
+          </div>
+          <p>Am schnellsten erreichen Sie uns telefonisch unter <a href="tel:+49123456789">0123 456 789</a>.</p>
+          <dl>
+            <dt>Adresse</dt>
+            <dd>Musterstraße 12, 12345 Musterstadt</dd>
+            <dt>Öffnungszeiten Büro</dt>
+            <dd>Mo–Fr 7:30–16:30 Uhr</dd>
+            <dt>Einsatzgebiet</dt>
+            <dd>Musterstadt und 30 km Umkreis</dd>
+          </dl>
+        </div>
+        <form id="anfrage">
+          <div class="zwei-spalten">
+            <label>Name<input type="text" name="name" autocomplete="name" required></label>
+            <label>Telefon<input type="tel" name="telefon" autocomplete="tel" required></label>
+          </div>
+          <label>Was haben Sie vor?
+            <select name="vorhaben">
+              <option>Komplettsanierung</option>
+              <option>Barrierefreies Bad</option>
+              <option>Dusche statt Wanne</option>
+              <option>Etwas anderes</option>
+            </select>
+          </label>
+          <label>Nachricht (optional)<textarea name="nachricht" rows="4"></textarea></label>
+          <label class="einwilligung">
+            <input type="checkbox" required>
+            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der Datenschutzerklärung.
+          </label>
+          <button class="knopf" type="submit">Anfrage senden</button>
+          <p class="formular-danke" role="status">Danke! Auf einer echten Seite würde Ihre Anfrage jetzt verschickt.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fuss">
+    <div class="container">
+      <p>&copy; 2026 Bad &amp; Raum Vogt (Beispiel) · Webseite: Rework Web</p>
+      <nav>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </nav>
+    </div>
+  </footer>
+
+  <a class="knopf anruf-mobil" href="tel:+49123456789">📞 Jetzt anrufen</a>
+
+  <script>
+    // Beispielseite: Das Formular verschickt nichts, es zeigt nur eine Bestätigung
+    document.getElementById('anfrage').addEventListener('submit', function (e) {
+      e.preventDefault();
+      this.querySelector('.formular-danke').style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Grünwerk Albers – Garten- und Landschaftsbau in Musterstadt</title>
+  <meta name="description" content="Garten- und Landschaftsbau in Musterstadt und Umgebung: Gartengestaltung, Terrassen, Pflaster, Zäune und Gartenpflege. Alles aus einer Hand.">
+  <!-- Beispielseite von Rework Web. Grünwerk Albers ist ein ausgedachtes Unternehmen. -->
+  <style>
+    /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
+    :root {
+      --primaer: #23402b;
+      --primaer-hell: #335c3e;
+      --grund: #f4f2ea;
+      --grund-dunkel: #e3dfd0;
+      --akzent: #966616;
+      --akzent-dunkel: #7a520f;
+      --text: #1e231f;
+      --text-leise: #5b625c;
+      --weiss: #ffffff;
+      --radius: 14px;
+      --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --schrift-titel: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--schrift);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--grund);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--schrift-titel);
+      line-height: 1.2;
+      margin: 0 0 0.5em;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .beispiel-hinweis {
+      background: var(--text);
+      color: #d5dad6;
+      text-align: center;
+      font-size: 0.85em;
+      padding: 8px 16px;
+    }
+
+    /* Kopfzeile */
+    .kopf {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 242, 234, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--grund-dunkel);
+    }
+    .kopf .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 68px;
+    }
+    .logo {
+      font-family: var(--schrift-titel);
+      font-size: 1.35em;
+      font-weight: 700;
+      color: var(--primaer);
+      text-decoration: none;
+    }
+    .logo span { color: var(--akzent); }
+    .nav {
+      display: flex;
+      gap: 28px;
+      font-size: 0.95em;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--text-leise);
+    }
+    .nav a:hover { color: var(--primaer); }
+
+    .knopf {
+      display: inline-block;
+      background: var(--akzent);
+      color: var(--weiss);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1em;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 150ms ease, transform 100ms ease-out;
+    }
+    .knopf:hover { background: var(--akzent-dunkel); }
+    .knopf:active { transform: scale(0.97); }
+    .knopf-hell {
+      background: transparent;
+      color: var(--primaer);
+      border: 2px solid var(--primaer);
+    }
+    .knopf-hell:hover { background: var(--primaer); color: var(--weiss); }
+
+    /* Startbereich: großes Bild über die volle Breite */
+    .start {
+      position: relative;
+      color: var(--weiss);
+      /* Platzhalter: gemähter Rasen mit Streifen. Später durch ein echtes Gartenfoto ersetzen */
+      background:
+        linear-gradient(90deg, rgba(20, 38, 25, 0.92) 0%, rgba(20, 38, 25, 0.75) 45%, rgba(20, 38, 25, 0.15) 100%),
+        repeating-linear-gradient(115deg, #4f7a3f 0 70px, #5d8a4a 70px 140px);
+      padding: 110px 0 120px;
+    }
+    .start-inhalt { max-width: 620px; }
+    .start-marke {
+      display: inline-block;
+      color: #e7c37c;
+      font-weight: 600;
+      font-size: 0.9em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .start h1 {
+      font-size: clamp(2.2em, 5vw, 3.5em);
+    }
+    .start p {
+      font-size: 1.15em;
+      color: #dfe7df;
+      margin: 0 0 28px;
+    }
+    .start-knoepfe {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .start .knopf-hell {
+      color: var(--weiss);
+      border-color: var(--weiss);
+    }
+    .start .knopf-hell:hover { background: var(--weiss); color: var(--primaer); }
+
+    /* Saison-Hinweis */
+    .saison {
+      background: var(--akzent);
+      color: var(--weiss);
+      text-align: center;
+      padding: 14px 20px;
+      font-weight: 600;
+    }
+    .saison a { color: var(--weiss); }
+
+    /* Vertrauensleiste */
+    .vertrauen {
+      background: var(--weiss);
+      padding: 32px 0;
+      border-bottom: 1px solid var(--grund-dunkel);
+    }
+    .vertrauen .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    .vertrauen strong {
+      display: block;
+      font-family: var(--schrift-titel);
+      font-size: 1.6em;
+      color: var(--primaer);
+    }
+    .vertrauen span {
+      color: var(--text-leise);
+      font-size: 0.9em;
+    }
+
+    /* Abschnitte */
+    .abschnitt { padding: 88px 0; }
+    .abschnitt-weiss { background: var(--weiss); }
+    .abschnitt-kopf {
+      max-width: 640px;
+      margin-bottom: 44px;
+    }
+    .abschnitt-kopf h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+      color: var(--primaer);
+    }
+    .abschnitt-kopf p {
+      color: var(--text-leise);
+      margin: 0;
+    }
+
+    /* Leistungen */
+    .raster {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .leistung {
+      background: var(--weiss);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--grund-dunkel);
+      transition: transform 200ms cubic-bezier(.23, 1, .32, 1), box-shadow 200ms cubic-bezier(.23, 1, .32, 1);
+    }
+    .leistung:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(35, 64, 43, 0.1);
+    }
+    .leistung-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primaer);
+      color: var(--weiss);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+    }
+    .leistung h3 {
+      font-size: 1.25em;
+      color: var(--primaer);
+    }
+    .leistung p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.97em;
+    }
+
+    /* Pflegevertrag */
+    .pflege {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .pflege-liste {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .pflege-liste li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--grund);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .pflege-liste span { color: var(--text-leise); white-space: nowrap; }
+
+    /* Ablauf */
+    .ablauf {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      counter-reset: schritt;
+    }
+    .schritt {
+      border-top: 3px solid var(--akzent);
+      padding-top: 18px;
+    }
+    .schritt::before {
+      counter-increment: schritt;
+      content: "0" counter(schritt);
+      font-family: var(--schrift-titel);
+      font-size: 1.8em;
+      color: var(--akzent);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .schritt h3 {
+      font-size: 1.15em;
+      color: var(--primaer);
+    }
+    .schritt p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.97em;
+    }
+
+    /* Vorher / Nachher */
+    .projekte {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .projekt-bilder {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .projekt-bilder div {
+      aspect-ratio: 3 / 4;
+      position: relative;
+    }
+    .projekt-bilder em {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      font-style: normal;
+      font-size: 0.8em;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.92);
+      padding: 3px 10px;
+      border-radius: 999px;
+    }
+    /* Platzhalter-Muster: verwilderte Fläche vorher, Pflaster und Rasen nachher */
+    .vorher {
+      background:
+        radial-gradient(circle at 20% 30%, #7c6a45 0 18%, transparent 19%),
+        radial-gradient(circle at 70% 60%, #6f7d45 0 22%, transparent 23%),
+        radial-gradient(circle at 40% 85%, #8a7a52 0 15%, transparent 16%),
+        #93885f;
+    }
+    .nachher-pflaster {
+      background:
+        repeating-linear-gradient(0deg, transparent 0 38px, #8c8a84 38px 40px),
+        repeating-linear-gradient(90deg, transparent 0 58px, #8c8a84 58px 60px),
+        #bdbab2;
+    }
+    .nachher-rasen {
+      background:
+        linear-gradient(180deg, transparent 62%, #a9a59b 62% 66%, transparent 66%),
+        repeating-linear-gradient(90deg, #5d8a4a 0 30px, #6b9856 30px 60px);
+    }
+    .projekt h3 {
+      margin-top: 16px;
+      font-size: 1.15em;
+      color: var(--primaer);
+    }
+    .projekt p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .platzhalter-hinweis {
+      margin-top: 28px;
+      font-size: 0.85em;
+      color: var(--text-leise);
+    }
+
+    /* Kundenstimmen */
+    .stimme {
+      background: var(--weiss);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin: 0;
+    }
+    .stimme p {
+      margin: 0 0 16px;
+      font-family: var(--schrift-titel);
+      font-size: 1.15em;
+      color: var(--primaer);
+    }
+    .stimme footer {
+      color: var(--text-leise);
+      font-size: 0.9em;
+    }
+    .sterne { color: var(--akzent); letter-spacing: 2px; }
+
+    /* Karriere */
+    .karriere {
+      background: var(--primaer);
+      color: var(--weiss);
+      border-radius: 22px;
+      padding: 56px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .karriere h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+    }
+    .karriere p { color: #cbdacd; margin: 0 0 24px; }
+    .karriere ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .karriere li {
+      background: var(--primaer-hell);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .karriere li::before {
+      content: "✓ ";
+      color: #e7c37c;
+      font-weight: 700;
+    }
+
+    /* Kontakt */
+    .kontakt {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+    }
+    .kontakt-info p { color: var(--text-leise); }
+    .kontakt-info a { color: var(--primaer); font-weight: 600; white-space: nowrap; }
+    .kontakt-info dl { margin: 24px 0 0; }
+    .kontakt-info dt {
+      font-weight: 600;
+      color: var(--primaer);
+    }
+    .kontakt-info dd {
+      margin: 0 0 14px;
+      color: var(--text-leise);
+    }
+    form {
+      background: var(--weiss);
+      box-shadow: 0 12px 30px rgba(35, 64, 43, 0.08);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+    }
+    label {
+      display: grid;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 0.95em;
+      color: var(--primaer);
+    }
+    input, select, textarea {
+      font: inherit;
+      font-weight: 400;
+      color: var(--text);
+      padding: 12px 14px;
+      border: 1px solid #cfcab8;
+      border-radius: 10px;
+      background: var(--weiss);
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--akzent);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+    .zwei-spalten {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .einwilligung {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-weight: 400;
+      color: var(--text-leise);
+      font-size: 0.88em;
+    }
+    .einwilligung input { width: auto; margin-top: 4px; }
+    .formular-danke {
+      display: none;
+      background: var(--primaer);
+      color: var(--weiss);
+      padding: 14px 18px;
+      border-radius: 10px;
+    }
+
+    /* Fußzeile */
+    .fuss {
+      background: var(--text);
+      color: #aab2ab;
+      padding: 40px 0 96px;
+      font-size: 0.9em;
+    }
+    .fuss .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .fuss nav { display: flex; gap: 20px; }
+
+    /* Anruf-Knopf nur auf dem Handy */
+    .anruf-mobil {
+      display: none;
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 20;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .start { padding: 72px 0 80px; }
+      .start {
+        background:
+          linear-gradient(180deg, rgba(20, 38, 25, 0.88), rgba(20, 38, 25, 0.7)),
+          repeating-linear-gradient(115deg, #4f7a3f 0 70px, #5d8a4a 70px 140px);
+      }
+      .kontakt,
+      .karriere,
+      .pflege { grid-template-columns: 1fr; }
+      .vertrauen .container,
+      .ablauf { grid-template-columns: 1fr 1fr; }
+      .karriere { padding: 36px 24px; }
+      .abschnitt { padding: 64px 0; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .kopf .knopf { display: none; }
+      .ablauf,
+      .zwei-spalten { grid-template-columns: 1fr; }
+      .pflege-liste li { flex-direction: column; gap: 2px; }
+      .anruf-mobil { display: block; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="beispiel-hinweis">
+    Beispielseite von Rework Web – „Grünwerk Albers“ ist ein ausgedachtes Unternehmen.
+  </div>
+
+  <header class="kopf">
+    <div class="container">
+      <a class="logo" href="#">Grünwerk <span>Albers</span></a>
+      <nav class="nav">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#pflege">Gartenpflege</a>
+        <a href="#projekte">Projekte</a>
+        <a href="#karriere">Karriere</a>
+      </nav>
+      <a class="knopf" href="tel:+49123456780">0123 456 780</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="start">
+      <div class="container">
+        <div class="start-inhalt">
+          <span class="start-marke">Garten- und Landschaftsbau in Musterstadt</span>
+          <h1>Ihr Garten. Fertig zum Genießen.</h1>
+          <p>
+            Wir planen und bauen Gärten, Terrassen und Wege, die zu Ihnen passen.
+            Und wenn Sie wollen, pflegen wir sie danach auch das ganze Jahr.
+          </p>
+          <div class="start-knoepfe">
+            <a class="knopf" href="#kontakt">Kostenlosen Vor-Ort-Termin anfragen</a>
+            <a class="knopf knopf-hell" href="#projekte">Projekte ansehen</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="saison">
+      🌱 Jetzt für das Frühjahr 2027 planen: Die Termine für März und April sind schnell vergeben. <a href="#kontakt">Termin sichern</a>
+    </div>
+
+    <section class="vertrauen" aria-label="Zahlen und Fakten">
+      <div class="container">
+        <div><strong>18 Jahre</strong><span>im Garten- und Landschaftsbau</span></div>
+        <div><strong>12</strong><span>Leute im Team</span></div>
+        <div><strong>Alles</strong><span>aus einer Hand</span></div>
+        <div><strong>25 km</strong><span>rund um Musterstadt</span></div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="leistungen">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>Was wir für Sie machen</h2>
+          <p>Vom ersten Entwurf bis zur letzten Pflanze: Wir übernehmen alles, damit Sie sich um nichts kümmern müssen.</p>
+        </div>
+        <div class="raster">
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 7 8 4 3 4c0 5 4 8 9 8z"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/></svg>
+            </div>
+            <h3>Gartengestaltung</h3>
+            <p>Wir planen Ihren Garten neu: Beete, Rasen, Bäume und Sitzplätze. Mit Entwurf, damit Sie vorher sehen, wie es wird.</p>
+          </article>
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5"/><rect x="14" y="3" width="7" height="5"/><rect x="3" y="12" width="11" height="5"/><rect x="17" y="12" width="4" height="5"/><path d="M3 21h18"/></svg>
+            </div>
+            <h3>Terrassen &amp; Pflaster</h3>
+            <p>Terrassen aus Naturstein, Holz oder Keramik, dazu Einfahrten und Gartenwege. Sauber verlegt und für Jahrzehnte gemacht.</p>
+          </article>
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V7l2-3 2 3v14"/><path d="M16 21V7l2-3 2 3v14"/><path d="M8 10h8M8 16h8"/></svg>
+            </div>
+            <h3>Zäune &amp; Sichtschutz</h3>
+            <p>Damit Ihr Garten Ihnen gehört: Zäune, Tore, Sichtschutzwände und Hecken, passend zu Haus und Grundstück.</p>
+          </article>
+          <article class="leistung">
+            <div class="leistung-icon" aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><path d="M12 16v5"/><path d="M9 21h6"/></svg>
+            </div>
+            <h3>Gartenpflege</h3>
+            <p>Rasen mähen, Hecken schneiden, Laub entfernen: einmalig oder fest im Jahresvertrag.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="pflege">
+      <div class="container pflege">
+        <div class="abschnitt-kopf">
+          <h2>Gartenpflege im Jahresvertrag</h2>
+          <p>
+            Sie genießen, wir arbeiten. Mit dem Pflegevertrag kommt unser Team regelmäßig vorbei.
+            Sie müssen nichts organisieren und haben einen festen Monatspreis.
+          </p>
+          <p style="margin-top: 20px;"><a class="knopf" href="#kontakt">Pflegevertrag anfragen</a></p>
+        </div>
+        <ul class="pflege-liste">
+          <li><strong>Frühjahr</strong><span>Rasen vertikutieren, Beete vorbereiten</span></li>
+          <li><strong>Sommer</strong><span>Mähen, Hecken schneiden, Bewässerung</span></li>
+          <li><strong>Herbst</strong><span>Laub entfernen, Rückschnitt</span></li>
+          <li><strong>Winter</strong><span>Winterschutz, Baumschnitt</span></li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="ablauf">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>So läuft's ab</h2>
+          <p>Vier Schritte bis zu Ihrem neuen Garten.</p>
+        </div>
+        <div class="ablauf">
+          <div class="schritt">
+            <h3>Anfrage</h3>
+            <p>Sie rufen an oder schreiben uns. Wir melden uns innerhalb von zwei Werktagen.</p>
+          </div>
+          <div class="schritt">
+            <h3>Termin vor Ort</h3>
+            <p>Wir schauen uns Ihren Garten an und besprechen Ihre Wünsche.</p>
+          </div>
+          <div class="schritt">
+            <h3>Entwurf &amp; Angebot</h3>
+            <p>Sie bekommen einen Plan und ein klares Angebot mit festem Termin.</p>
+          </div>
+          <div class="schritt">
+            <h3>Wir legen los</h3>
+            <p>Unser Team baut zügig und sauber. Am Ende räumen wir alles auf.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="projekte">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>Vorher und nachher</h2>
+          <p>Ein paar unserer letzten Projekte aus Musterstadt und Umgebung.</p>
+        </div>
+        <div class="projekte">
+          <article class="projekt">
+            <div class="projekt-bilder">
+              <div class="vorher" role="img" aria-label="Platzhalter: Garten vorher"><em>Vorher</em></div>
+              <div class="nachher-pflaster" role="img" aria-label="Platzhalter: neue Terrasse"><em>Nachher</em></div>
+            </div>
+            <h3>Neue Terrasse, 40 m²</h3>
+            <p>Aus einer verwilderten Ecke wurde eine Terrasse aus Naturstein mit Platz für die ganze Familie. Bauzeit: 2 Wochen.</p>
+          </article>
+          <article class="projekt">
+            <div class="projekt-bilder">
+              <div class="vorher" role="img" aria-label="Platzhalter: Garten vorher"><em>Vorher</em></div>
+              <div class="nachher-rasen" role="img" aria-label="Platzhalter: neuer Rasen mit Weg"><em>Nachher</em></div>
+            </div>
+            <h3>Familiengarten, 300 m²</h3>
+            <p>Neuer Rollrasen, ein Gartenweg und Beete mit pflegeleichten Stauden. Bauzeit: 10 Tage.</p>
+          </article>
+        </div>
+        <p class="platzhalter-hinweis">Hinweis: Die Bildflächen sind Platzhalter. Hier kommen die echten Projektfotos des Betriebs hin.</p>
+      </div>
+    </section>
+
+    <section class="abschnitt">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2>Das sagen unsere Kunden</h2>
+          <p>Beispieltexte: Auf einer echten Seite stehen hier echte Bewertungen, zum Beispiel aus Google.</p>
+        </div>
+        <div class="raster">
+          <blockquote class="stimme">
+            <p>„Die Terrasse ist genau so geworden, wie auf dem Entwurf. Und die Baustelle war jeden Abend aufgeräumt.“</p>
+            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkunde aus Musterstadt</footer>
+          </blockquote>
+          <blockquote class="stimme">
+            <p>„Seit wir den Pflegevertrag haben, sieht unser Garten das ganze Jahr gut aus, ohne dass wir etwas tun müssen.“</p>
+            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkundin aus dem Umland</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="karriere">
+      <div class="container">
+        <div class="karriere">
+          <div>
+            <h2>Arbeiten an der frischen Luft?</h2>
+            <p>
+              Bei uns sitzt du nicht im Büro. Du baust Gärten, die Menschen jeden Tag genießen.
+              Wir suchen Leute, die mit anpacken wollen.
+            </p>
+            <a class="knopf" href="mailto:info@beispiel.de?subject=Bewerbung">Jetzt einfach bewerben</a>
+          </div>
+          <ul>
+            <li>Landschaftsgärtner (m/w/d)</li>
+            <li>Helfer im Garten- und Landschaftsbau (m/w/d)</li>
+            <li>Azubi Landschaftsgärtner für 2027 (m/w/d)</li>
+            <li>Bewerbung auch per WhatsApp möglich</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="kontakt">
+      <div class="container kontakt">
+        <div class="kontakt-info">
+          <div class="abschnitt-kopf">
+            <h2>Lassen Sie uns über Ihren Garten sprechen</h2>
+            <p>Der erste Termin vor Ort ist kostenlos und unverbindlich.</p>
+          </div>
+          <p>Am schnellsten erreichen Sie uns telefonisch unter <a href="tel:+49123456780">0123 456 780</a>.</p>
+          <dl>
+            <dt>Adresse</dt>
+            <dd>Am Gartenweg 5, 12345 Musterstadt</dd>
+            <dt>Bürozeiten</dt>
+            <dd>Mo–Fr 7:00–16:00 Uhr</dd>
+            <dt>Einsatzgebiet</dt>
+            <dd>Musterstadt und 25 km Umkreis</dd>
+          </dl>
+        </div>
+        <form id="anfrage">
+          <div class="zwei-spalten">
+            <label>Name<input type="text" name="name" autocomplete="name" required></label>
+            <label>Telefon<input type="tel" name="telefon" autocomplete="tel" required></label>
+          </div>
+          <label>Was haben Sie vor?
+            <select name="vorhaben">
+              <option>Garten neu gestalten</option>
+              <option>Terrasse oder Pflaster</option>
+              <option>Zaun oder Sichtschutz</option>
+              <option>Gartenpflege</option>
+              <option>Etwas anderes</option>
+            </select>
+          </label>
+          <label>Wie groß ist Ihr Garten ungefähr? (optional)<input type="text" name="groesse" placeholder="z. B. 200 m²"></label>
+          <label>Nachricht (optional)<textarea name="nachricht" rows="4"></textarea></label>
+          <label class="einwilligung">
+            <input type="checkbox" required>
+            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der Datenschutzerklärung.
+          </label>
+          <button class="knopf" type="submit">Anfrage senden</button>
+          <p class="formular-danke" role="status">Danke! Auf einer echten Seite würde Ihre Anfrage jetzt verschickt.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fuss">
+    <div class="container">
+      <p>&copy; 2026 Grünwerk Albers (Beispiel) · Webseite: Rework Web</p>
+      <nav>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </nav>
+    </div>
+  </footer>
+
+  <a class="knopf anruf-mobil" href="tel:+49123456780">📞 Jetzt anrufen</a>
+
+  <script>
+    // Beispielseite: Das Formular verschickt nichts, es zeigt nur eine Bestätigung
+    document.getElementById('anfrage').addEventListener('submit', function (e) {
+      e.preventDefault();
+      this.querySelector('.formular-danke').style.display = 'block';
+    });
+  </script>
+
+</body>
+</html>

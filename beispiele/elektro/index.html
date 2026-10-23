@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Elektro Brandt – Elektromeister in Musterstadt, Notdienst rund um die Uhr</title>
+  <meta name="description" content="Elektro Brandt, Meisterbetrieb in Musterstadt: Elektroinstallation, Sicherungskasten, Altbau-Leitungen, E-Check und 24-Stunden-Notdienst. Preise, Antworten und direkter Kontakt.">
+  <meta name="theme-color" content="#e2e4e3">
+  <!-- Beispielseite von Rework Web. Elektro Brandt ist ein ausgedachtes Unternehmen. -->
+  <style>
+    /* Schrift liegt im eigenen Ordner: nichts wird von fremden Servern geladen (DSGVO) */
+    @font-face { font-family: "Barlow"; src: url("fonts/barlow-400.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Barlow"; src: url("fonts/barlow-500.woff2") format("woff2"); font-weight: 500; font-display: swap; }
+    @font-face { font-family: "Barlow"; src: url("fonts/barlow-600.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Barlow"; src: url("fonts/barlow-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+    @font-face { font-family: "Barlow Semi Condensed"; src: url("fonts/barlow-semi-condensed-700.woff2") format("woff2"); font-weight: 700; font-display: swap; }
+
+    :root {
+      /* Wand und Schalterplatten */
+      --wand: #e2e4e3;
+      --wand-tief: #d5d8d7;
+      --platte: #f7f8f7;
+      --platte-kante: #cbcfcd;
+      --einsatz: #fdfdfd;
+      /* Schrift */
+      --graphit: #1b1d1f;
+      --leise: #55595d;
+      --linie: #c6cac8;
+      /* Stahlblau für Links und Knöpfe */
+      --blau: #2a5784;
+      --blau-dunkel: #1f4469;
+      --blau-hell: #e3eaf1;
+      /* Rot gibt es nur für den Notdienst */
+      --notruf: #ad2a14;
+      --notruf-dunkel: #8c210f;
+      --notruf-hell: #fbe9e4;
+
+      --radius-platte: 18px;
+      --radius-einsatz: 10px;
+      --schatten-platte: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 14px 28px -16px rgba(40, 36, 28, 0.35), 0 2px 4px rgba(40, 36, 28, 0.08);
+      --schrift: "Barlow", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      --schrift-titel: "Barlow Semi Condensed", "Barlow", system-ui, sans-serif;
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 84px; }
+
+    body {
+      margin: 0;
+      font-family: var(--schrift);
+      font-size: 18px;
+      line-height: 1.6;
+      color: var(--graphit);
+      background: var(--wand);
+      -webkit-font-smoothing: antialiased;
+      font-variant-numeric: lining-nums;
+    }
+
+    ::selection { background: var(--blau); color: #fff; }
+    :focus-visible { outline: 3px solid var(--blau); outline-offset: 3px; border-radius: 6px; }
+    html { scrollbar-color: #b3b8b5 var(--wand); }
+
+    h1, h2, h3 {
+      font-family: var(--schrift-titel);
+      font-weight: 700;
+      line-height: 1.08;
+      letter-spacing: -0.01em;
+      margin: 0 0 0.45em;
+      text-wrap: balance;
+    }
+    p { margin: 0 0 1em; text-wrap: pretty; }
+    a { color: var(--blau); text-underline-offset: 0.18em; text-decoration-thickness: 1.5px; }
+    a:hover { color: var(--blau-dunkel); }
+
+    img { max-width: 100%; height: auto; }
+
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+
+    .icon { width: 22px; height: 22px; flex: none; stroke: currentColor; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* Artikelnummer wie im Schalter-Katalog */
+    .nr {
+      font-family: var(--schrift);
+      font-weight: 600;
+      font-size: 0.78rem;
+      letter-spacing: 0.06em;
+      color: var(--leise);
+      font-variant-numeric: tabular-nums;
+    }
+    .nr-notruf { color: var(--notruf); }
+
+    .beispiel-hinweis {
+      background: var(--graphit);
+      color: #d3d5d7;
+      text-align: center;
+      font-size: 0.85rem;
+      padding: 8px 16px;
+    }
+
+    /* ---------- Kopfzeile ---------- */
+    .kopf {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      background: rgba(226, 228, 227, 0.94);
+      backdrop-filter: saturate(1.2) blur(10px);
+      -webkit-backdrop-filter: saturate(1.2) blur(10px);
+      border-bottom: 1px solid var(--linie);
+    }
+    .kopf .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 72px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; color: var(--graphit); }
+    .logo-zeichen {
+      width: 40px; height: 40px;
+      border-radius: 9px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      box-shadow: var(--schatten-platte);
+      display: grid; place-items: center;
+    }
+    .logo-zeichen span { width: 14px; height: 22px; border-radius: 3px; background: var(--graphit); }
+    .logo strong { font-family: var(--schrift-titel); font-size: 1.4rem; line-height: 1; display: block; }
+    .logo small { display: block; font-size: 0.78rem; color: var(--leise); letter-spacing: 0.02em; margin-top: 2px; }
+    .nav { display: flex; gap: 26px; font-weight: 500; font-size: 0.98rem; }
+    .nav a { color: var(--graphit); text-decoration: none; padding: 6px 0; border-bottom: 2px solid transparent; }
+    .nav a:hover { border-color: var(--blau); color: var(--graphit); }
+    .kopf-tel {
+      display: inline-flex; align-items: center; gap: 8px;
+      font-weight: 600; text-decoration: none; color: var(--graphit);
+      padding: 10px 16px; border-radius: 999px;
+      background: var(--platte); border: 1px solid var(--platte-kante);
+      font-variant-numeric: tabular-nums;
+    }
+    .kopf-tel:hover { background: #fff; color: var(--graphit); }
+
+    /* ---------- Startbereich: Wand mit Lichtschalter ---------- */
+    .start {
+      position: relative;
+      overflow: clip;
+      padding: 64px 0 72px;
+      background: var(--wand);
+      transition: background-color 700ms var(--ease);
+    }
+    /* Lichtkegel der Deckenleuchte, nur sichtbar wenn das Licht an ist */
+    .start::before {
+      content: "";
+      position: absolute;
+      inset: -20% -10% auto auto;
+      width: 90%;
+      height: 140%;
+      background: radial-gradient(ellipse at 70% 0%, rgba(255, 244, 214, 0.85), rgba(255, 244, 214, 0) 60%);
+      opacity: 1;
+      pointer-events: none;
+      transition: opacity 900ms var(--ease);
+    }
+    .start-raster {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+      gap: 56px;
+      align-items: center;
+    }
+    .start h1 {
+      font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+      margin-bottom: 0.3em;
+      transition: color 700ms var(--ease);
+    }
+    .start-text {
+      font-size: 1.2rem;
+      color: var(--leise);
+      max-width: 34ch;
+      margin-bottom: 28px;
+      transition: color 700ms var(--ease);
+    }
+    .notdienst-nummer { display: block; text-decoration: none; color: var(--notruf); margin-bottom: 4px; }
+    .notdienst-nummer small {
+      display: flex; align-items: center; gap: 10px;
+      font-weight: 600; font-size: 0.95rem; letter-spacing: 0.04em;
+      color: var(--notruf);
+    }
+    .notdienst-nummer small::before {
+      content: ""; width: 10px; height: 10px; border-radius: 50%;
+      background: var(--notruf);
+      box-shadow: 0 0 0 4px rgba(173, 42, 20, 0.18);
+    }
+    .notdienst-nummer b {
+      display: block;
+      font-family: var(--schrift-titel);
+      font-weight: 700;
+      font-size: clamp(3rem, 8.4vw, 6rem);
+      line-height: 1;
+      letter-spacing: -0.02em;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+    .notdienst-nummer:hover b { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 0.12em; }
+    .notdienst-info { font-size: 0.98rem; color: var(--leise); transition: color 700ms var(--ease); }
+
+    /* Der Schalter */
+    .schalter-feld { display: grid; justify-items: center; gap: 18px; }
+    .schalter-platte {
+      width: min(300px, 70vw);
+      aspect-ratio: 1;
+      border-radius: 34px;
+      background: linear-gradient(160deg, #fdfdfb 0%, #eef0ef 100%);
+      border: 1px solid var(--platte-kante);
+      box-shadow: 0 1px 0 #fff inset, 0 30px 50px -24px rgba(40, 36, 28, 0.45), 0 4px 10px rgba(40, 36, 28, 0.08);
+      display: grid;
+      place-items: center;
+      perspective: 700px;
+    }
+    .schalter-wippe {
+      position: relative;
+      width: 60%;
+      aspect-ratio: 1;
+      border-radius: 18px;
+      border: 1px solid #d9dcda;
+      background: linear-gradient(180deg, #ffffff 0%, #f1f2f1 100%);
+      box-shadow: 0 1px 0 #fff inset, 0 6px 14px -6px rgba(40, 36, 28, 0.35);
+      cursor: pointer;
+      transform-origin: 50% 50%;
+      transform: rotateX(-7deg);
+      transition: transform 260ms var(--ease), box-shadow 260ms var(--ease);
+      font: inherit;
+      color: inherit;
+      padding: 0;
+    }
+    .schalter-wippe[aria-pressed="false"] {
+      transform: rotateX(7deg);
+      box-shadow: 0 1px 0 #fff inset, 0 -6px 14px -6px rgba(40, 36, 28, 0.25);
+    }
+    .schalter-wippe:active { transition-duration: 120ms; }
+    /* Orientierungslicht: leuchtet, solange das Licht aus ist */
+    .schalter-led {
+      position: absolute;
+      left: 50%; bottom: 16%;
+      width: 22%; height: 5px;
+      translate: -50% 0;
+      border-radius: 3px;
+      background: #d9d4c8;
+      transition: background-color 300ms var(--ease), box-shadow 300ms var(--ease);
+    }
+    .schalter-wippe[aria-pressed="false"] .schalter-led {
+      background: #ffb347;
+      box-shadow: 0 0 10px 2px rgba(255, 179, 71, 0.65);
+    }
+    .schalter-beschriftung {
+      font-size: 0.95rem;
+      color: var(--leise);
+      text-align: center;
+      transition: color 700ms var(--ease);
+    }
+
+    /* Licht aus (nur mit JavaScript, Startzustand) */
+    .start.dunkel { background: #2d2f31; }
+    .start.dunkel::before { opacity: 0; }
+    .start.dunkel h1 { color: #f1efe9; }
+    .start.dunkel .start-text,
+    .start.dunkel .notdienst-info,
+    .start.dunkel .schalter-beschriftung { color: #c5c3bd; }
+    .start.dunkel .notdienst-nummer,
+    .start.dunkel .notdienst-nummer small { color: #ff7a5c; }
+    .start.dunkel .notdienst-nummer small::before { background: #ff7a5c; box-shadow: 0 0 0 4px rgba(255, 122, 92, 0.22); }
+    .start.dunkel .schalter-platte { box-shadow: 0 1px 0 #fff inset, 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
+
+    /* 3-fach-Rahmen: eine Platte, drei bündige Einsätze, oben das Beschriftungsfeld mit dem Meister-Siegel */
+    .rahmen-3 {
+      position: relative;
+      margin-top: 56px;
+      border-radius: 24px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      box-shadow: var(--schatten-platte);
+    }
+    .rahmen-schild {
+      position: absolute;
+      top: 0;
+      left: 28px;
+      translate: 0 -50%;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 14px 6px 6px;
+      border-radius: 999px;
+      background: var(--einsatz);
+      border: 1px solid var(--platte-kante);
+      font-size: 0.85rem;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--graphit);
+    }
+    .rahmen-schild svg { width: 34px; height: 34px; flex: none; }
+    .rahmen-schild small { font-weight: 400; color: var(--leise); }
+    .rahmen-einsaetze {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-radius: 23px;
+      overflow: clip;
+    }
+    .einsatz {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 30px 28px 26px;
+      border-left: 1px solid #e1e4e2;
+      text-decoration: none;
+      color: var(--graphit);
+      transition: background-color 160ms ease;
+    }
+    .einsatz:first-child { border-left: 0; }
+    .einsatz:hover { background: #fff; color: var(--graphit); }
+    .einsatz:hover strong { color: var(--blau); }
+    .einsatz-symbol { display: grid; place-items: center; color: var(--blau); flex: none; }
+    .einsatz-symbol .icon { width: 28px; height: 28px; stroke-width: 1.6; }
+    .einsatz strong { display: block; font-size: 1.12rem; line-height: 1.25; transition: color 160ms ease; }
+    .einsatz-text span { display: block; font-size: 0.92rem; color: var(--leise); font-variant-numeric: tabular-nums; }
+    .einsatz-notruf .einsatz-symbol,
+    .einsatz-notruf:hover strong { color: var(--notruf); }
+
+    /* ---------- Typenschild mit den Eckdaten ---------- */
+    .typenschild-zeile { background: var(--wand-tief); border-block: 1px solid var(--linie); }
+    .typenschild {
+      display: grid;
+      grid-template-columns: auto repeat(4, 1fr);
+      align-items: stretch;
+      font-size: 0.95rem;
+    }
+    .typenschild > div { padding: 18px 20px; border-left: 1px solid var(--linie); }
+    .typenschild > div:first-child { border-left: 0; padding-left: 0; display: flex; align-items: center; }
+    .typenschild dt { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--leise); font-weight: 600; }
+    .typenschild dd { margin: 2px 0 0; font-weight: 600; font-size: 1.08rem; font-variant-numeric: tabular-nums; }
+    .siegel {
+      display: flex; align-items: center; gap: 12px;
+      font-weight: 600; line-height: 1.25;
+    }
+    .siegel svg { width: 52px; height: 52px; flex: none; }
+    .siegel small { display: block; font-weight: 400; color: var(--leise); font-size: 0.82rem; }
+
+    /* ---------- Abschnitte ---------- */
+    .abschnitt { padding: 104px 0; }
+    .abschnitt-hell { background: var(--platte); border-block: 1px solid var(--linie); }
+    .abschnitt-kopf { max-width: 680px; margin-bottom: 48px; }
+    .abschnitt-kopf h2 { font-size: clamp(2.1rem, 4vw, 3.1rem); }
+    .abschnitt-kopf p { color: var(--leise); font-size: 1.1rem; margin: 0; }
+
+    /* Leistungen als Katalog-Seite */
+    .katalog {
+      display: grid;
+      grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+      gap: 56px;
+      align-items: start;
+    }
+    .katalog-bild {
+      position: sticky;
+      top: 100px;
+      margin: 0;
+      padding: 12px;
+      border-radius: 24px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      box-shadow: var(--schatten-platte);
+    }
+    .katalog-bild img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; }
+    .katalog-bild figcaption { font-size: 0.85rem; color: var(--leise); padding: 10px 6px 2px; }
+    .katalog-liste { list-style: none; margin: 0; padding: 0; border-top: 2px solid var(--graphit); }
+    .katalog-liste li {
+      display: grid;
+      grid-template-columns: 64px minmax(0, 1fr) auto;
+      gap: 8px 20px;
+      align-items: baseline;
+      padding: 24px 0;
+      border-bottom: 1px solid var(--linie);
+    }
+    .katalog-liste h3 { font-size: 1.55rem; margin: 0; }
+    .katalog-liste p { grid-column: 2 / 4; margin: 0; color: var(--leise); }
+    .katalog-liste .ab {
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      color: var(--graphit);
+    }
+    .katalog-liste .notruf h3,
+    .katalog-liste .notruf .ab { color: var(--notruf); }
+
+    /* Der Chef */
+    .chef {
+      display: grid;
+      grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+      gap: 64px;
+      align-items: center;
+    }
+    .chef-foto {
+      margin: 0;
+      padding: 12px;
+      border-radius: 24px;
+      background: var(--einsatz);
+      border: 1px solid var(--platte-kante);
+      box-shadow: var(--schatten-platte);
+    }
+    .chef-foto img { display: block; width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: 50% 30%; border-radius: 14px; }
+    .chef-foto figcaption { padding: 12px 6px 2px; }
+    .chef-foto figcaption strong { display: block; font-size: 1.15rem; }
+    .chef-foto figcaption span { color: var(--leise); font-size: 0.92rem; }
+    .chef-titel { font-size: clamp(2.1rem, 4vw, 3.1rem); }
+    .chef blockquote {
+      margin: 0 0 28px;
+      padding-left: 0;
+      color: var(--graphit);
+      font-family: var(--schrift-titel);
+      font-weight: 700;
+      font-size: clamp(1.7rem, 3vw, 2.4rem);
+      line-height: 1.15;
+      text-wrap: balance;
+    }
+    .chef-text { color: var(--leise); max-width: 60ch; }
+    .nachweise {
+      list-style: none;
+      margin: 32px 0 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+    .nachweise li {
+      padding: 16px;
+      border-radius: 14px;
+      background: var(--einsatz);
+      border: 1px solid var(--platte-kante);
+      font-size: 0.92rem;
+      line-height: 1.35;
+    }
+    .nachweise strong { display: block; font-size: 1rem; margin-bottom: 4px; }
+    .nachweise svg { width: 28px; height: 28px; color: var(--graphit); margin-bottom: 8px; display: block; }
+
+    /* Preise wie ein Datenblatt */
+    .preise-raster {
+      display: grid;
+      grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: start;
+    }
+    .preistabelle {
+      width: 100%;
+      border-collapse: collapse;
+      font-variant-numeric: tabular-nums;
+      background: var(--platte);
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: var(--schatten-platte);
+      border: 1px solid var(--platte-kante);
+    }
+    .preistabelle caption { text-align: left; font-size: 0.9rem; color: var(--leise); padding-bottom: 12px; caption-side: bottom; padding-top: 14px; }
+    .preistabelle th, .preistabelle td { padding: 16px 20px; text-align: left; border-bottom: 1px solid #e1e4e2; vertical-align: baseline; }
+    .preistabelle thead th { font-size: 0.78rem; letter-spacing: 0.06em; color: var(--leise); font-weight: 600; background: var(--wand-tief); }
+    .preistabelle tbody tr:last-child th,
+    .preistabelle tbody tr:last-child td { border-bottom: 0; }
+    .preistabelle tbody th { font-weight: 600; }
+    .preistabelle tbody th small { display: block; font-weight: 400; color: var(--leise); font-size: 0.88rem; }
+    .preistabelle td.preis { text-align: right; font-weight: 700; white-space: nowrap; font-size: 1.05rem; }
+    .preistabelle .nr { white-space: nowrap; }
+    .preistabelle tr.notruf th, .preistabelle tr.notruf td.preis { color: var(--notruf); }
+    .preis-hinweis {
+      padding: 28px;
+      border-radius: 18px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      color: var(--graphit);
+    }
+    .preis-hinweis h3 { font-size: 1.5rem; }
+    .preis-hinweis ul { margin: 0; padding-left: 20px; }
+    .preis-hinweis li { margin-bottom: 8px; }
+
+    /* Ablauf */
+    .ablauf {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 0;
+      border-radius: 24px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      box-shadow: var(--schatten-platte);
+      padding: 12px;
+      counter-reset: schritt;
+    }
+    .ablauf li {
+      padding: 24px 22px;
+      border-left: 1px solid #e1e4e2;
+      counter-increment: schritt;
+    }
+    .ablauf li:first-child { border-left: 0; }
+    .ablauf h3 { font-size: 1.35rem; }
+    .ablauf h3::before {
+      content: counter(schritt);
+      font-variant-numeric: tabular-nums;
+      color: var(--leise);
+      margin-right: 0.4em;
+    }
+    .nr-inline { white-space: nowrap; }
+    .ablauf p { margin: 0; color: var(--leise); font-size: 0.98rem; }
+
+    /* Bewertungen */
+    .bewertung-kopf { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 24px; margin-bottom: 40px; }
+    .bewertung-kopf .abschnitt-kopf { margin-bottom: 0; }
+    .schnitt {
+      display: flex; align-items: center; gap: 14px;
+      padding: 14px 20px;
+      border-radius: 14px;
+      background: var(--einsatz);
+      border: 1px solid var(--platte-kante);
+    }
+    .schnitt b { font-family: var(--schrift-titel); font-size: 2.2rem; line-height: 1; font-variant-numeric: tabular-nums; }
+    .schnitt span { font-size: 0.9rem; color: var(--leise); line-height: 1.3; }
+    .sterne { display: inline-flex; gap: 2px; color: #b07a12; }
+    .sterne svg { width: 18px; height: 18px; fill: currentColor; stroke: none; }
+    .bewertungen {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 20px;
+      align-items: start;
+    }
+    .bewertung {
+      margin: 0;
+      padding: 28px;
+      border-radius: 18px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+    }
+    .bewertung:first-child { background: var(--graphit); color: #f1efe9; border-color: var(--graphit); }
+    .bewertung:first-child footer { color: #b9bbbd; }
+    .bewertung:first-child .sterne { color: #e6b54a; }
+    .bewertung p { font-size: 1.08rem; margin: 14px 0 18px; }
+    .bewertung:first-child p { font-family: var(--schrift-titel); font-size: 1.5rem; line-height: 1.25; }
+    .bewertung footer { font-size: 0.9rem; color: var(--leise); }
+    .bewertung footer strong { color: inherit; font-weight: 600; }
+    .klein-hinweis { margin-top: 24px; font-size: 0.88rem; color: var(--leise); }
+
+    /* Häufige Fragen */
+    .fragen-raster { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 56px; align-items: start; }
+    .fragen-raster .abschnitt-kopf { position: sticky; top: 100px; }
+    .fragen { border-top: 2px solid var(--graphit); }
+    .fragen details { border-bottom: 1px solid var(--linie); }
+    .fragen summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 22px 0;
+      font-weight: 600;
+      font-size: 1.15rem;
+      line-height: 1.35;
+    }
+    .fragen summary::-webkit-details-marker { display: none; }
+    .fragen summary:hover { color: var(--blau); }
+    .plus {
+      width: 34px; height: 34px; flex: none;
+      border-radius: 9px;
+      border: 1px solid var(--platte-kante);
+      background: var(--platte);
+      display: grid; place-items: center;
+      transition: transform 240ms var(--ease), background-color 160ms ease;
+    }
+    .plus svg { width: 16px; height: 16px; }
+    details[open] .plus { transform: rotate(45deg); background: var(--wand-tief); }
+    .fragen .antwort { padding: 0 54px 24px 0; color: var(--leise); }
+    .fragen .antwort p:last-child { margin: 0; }
+
+    /* Einsatzgebiet */
+    .gebiet {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 48px;
+      align-items: center;
+    }
+    .orte { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px; }
+    .orte li {
+      padding: 10px 16px;
+      border-radius: 999px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      font-weight: 500;
+    }
+    .orte li small { color: var(--leise); font-variant-numeric: tabular-nums; margin-left: 6px; }
+    .gebiet-bild {
+      margin: 0;
+      padding: 12px;
+      border-radius: 24px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      box-shadow: var(--schatten-platte);
+    }
+    .gebiet-bild img { display: block; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 14px; }
+
+    /* Karriere */
+    .karriere {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+      gap: 48px;
+      padding: 56px;
+      border-radius: 28px;
+      background: var(--graphit);
+      color: #f1efe9;
+    }
+    .karriere h2 { font-size: clamp(2.1rem, 4vw, 3.1rem); }
+    .karriere p { color: #c5c3bd; font-size: 1.1rem; }
+    .karriere .knopf { margin-top: 8px; }
+    .stellen { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+    .stellen li {
+      padding: 16px 20px;
+      border-radius: 14px;
+      background: #2a2d30;
+      border: 1px solid #3a3d41;
+    }
+    .stellen strong { display: block; }
+    .stellen span { color: #b5b3ad; font-size: 0.92rem; }
+
+    /* Knöpfe */
+    .knopf {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 52px;
+      padding: 12px 24px;
+      border-radius: 14px;
+      border: 0;
+      background: var(--blau);
+      color: #fff;
+      font: inherit;
+      font-weight: 600;
+      text-decoration: none;
+      cursor: pointer;
+      transition: background-color 160ms ease, transform 120ms ease-out;
+    }
+    .knopf:hover { background: var(--blau-dunkel); color: #fff; }
+    .knopf:active { transform: scale(0.97); }
+    .knopf-hell { background: #f1efe9; color: var(--graphit); }
+    .knopf-hell:hover { background: #fff; color: var(--graphit); }
+    .knopf-notruf { background: var(--notruf); }
+    .knopf-notruf:hover { background: var(--notruf-dunkel); }
+
+    /* Kontakt */
+    .kontakt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 56px; align-items: start; }
+    .kontakt-wege { display: grid; gap: 12px; margin: 28px 0; }
+    .kontakt-wege a {
+      display: flex; align-items: center; gap: 14px;
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      text-decoration: none;
+      color: var(--graphit);
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .kontakt-wege a:hover { border-color: var(--blau); color: var(--graphit); }
+    .kontakt-wege a span span { display: block; font-weight: 400; font-size: 0.88rem; color: var(--leise); }
+    .kontakt-wege a.notruf { background: var(--notruf-hell); border-color: #f0c5ba; color: var(--notruf-dunkel); }
+    .kontakt-wege a.notruf span span { color: #8a3a2a; }
+    .kontakt-wege .icon { color: var(--blau); }
+    .kontakt-wege a.notruf .icon { color: var(--notruf); }
+    .kontakt dl { margin: 0; display: grid; grid-template-columns: auto 1fr; gap: 8px 20px; font-size: 0.98rem; }
+    .kontakt dt { font-weight: 600; }
+    .kontakt dd { margin: 0; color: var(--leise); }
+
+    form {
+      display: grid;
+      gap: 18px;
+      padding: 32px;
+      border-radius: 24px;
+      background: var(--platte);
+      border: 1px solid var(--platte-kante);
+      box-shadow: var(--schatten-platte);
+    }
+    label { display: grid; gap: 6px; font-weight: 600; font-size: 0.98rem; }
+    label small { font-weight: 400; color: var(--leise); }
+    input, select, textarea {
+      font: inherit;
+      font-weight: 400;
+      color: var(--graphit);
+      background: #fff;
+      border: 1px solid #bcc1be;
+      border-radius: 10px;
+      padding: 13px 14px;
+      width: 100%;
+      caret-color: var(--blau);
+    }
+    input::placeholder, textarea::placeholder { color: #6e7175; }
+    input:focus, select:focus, textarea:focus { outline: 3px solid var(--blau); outline-offset: 0; border-color: var(--blau); }
+    input:user-invalid, textarea:user-invalid { border-color: var(--notruf); }
+    .zwei-spalten { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .einwilligung { display: flex; align-items: flex-start; gap: 12px; font-weight: 400; font-size: 0.9rem; color: var(--leise); }
+    .einwilligung input { width: 22px; height: 22px; margin: 2px 0 0; accent-color: var(--blau); flex: none; }
+    .formular-danke {
+      display: none;
+      margin: 0;
+      padding: 16px 18px;
+      border-radius: 12px;
+      background: var(--blau-hell);
+      color: #1d3550;
+      font-weight: 500;
+    }
+    .formular-danke.sichtbar { display: block; }
+
+    /* Fußzeile */
+    .fuss { background: var(--graphit); color: #b5b7b9; padding: 48px 0 112px; font-size: 0.92rem; }
+    .fuss .container { display: grid; grid-template-columns: 1fr auto; gap: 24px; }
+    .fuss a { color: #e7e5df; }
+    .fuss nav { display: flex; gap: 22px; }
+    .quellen { grid-column: 1 / -1; font-size: 0.82rem; color: #8f9295; margin: 0; }
+    .quellen a { color: #b5b7b9; }
+
+    /* Anruf-Leiste unten auf dem Handy: ein 2-fach-Rahmen */
+    .anruf-leiste {
+      display: none;
+      position: fixed;
+      left: 12px; right: 12px; bottom: 12px;
+      z-index: 40;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      padding: 8px;
+      border-radius: 20px;
+      background: rgba(247, 248, 247, 0.96);
+      border: 1px solid var(--platte-kante);
+      box-shadow: 0 18px 40px -12px rgba(0, 0, 0, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .anruf-leiste .knopf { min-height: 54px; padding: 10px 12px; font-size: 1rem; }
+
+    /* ---------- Bildschirmgrößen ---------- */
+    @media (max-width: 1020px) {
+      .nav { display: none; }
+      .start-raster { grid-template-columns: 1fr; gap: 40px; }
+      .schalter-feld { grid-template-columns: auto 1fr; justify-items: start; align-items: center; }
+      .schalter-platte { width: 150px; border-radius: 22px; }
+      .schalter-wippe { border-radius: 12px; }
+      .schalter-beschriftung { text-align: left; }
+      .rahmen-einsaetze { grid-template-columns: 1fr; }
+      .einsatz { border-left: 0; border-top: 1px solid #e1e4e2; padding: 20px 24px; }
+      .einsatz:first-child { border-top: 0; padding-top: 32px; }
+      .katalog, .chef, .preise-raster, .fragen-raster, .gebiet, .kontakt, .karriere { grid-template-columns: 1fr; }
+      .katalog-bild, .fragen-raster .abschnitt-kopf { position: static; }
+      .katalog-bild img { aspect-ratio: 16 / 10; }
+      .chef { gap: 40px; }
+      .chef-foto { max-width: 420px; }
+      .typenschild { grid-template-columns: 1fr 1fr; }
+      .typenschild > div:first-child { grid-column: 1 / -1; padding: 18px 0; border-bottom: 1px solid var(--linie); }
+      .typenschild > div:nth-child(2), .typenschild > div:nth-child(4) { border-left: 0; padding-left: 0; }
+      .typenschild > div:nth-child(n+4) { border-top: 1px solid var(--linie); }
+      .ablauf { grid-template-columns: 1fr 1fr; }
+      .ablauf li:nth-child(3) { border-left: 0; }
+      .ablauf li:nth-child(n+3) { border-top: 1px solid #e1e4e2; }
+      .bewertungen { grid-template-columns: 1fr; }
+      .karriere { padding: 40px 28px; }
+      .abschnitt { padding: 80px 0; }
+    }
+
+    @media (max-width: 640px) {
+      body { font-size: 17px; }
+      .container { padding: 0 16px; }
+      .kopf .container { height: 64px; }
+      .kopf-tel { display: none; }
+      .start { padding: 40px 0 48px; }
+      .start-text { font-size: 1.08rem; }
+      .notdienst-nummer b { font-size: clamp(2.6rem, 13.5vw, 3.4rem); }
+      .schalter-platte { width: 112px; border-radius: 18px; }
+      .rahmen-3 { margin-top: 40px; border-radius: 20px; }
+      .rahmen-einsaetze { border-radius: 19px; }
+      .rahmen-schild { left: 16px; }
+      .einsatz { padding: 18px 20px; }
+      .einsatz:first-child { padding-top: 30px; }
+      .nachweise { grid-template-columns: 1fr; }
+      .typenschild .siegel svg { display: none; }
+      .katalog-liste li { grid-template-columns: 1fr auto; }
+      .katalog-liste .nr { grid-column: 1 / -1; }
+      .katalog-liste p { grid-column: 1 / -1; }
+      .katalog-liste h3 { font-size: 1.35rem; }
+      .preistabelle thead { display: none; }
+      .preistabelle tbody tr { display: grid; grid-template-columns: 1fr auto; column-gap: 12px; padding: 14px 16px; border-bottom: 1px solid #e1e4e2; }
+      .preistabelle tbody tr:last-child { border-bottom: 0; }
+      .preistabelle tbody th, .preistabelle tbody td { padding: 0; border: 0; }
+      .preistabelle td.nr-zelle { grid-column: 1 / -1; margin-bottom: 4px; }
+      .preistabelle tbody th { grid-column: 1; }
+      .preistabelle td.preis { grid-column: 2; grid-row: 2; }
+      .ablauf { grid-template-columns: 1fr; }
+      .ablauf li { border-left: 0 !important; }
+      .ablauf li:nth-child(n+2) { border-top: 1px solid #e1e4e2; }
+      .zwei-spalten { grid-template-columns: 1fr; }
+      form { padding: 22px 18px; }
+      .fragen .antwort { padding-right: 0; }
+      .fuss .container { grid-template-columns: 1fr; }
+      .anruf-leiste { display: grid; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></symbol>
+    <symbol id="i-notruf" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-brief" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></symbol>
+    <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+    <symbol id="i-urkunde" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="13" rx="1.5"/><path d="M8 7h8M8 10.5h5"/><circle cx="15" cy="17" r="3"/><path d="m13.5 19.5-1 2.5 2.5-1 2.5 1-1-2.5"/></symbol>
+    <symbol id="i-haus" viewBox="0 0 24 24"><path d="M3 11 12 4l9 7"/><path d="M5 10v10h14V10"/><path d="M10 20v-6h4v6"/></symbol>
+    <symbol id="i-schild" viewBox="0 0 24 24"><path d="M12 3 5 6v5c0 4.5 3 8.3 7 10 4-1.7 7-5.5 7-10V6z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M4 20l1.3-3.9A8 8 0 1 1 8 19z"/><path d="M9 9.5c.5 2.5 2.5 4.5 5 5l1.2-1.2 1.8 1-.6 1.6c-3.6.4-8-4-7.6-7.6L10.4 7.6l1 1.8z"/></symbol>
+    <symbol id="i-siegel" viewBox="0 0 52 52">
+      <circle cx="26" cy="26" r="24" fill="#f7f8f7" stroke="#1b1d1f" stroke-width="2"/>
+      <circle cx="26" cy="26" r="18.5" fill="none" stroke="#1b1d1f" stroke-width="1" stroke-dasharray="2 2.4"/>
+      <text x="26" y="24" text-anchor="middle" font-family="Barlow Semi Condensed, sans-serif" font-weight="700" font-size="11" fill="#1b1d1f">M</text>
+      <text x="26" y="33" text-anchor="middle" font-family="Barlow, sans-serif" font-weight="600" font-size="5.6" letter-spacing=".4" fill="#1b1d1f">MEISTER</text>
+    </symbol>
+    <symbol id="i-stern" viewBox="0 0 24 24"><path d="m12 2.8 2.8 5.9 6.4.8-4.7 4.4 1.2 6.4L12 17.2l-5.7 3.1 1.2-6.4-4.7-4.4 6.4-.8z"/></symbol>
+  </svg>
+
+  <div class="beispiel-hinweis">
+    Beispielseite von Rework Web – „Elektro Brandt“ ist ein ausgedachtes Unternehmen. Namen, Preise und Bewertungen sind Beispiele.
+  </div>
+
+  <header class="kopf">
+    <div class="container">
+      <a class="logo" href="#">
+        <span class="logo-zeichen" aria-hidden="true"><span></span></span>
+        <span><strong>Elektro Brandt</strong><small>Meisterbetrieb seit 1998</small></span>
+      </a>
+      <nav class="nav" aria-label="Hauptmenü">
+        <a href="#leistungen">Leistungen</a>
+        <a href="#preise">Preise</a>
+        <a href="#fragen">Fragen</a>
+        <a href="#karriere">Karriere</a>
+        <a href="#kontakt">Kontakt</a>
+      </nav>
+      <a class="kopf-tel" href="tel:+49123456780"><svg class="icon" aria-hidden="true"><use href="#i-telefon"/></svg>0123 456 780</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="start" id="start" aria-labelledby="start-titel">
+      <div class="container">
+        <div class="start-raster">
+          <div>
+            <h1 id="start-titel">Strom weg? Wir sind gleich da.</h1>
+            <p class="start-text">Ihr Elektromeister in Musterstadt: für den kleinen Defekt, den neuen Sicherungskasten und den Notfall um 2 Uhr nachts.</p>
+            <a class="notdienst-nummer" href="tel:+49123456789">
+              <small>Notdienst · 24 Stunden, auch am Wochenende</small>
+              <b>0123 456 789</b>
+            </a>
+            <p class="notdienst-info">Meist in unter einer Stunde bei Ihnen. Feste Notdienst-Pauschale, die Sie vorher kennen.</p>
+          </div>
+
+          <div class="schalter-feld">
+            <div class="schalter-platte">
+              <button class="schalter-wippe" type="button" aria-pressed="true" aria-label="Licht im Startbereich schalten">
+                <span class="schalter-led" aria-hidden="true"></span>
+              </button>
+            </div>
+            <p class="schalter-beschriftung" aria-live="polite">Licht ist an.<br>So schnell geht's, wenn alles richtig verdrahtet ist.</p>
+          </div>
+        </div>
+
+        <div class="rahmen-3">
+          <p class="rahmen-schild">
+            <svg aria-hidden="true"><use href="#i-siegel"/></svg>
+            <span>Meisterbetrieb <small>· HWK Musterstadt</small></span>
+          </p>
+          <nav class="rahmen-einsaetze" aria-label="So erreichen Sie uns">
+          <a class="einsatz" href="tel:+49123456780">
+            <span class="einsatz-symbol"><svg class="icon" aria-hidden="true"><use href="#i-telefon"/></svg></span>
+            <span class="einsatz-text"><strong>Anrufen</strong><span>Büro: 0123 456 780</span></span>
+          </a>
+          <a class="einsatz einsatz-notruf" href="tel:+49123456789">
+            <span class="einsatz-symbol"><svg class="icon" aria-hidden="true"><use href="#i-notruf"/></svg></span>
+            <span class="einsatz-text"><strong>Notdienst</strong><span>24 h: 0123 456 789</span></span>
+          </a>
+          <a class="einsatz" href="#kontakt">
+            <span class="einsatz-symbol"><svg class="icon" aria-hidden="true"><use href="#i-brief"/></svg></span>
+            <span class="einsatz-text"><strong>Anfrage schreiben</strong><span>Antwort am nächsten Werktag</span></span>
+          </a>
+          </nav>
+        </div>
+      </div>
+    </section>
+
+    <div class="typenschild-zeile">
+      <dl class="container typenschild" aria-label="Eckdaten">
+        <div>
+          <div class="siegel">
+            <svg aria-hidden="true"><use href="#i-siegel"/></svg>
+            <span>Meisterbetrieb<small>eingetragen in der Handwerksrolle der HWK Musterstadt</small></span>
+          </div>
+        </div>
+        <div><dt>Gegründet</dt><dd>1998</dd></div>
+        <div><dt>Team</dt><dd>6 Elektriker, 1 Azubi</dd></div>
+        <div><dt>Einsatzgebiet</dt><dd>20 km um Musterstadt</dd></div>
+        <div><dt>Notdienst</dt><dd>365 Tage, rund um die Uhr</dd></div>
+      </dl>
+    </div>
+
+    <section class="abschnitt" id="leistungen" aria-labelledby="leistungen-titel">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2 id="leistungen-titel">Was wir für Sie machen</h2>
+          <p>Klassische Elektrotechnik für Haus und Wohnung. Jede Leistung hat eine feste Nummer, die Sie bei den Preisen und Fragen wiederfinden.</p>
+        </div>
+        <div class="katalog">
+          <figure class="katalog-bild">
+            <img src="bilder/verteiler.jpg" alt="Geöffneter Verteilerkasten mit ordentlich verlegten Leitungen und Sicherungen" width="1400" height="933" loading="lazy">
+            <figcaption>Sauber verdrahtet: ein neu aufgebauter Verteiler.</figcaption>
+          </figure>
+          <ol class="katalog-liste">
+            <li>
+              <span class="nr">E-01</span>
+              <h3>Installation &amp; Reparatur</h3>
+              <span class="ab">ab 65 €</span>
+              <p>Steckdosen, Schalter, Lampen, Herd- und Backofen-Anschluss. Auch kleine Aufträge sind uns nicht zu klein.</p>
+            </li>
+            <li>
+              <span class="nr">E-02</span>
+              <h3>Sicherungskasten &amp; Zählerschrank</h3>
+              <span class="ab">ab 1.800 €</span>
+              <p>Alte Schraubsicherungen raus, moderner Verteiler mit FI-Schutzschalter rein. Wir sprechen alles mit dem Netzbetreiber ab.</p>
+            </li>
+            <li>
+              <span class="nr">E-03</span>
+              <h3>Altbau: Leitungen erneuern</h3>
+              <span class="ab">ab 9.500 €</span>
+              <p>Alte Stoff- oder Alu-Leitungen sind ein Brandrisiko. Wir erneuern Raum für Raum, damit Sie weiter wohnen können.</p>
+            </li>
+            <li>
+              <span class="nr">E-04</span>
+              <h3>E-Check</h3>
+              <span class="ab">ab 180 €</span>
+              <p>Die Sicherheitsprüfung Ihrer Anlage mit Prüfprotokoll. Wichtig für Vermieter und oft gern gesehen von der Versicherung.</p>
+            </li>
+            <li class="notruf">
+              <span class="nr nr-notruf">E-05</span>
+              <h3>Notdienst 24 h</h3>
+              <span class="ab">ab 95 €</span>
+              <p>Stromausfall, Sicherung fliegt immer wieder raus, Schmorgeruch: Rufen Sie an. Tag und Nacht, auch an Feiertagen.</p>
+            </li>
+          </ol>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-hell" id="ueber-uns" aria-labelledby="chef-titel">
+      <div class="container chef">
+        <figure class="chef-foto">
+          <img src="bilder/meister.jpg" alt="Klaus Brandt, Elektromeister, in blauer Arbeitskleidung mit verschränkten Armen auf einer Baustelle" width="780" height="975" loading="lazy">
+          <figcaption><strong>Klaus Brandt</strong><span>Elektromeister und Inhaber</span></figcaption>
+        </figure>
+        <div>
+          <h2 id="chef-titel" class="chef-titel">Klaus Brandt, Ihr Elektromeister</h2>
+          <blockquote>„Bei uns geht keiner, bevor nicht alles geprüft ist. Und ich gehe auch selbst ans Telefon.“</blockquote>
+          <div class="chef-text">
+            <p>Ich habe den Betrieb 1998 gegründet, nach meiner Meisterprüfung vor der Handwerkskammer. Heute sind wir sieben Leute, alle aus der Gegend. Sie bekommen bei uns einen festen Ansprechpartner und am Ende eine Rechnung ohne Überraschungen.</p>
+          </div>
+          <ul class="nachweise">
+            <li><svg class="icon" aria-hidden="true"><use href="#i-urkunde"/></svg><strong>Meisterbrief</strong>Elektrotechnikermeister, HWK Musterstadt, 1997</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-schild"/></svg><strong>Innungsbetrieb</strong>Mitglied der Elektro-Innung Musterstadt</li>
+            <li><svg class="icon" aria-hidden="true"><use href="#i-haus"/></svg><strong>Eingetragen beim Netzbetreiber</strong>Wir dürfen am Zählerschrank arbeiten</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="preise" aria-labelledby="preise-titel">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2 id="preise-titel">Was kostet das ungefähr?</h2>
+          <p>Damit Sie vorher wissen, woran Sie sind. Den genauen Preis bekommen Sie nach einem kurzen Blick vor Ort, schriftlich und verbindlich.</p>
+        </div>
+        <div class="preise-raster">
+          <table class="preistabelle">
+            <caption>Richtwerte inklusive Mehrwertsteuer, Stand 2026. Beispielpreise.</caption>
+            <thead>
+              <tr><th scope="col">Nr.</th><th scope="col">Arbeit</th><th scope="col" style="text-align:right">Preis</th></tr>
+            </thead>
+            <tbody>
+              <tr><td class="nr nr-zelle">E-01</td><th scope="row">Steckdose oder Schalter setzen<small>inkl. Material, im Einsatzgebiet</small></th><td class="preis">65–120 €</td></tr>
+              <tr><td class="nr nr-zelle">E-01</td><th scope="row">Herd anschließen<small>vorhandene Herdanschlussdose</small></th><td class="preis">90–140 €</td></tr>
+              <tr><td class="nr nr-zelle">E-02</td><th scope="row">Sicherungskasten erneuern<small>Einfamilienhaus, mit FI-Schutzschalter</small></th><td class="preis">1.800–3.500 €</td></tr>
+              <tr><td class="nr nr-zelle">E-03</td><th scope="row">Wohnung neu verkabeln<small>ca. 80 m², Altbau</small></th><td class="preis">9.500–16.000 €</td></tr>
+              <tr><td class="nr nr-zelle">E-04</td><th scope="row">E-Check mit Prüfprotokoll<small>Einfamilienhaus</small></th><td class="preis">180–290 €</td></tr>
+              <tr class="notruf"><td class="nr nr-zelle nr-notruf">E-05</td><th scope="row">Notdienst-Pauschale<small>nachts, am Wochenende, an Feiertagen, plus Material</small></th><td class="preis">ab 95 €</td></tr>
+            </tbody>
+          </table>
+          <aside class="preis-hinweis">
+            <h3>Gut zu wissen</h3>
+            <ul>
+              <li>Anfahrt in Musterstadt kostet nichts.</li>
+              <li>Der Termin zur Besichtigung ist kostenlos.</li>
+              <li>Sie bekommen immer erst ein schriftliches Angebot.</li>
+              <li>Bezahlen per Überweisung oder EC-Karte vor Ort.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-hell" id="ablauf" aria-labelledby="ablauf-titel">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2 id="ablauf-titel">So läuft ein Auftrag ab</h2>
+          <p>Vom Anruf bis zum Prüfprotokoll: Sie wissen in jedem Schritt, was passiert.</p>
+        </div>
+        <ol class="ablauf">
+          <li><h3>Anruf oder Anfrage</h3><p>Sie schildern kurz, worum es geht. Wir melden uns spätestens am nächsten Werktag.</p></li>
+          <li><h3>Kurzer Termin vor Ort</h3><p>Wir schauen uns alles an. Kostenlos und ohne Verpflichtung.</p></li>
+          <li><h3>Festes Angebot</h3><p>Schriftlich, mit Preis und Termin. Sie entscheiden in Ruhe.</p></li>
+          <li><h3>Arbeit und Prüfung</h3><p>Wir arbeiten sauber, räumen auf und prüfen jede Anlage, bevor wir gehen.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="bewertungen" aria-labelledby="bewertungen-titel">
+      <div class="container">
+        <div class="bewertung-kopf">
+          <div class="abschnitt-kopf">
+            <h2 id="bewertungen-titel">Was Kunden über uns schreiben</h2>
+            <p>Beispielbewertungen. Hier stehen später die echten Google-Bewertungen des Betriebs.</p>
+          </div>
+          <div class="schnitt">
+            <b>4,9</b>
+            <span><span class="sterne" aria-label="4,9 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span><br>Beispiel: aus 87 Bewertungen</span>
+          </div>
+        </div>
+        <div class="bewertungen">
+          <blockquote class="bewertung">
+            <span class="sterne" aria-label="5 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span>
+            <p>„Sonntagabend war plötzlich das ganze Haus dunkel. Eine Stunde nach dem Anruf war Herr Brandt da und hat den Fehler gefunden. Preis vorher genannt, genau so abgerechnet.“</p>
+            <footer><strong>Monika S.</strong> aus Musterstadt · 14. September 2026</footer>
+          </blockquote>
+          <blockquote class="bewertung">
+            <span class="sterne" aria-label="5 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span>
+            <p>„Neuer Sicherungskasten im Altbau. Alles wurde gut erklärt, und die Baustelle war jeden Abend sauber.“</p>
+            <footer><strong>Thomas K.</strong> aus Beispielhausen · 2. August 2026</footer>
+          </blockquote>
+          <blockquote class="bewertung">
+            <span class="sterne" aria-label="5 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span>
+            <p>„Nur zwei Steckdosen, trotzdem schnell einen Termin bekommen. Freundlich und pünktlich.“</p>
+            <footer><strong>Aylin D.</strong> aus Musterstadt · 19. Juli 2026</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-hell" id="fragen" aria-labelledby="fragen-titel">
+      <div class="container fragen-raster">
+        <div class="abschnitt-kopf">
+          <h2 id="fragen-titel">Häufige Fragen</h2>
+          <p>Ihre Frage ist nicht dabei? Rufen Sie einfach an: <a href="tel:+49123456780">0123 456 780</a>.</p>
+        </div>
+        <div class="fragen">
+          <details>
+            <summary>Was kostet ein Notdienst-Einsatz? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <div class="antwort"><p>Die Notdienst-Pauschale beträgt ab 95 € <span class="nr-inline">(Nr. E-05)</span>, dazu kommen Arbeitszeit und Material. Den Rahmen nennen wir Ihnen schon am Telefon, bevor wir losfahren.</p></div>
+          </details>
+          <details>
+            <summary>Wie schnell sind Sie im Notfall da? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <div class="antwort"><p>In Musterstadt meist in unter einer Stunde, im Umland in rund anderthalb Stunden. Bei Schmorgeruch oder Funken schalten Sie bitte sofort die Sicherung aus und rufen uns an.</p></div>
+          </details>
+          <details>
+            <summary>Muss mein alter Sicherungskasten raus? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <div class="antwort"><p>Nicht immer. Haben Sie noch Schraubsicherungen und keinen FI-Schutzschalter, raten wir dazu. Beim kostenlosen Termin vor Ort sagen wir Ihnen ehrlich, ob es nötig ist <span class="nr-inline">(Nr. E-02)</span>.</p></div>
+          </details>
+          <details>
+            <summary>Was ist ein E-Check, und brauche ich den? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <div class="antwort"><p>Beim E-Check prüfen wir Ihre Elektroanlage auf Sicherheit und Sie bekommen ein Protokoll. Für Vermieter ist er sehr zu empfehlen, für Hausbesitzer alle paar Jahre sinnvoll <span class="nr-inline">(Nr. E-04)</span>.</p></div>
+          </details>
+          <details>
+            <summary>Kommen Sie auch für kleine Aufträge? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <div class="antwort"><p>Ja. Eine einzelne Steckdose oder Lampe ist für uns ein ganz normaler Auftrag <span class="nr-inline">(Nr. E-01)</span>.</p></div>
+          </details>
+          <details>
+            <summary>Darf ich Lampen oder Steckdosen selbst anschließen? <span class="plus" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></summary>
+            <div class="antwort"><p>Arbeiten an der Elektroanlage sollten nur Fachleute machen. Bei einem Schaden kann sonst die Versicherung Probleme machen. Rufen Sie lieber kurz an.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="gebiet" aria-labelledby="gebiet-titel">
+      <div class="container gebiet">
+        <div>
+          <div class="abschnitt-kopf" style="margin-bottom:28px">
+            <h2 id="gebiet-titel">Hier sind wir unterwegs</h2>
+            <p>Musterstadt und 20 Kilometer drumherum. Wohnen Sie etwas weiter weg? Fragen Sie trotzdem.</p>
+          </div>
+          <ul class="orte">
+            <li>Musterstadt</li>
+            <li>Beispielhausen <small>6 km</small></li>
+            <li>Neudorf <small>9 km</small></li>
+            <li>Lindenau <small>11 km</small></li>
+            <li>Bergheim am See <small>14 km</small></li>
+            <li>Kirchwalde <small>17 km</small></li>
+            <li>Oberfeld <small>19 km</small></li>
+          </ul>
+        </div>
+        <figure class="gebiet-bild">
+          <img src="bilder/pruefung.jpg" alt="Elektriker misst mit einem Prüfgerät an einer Verteilung" width="1400" height="1050" loading="lazy">
+        </figure>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-hell" id="karriere" aria-labelledby="karriere-titel">
+      <div class="container">
+        <div class="karriere">
+          <div>
+            <h2 id="karriere-titel">Du willst, dass bei anderen das Licht angeht?</h2>
+            <p>Wir suchen Leute aus der Gegend, die ordentlich arbeiten. Dafür gibt es feste Arbeitszeiten, Tariflohn, ein eigenes Firmenauto und einen Chef, der selbst noch mit anpackt.</p>
+            <a class="knopf knopf-hell" href="mailto:bewerbung@elektro-brandt.example?subject=Bewerbung"><svg class="icon" aria-hidden="true"><use href="#i-brief"/></svg>Jetzt bewerben</a>
+          </div>
+          <ul class="stellen">
+            <li><strong>Elektroniker (m/w/d)</strong><span>Energie- und Gebäudetechnik, Vollzeit</span></li>
+            <li><strong>Ausbildung 2027 (m/w/d)</strong><span>Elektroniker, Start 1. August</span></li>
+            <li><strong>Bewerben ohne Anschreiben</strong><span>Kurz anrufen oder per WhatsApp: 0123 456 781</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="kontakt" aria-labelledby="kontakt-titel">
+      <div class="container kontakt">
+        <div>
+          <div class="abschnitt-kopf" style="margin-bottom:0">
+            <h2 id="kontakt-titel">Sprechen Sie uns an</h2>
+            <p>Am schnellsten geht es am Telefon. Für alles, was Zeit hat, nutzen Sie gern das Formular.</p>
+          </div>
+          <div class="kontakt-wege">
+            <a href="tel:+49123456780"><svg class="icon" aria-hidden="true"><use href="#i-telefon"/></svg><span>0123 456 780<span>Büro, Mo–Fr 7–17 Uhr</span></span></a>
+            <a class="notruf" href="tel:+49123456789"><svg class="icon" aria-hidden="true"><use href="#i-notruf"/></svg><span>0123 456 789<span>Notdienst, rund um die Uhr</span></span></a>
+            <a href="mailto:info@elektro-brandt.example"><svg class="icon" aria-hidden="true"><use href="#i-brief"/></svg><span>info@elektro-brandt.example<span>Antwort am nächsten Werktag</span></span></a>
+          </div>
+          <dl>
+            <dt>Adresse</dt><dd>Lindenstraße 12, 12345 Musterstadt</dd>
+            <dt>Büro</dt><dd>Mo–Fr 7:00–17:00 Uhr</dd>
+            <dt>Notdienst</dt><dd>24 Stunden, 365 Tage</dd>
+          </dl>
+        </div>
+
+        <form id="anfrage" novalidate>
+          <div class="zwei-spalten">
+            <label>Name<input type="text" name="name" autocomplete="name" required></label>
+            <label>Telefon<input type="tel" name="telefon" autocomplete="tel" required></label>
+          </div>
+          <label>Worum geht es?
+            <select name="thema">
+              <option>E-01 Installation oder Reparatur</option>
+              <option>E-02 Sicherungskasten oder Zählerschrank</option>
+              <option>E-03 Altbau: Leitungen erneuern</option>
+              <option>E-04 E-Check</option>
+              <option>Etwas anderes</option>
+            </select>
+          </label>
+          <label><span>Ort <small>(optional)</small></span><input type="text" name="ort" autocomplete="address-level2" placeholder="z. B. Beispielhausen"></label>
+          <label><span>Ihre Nachricht <small>(optional)</small></span><textarea name="nachricht" rows="4" placeholder="Was ist passiert oder was haben Sie vor?"></textarea></label>
+          <label class="einwilligung">
+            <input type="checkbox" name="einwilligung" required>
+            <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der <a href="#">Datenschutzerklärung</a>.</span>
+          </label>
+          <button class="knopf" type="submit">Anfrage senden</button>
+          <p class="formular-danke" role="status" aria-live="polite"></p>
+          <p style="margin:0;font-size:0.88rem;color:var(--leise)">Im Notfall bitte nicht schreiben, sondern anrufen: <a href="tel:+49123456789" style="color:var(--notruf)">0123 456 789</a>.</p>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="fuss">
+    <div class="container">
+      <p style="margin:0">&copy; 2026 Elektro Brandt (Beispiel) · Webseite: Rework Web</p>
+      <nav aria-label="Rechtliches">
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+      </nav>
+      <p class="quellen">
+        Fotos von Unsplash (kostenlose Lizenz):
+        <a href="https://unsplash.com/de/fotos/63TPRKUxhmA">Divaris Shirichena</a>,
+        <a href="https://unsplash.com/de/fotos/47jO5Y8nsYo">mostafa mahmoudi</a>,
+        <a href="https://unsplash.com/de/fotos/PkHf7BUWbtk">Toolmash Expo</a>.
+        Schrift: Barlow (SIL Open Font License), lokal eingebunden.
+      </p>
+    </div>
+  </footer>
+
+  <div class="anruf-leiste" aria-label="Schnell anrufen">
+    <a class="knopf" href="tel:+49123456780"><svg class="icon" aria-hidden="true"><use href="#i-telefon"/></svg>Anrufen</a>
+    <a class="knopf knopf-notruf" href="tel:+49123456789"><svg class="icon" aria-hidden="true"><use href="#i-notruf"/></svg>Notdienst</a>
+  </div>
+
+  <script>
+    // Lichtschalter: Der Startbereich beginnt in der Dämmerung, ein Klick macht Licht
+    (function () {
+      var start = document.getElementById('start');
+      var wippe = start.querySelector('.schalter-wippe');
+      var text = start.querySelector('.schalter-beschriftung');
+      function schalten(an) {
+        start.classList.toggle('dunkel', !an);
+        wippe.setAttribute('aria-pressed', String(an));
+        text.innerHTML = an
+          ? 'Licht ist an.<br>So schnell geht’s, wenn alles richtig verdrahtet ist.'
+          : 'Dunkel? Probieren Sie den Schalter.<br>Bei Ihnen zu Hause machen wir das.';
+      }
+      schalten(false);
+      wippe.addEventListener('click', function () {
+        schalten(wippe.getAttribute('aria-pressed') !== 'true');
+      });
+    })();
+
+    // Beispielseite: Das Formular verschickt nichts, es prüft nur die Felder und zeigt eine Bestätigung
+    document.getElementById('anfrage').addEventListener('submit', function (e) {
+      e.preventDefault();
+      var meldung = this.querySelector('.formular-danke');
+      if (!this.checkValidity()) {
+        var erstes = this.querySelector(':invalid');
+        meldung.textContent = erstes.type === 'checkbox'
+          ? 'Bitte setzen Sie noch das Häkchen zur Datenschutz-Einwilligung.'
+          : 'Bitte füllen Sie noch Name und Telefon aus, damit wir Sie zurückrufen können.';
+        meldung.classList.add('sichtbar');
+        erstes.focus();
+        return;
+      }
+      meldung.textContent = 'Danke! Auf einer echten Seite wäre Ihre Anfrage jetzt verschickt, und wir würden uns am nächsten Werktag melden.';
+      meldung.classList.add('sichtbar');
+    });
+  </script>
+
+</body>
+</html>
