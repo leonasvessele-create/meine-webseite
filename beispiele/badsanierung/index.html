@@ -8,719 +8,334 @@
   <meta name="description" content="Badsanierung aus einer Hand in Musterstadt und Umgebung: Komplettbad, barrierefreie Bäder, Dusche statt Wanne. Festpreis und fester Termin.">
   <!-- Beispielseite von Hand &amp; Fuß Webseiten. Bad & Raum Vogt ist ein ausgedachtes Unternehmen. -->
   <style>
-    /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
+    /* Schrift lokal eingebunden (keine Google-Server, DSGVO-sicher) */
+    @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+
     :root {
-      --wasser: #12343b;
-      --wasser-hell: #1f5560;
-      --sand: #f6f1ea;
-      --sand-dunkel: #e8dfd2;
-      --kupfer: #c4692d;
-      --kupfer-dunkel: #a4541f;
-      --text: #1d2426;
-      --text-leise: #5a6568;
-      --weiss: #ffffff;
-      --radius: 14px;
-      --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --schrift-titel: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --film: #eef1f0;
+      --film-tief: #e2e7e6;
+      --weiss: #fbfcfc;
+      --tusche: #1f2429;
+      --leise: #4b555c;
+      --raster: rgba(31, 36, 41, 0.055);
+      --raster-grob: rgba(31, 36, 41, 0.09);
+      --kalt: #0b6f72;
+      --kalt-tief: #08585a;
+      --kalt-hell: #8fd3cf;
+      --warm: #c93a2a;
+      --linie: 1.5px solid var(--tusche);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      font-family: var(--schrift);
-      font-size: 17px;
+      font-family: "Bricolage", system-ui, sans-serif;
+      font-size: 18px;
       line-height: 1.6;
-      color: var(--text);
-      background: var(--sand);
+      color: var(--tusche);
+      background-color: var(--film);
+      /* Zeichenfilm mit 1:20-Raster */
+      background-image:
+        linear-gradient(var(--raster-grob) 1px, transparent 1px),
+        linear-gradient(90deg, var(--raster-grob) 1px, transparent 1px),
+        linear-gradient(var(--raster) 1px, transparent 1px),
+        linear-gradient(90deg, var(--raster) 1px, transparent 1px);
+      background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+      overflow-x: clip;
     }
+    ::selection { background: var(--kalt); color: #fff; }
+    h1, h2, h3 { line-height: 1.12; margin: 0 0 0.5em; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+    p { margin: 0 0 1em; }
+    a { color: inherit; text-underline-offset: 3px; }
+    img { max-width: 100%; height: auto; display: block; }
+    :focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
 
-    h1, h2, h3 {
-      font-family: var(--schrift-titel);
-      line-height: 1.2;
-      margin: 0 0 0.5em;
-    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-    a { color: inherit; }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .beispiel-hinweis {
-      background: var(--text);
-      color: #d7dcdd;
-      text-align: center;
-      font-size: 0.85em;
-      padding: 8px 16px;
-    }
+    .beispiel-hinweis { background: var(--tusche); color: #d4dadc; text-align: center; font-size: 0.82em; padding: 8px 16px; }
 
     /* Kopfzeile */
-    .kopf {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(246, 241, 234, 0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--sand-dunkel);
-    }
-    .kopf .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      height: 68px;
-    }
-    .logo {
-      font-family: var(--schrift-titel);
-      font-size: 1.35em;
-      font-weight: 700;
-      color: var(--wasser);
-      text-decoration: none;
-    }
-    .logo span { color: var(--kupfer); }
-    .nav {
-      display: flex;
-      gap: 28px;
-      font-size: 0.95em;
-    }
-    .nav a {
-      text-decoration: none;
-      color: var(--text-leise);
-    }
-    .nav a:hover { color: var(--wasser); }
+    .kopf { position: sticky; top: 0; z-index: 10; background: rgba(238, 241, 240, 0.94); border-bottom: var(--linie); }
+    .kopf .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 70px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 1.2em; letter-spacing: -0.02em; }
+    .logo svg { width: 34px; height: 34px; flex: none; }
+    .logo small { display: block; font-weight: 400; font-size: 0.62em; letter-spacing: 0; color: var(--leise); }
+    .nav { display: flex; gap: 26px; font-size: 0.92em; }
+    .nav a { text-decoration: none; color: var(--leise); padding: 6px 0; border-bottom: 2px solid transparent; }
+    .nav a:hover { color: var(--tusche); border-color: var(--kalt); }
 
     .knopf {
-      display: inline-block;
-      background: var(--kupfer);
-      color: var(--weiss);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 12px 22px;
-      border-radius: 999px;
-      border: none;
-      font-size: 1em;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background 150ms ease, transform 100ms ease-out;
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--kalt); color: #fff; text-decoration: none; font: inherit; font-weight: 600;
+      padding: 14px 22px; border: 0; border-radius: 0; cursor: pointer;
+      box-shadow: 0 6px 14px -6px rgba(8, 88, 90, 0.6);
+      transition: background 160ms var(--ease), transform 120ms var(--ease);
     }
-    .knopf:hover { background: var(--kupfer-dunkel); }
-    .knopf:active { transform: scale(0.97); }
-    .knopf-hell {
-      background: transparent;
-      color: var(--wasser);
-      border: 2px solid var(--wasser);
-    }
-    .knopf-hell:hover { background: var(--wasser); color: var(--weiss); }
+    .knopf:hover { background: var(--kalt-tief); }
+    .knopf:active { transform: translateY(1px); }
+    .knopf svg { width: 18px; height: 18px; flex: none; }
+    .knopf-linie { background: transparent; color: var(--tusche); box-shadow: none; outline: var(--linie); outline-offset: -1.5px; }
+    .knopf-linie:hover { background: var(--tusche); color: #fff; }
 
-    /* Startbereich */
-    .start {
-      padding: 72px 0 80px;
-    }
-    .start .container {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .start-marke {
-      display: inline-block;
-      color: var(--kupfer-dunkel);
-      font-weight: 600;
-      font-size: 0.9em;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .start h1 {
-      font-size: clamp(2.2em, 5vw, 3.4em);
-      color: var(--wasser);
-    }
-    .start p {
-      font-size: 1.15em;
-      color: var(--text-leise);
-      max-width: 34em;
-      margin: 0 0 28px;
-    }
-    .start-knoepfe {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .start-bild {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      border-radius: 22px;
-      overflow: hidden;
-      background: var(--sand-dunkel);
-    }
-    .start-bild img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .start-karte {
-      position: absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
-      background: var(--weiss);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      box-shadow: 0 12px 30px rgba(18, 52, 59, 0.2);
-    }
-    .start-karte strong {
-      font-family: var(--schrift-titel);
-      font-size: 2em;
-      color: var(--kupfer);
-      line-height: 1;
-      white-space: nowrap;
-    }
-    .start-karte span {
-      font-size: 0.95em;
-      color: var(--text-leise);
-    }
+    /* Startbereich: Text + Grundriss */
+    .start { padding: 40px 0 72px; }
+    .start-raster { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); grid-template-areas: "text blatt" "foto blatt"; column-gap: 56px; row-gap: 36px; align-items: start; }
+    .start-text { grid-area: text; }
+    .start-raster > .blatt { grid-area: blatt; }
+    .ergebnis { grid-area: foto; position: relative; margin: 0; padding-top: 26px; }
+    .ergebnis img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; border: var(--linie); box-shadow: 0 24px 40px -28px rgba(31, 36, 41, 0.45); }
+    .ergebnis .mass-oben { left: 0; }
+    .ergebnis figcaption { margin-top: 10px; font-size: 0.82em; color: var(--leise); }
+    .start-text { padding-top: 24px; }
+    .start h1 { font-size: clamp(2.4rem, 4.4vw, 3.8rem); }
+    .start-text > p { font-size: 1.12em; color: var(--leise); max-width: 30em; }
+    .start-knoepfe { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .start-knoepfe .knopf { padding: 14px 18px; }
+    .meister { display: flex; align-items: center; gap: 14px; margin-top: 34px; font-size: 0.95em; color: var(--leise); }
+    .meister img { width: 56px; height: 56px; object-fit: cover; object-position: center 20%; border: var(--linie); }
+    .meister strong { display: block; color: var(--tusche); }
 
-    /* Vertrauensleiste */
-    .vertrauen {
-      background: var(--wasser);
-      color: var(--weiss);
-      padding: 28px 0;
-    }
-    .vertrauen .container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      text-align: center;
-    }
-    .vertrauen strong {
-      display: block;
-      font-family: var(--schrift-titel);
-      font-size: 1.6em;
-    }
-    .vertrauen span {
-      color: #b8cdd1;
-      font-size: 0.9em;
-    }
+    .blatt { background: var(--weiss); border: var(--linie); box-shadow: 0 24px 40px -28px rgba(31, 36, 41, 0.45); }
+    .plan { display: block; width: 100%; height: auto; padding: 14px 14px 0; }
+    .plan text { font-family: "Bricolage", system-ui, sans-serif; }
+
+    /* Zeichnen beim Laden: der eine Moment der Seite */
+    .plan .strich { stroke-dasharray: 1600; stroke-dashoffset: 0; animation: zeichnen 1.6s var(--ease) both; }
+    .plan .spaet { animation: auftauchen 600ms var(--ease) 1.1s both; }
+    @keyframes zeichnen { from { stroke-dashoffset: 1600; } }
+    @keyframes auftauchen { from { opacity: 0; } }
+
+    /* Zonen im Plan, die zu den Leistungen gehören */
+    .zone { transition: fill 220ms var(--ease), stroke 220ms var(--ease), opacity 220ms var(--ease); }
+    .plan .markierung circle { fill: var(--warm); }
+    .plan .markierung text { fill: #fff; font-weight: 800; font-size: 15px; }
+    .start:has(.l1:is(:hover, :focus-within)) .z1,
+    .start:has(.l2:is(:hover, :focus-within)) .z2,
+    .start:has(.l3:is(:hover, :focus-within)) .z3,
+    .start:has(.l4:is(:hover, :focus-within)) .z4 { fill: rgba(11, 111, 114, 0.16); stroke: var(--kalt); }
+    .start:has(.l1:is(:hover, :focus-within)) .raum-umriss { stroke: var(--kalt); stroke-width: 5; }
+
+    /* Schriftfeld wie auf jedem Bauplan */
+    .schriftfeld { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: var(--linie); margin: 0; }
+    .schriftfeld div { padding: 10px 14px 12px; border-right: var(--linie); border-bottom: var(--linie); }
+    .schriftfeld div:nth-child(3n) { border-right: 0; }
+    .schriftfeld div:nth-last-child(-n+3) { border-bottom: 0; }
+    .schriftfeld dt { font-size: 0.72em; color: var(--leise); }
+    .schriftfeld dd { margin: 0; font-weight: 600; line-height: 1.3; font-variant-numeric: tabular-nums; }
+    .schriftfeld dd svg { width: 0.9em; height: 0.9em; fill: var(--warm); vertical-align: -0.05em; }
+
+    /* Legende = Leistungen */
+    .legende { list-style: none; margin: 56px 0 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); border-top: var(--linie); }
+    .legende li { position: relative; padding: 22px 22px 6px 0; }
+    .legende img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border: var(--linie); margin-bottom: 16px; filter: saturate(0.9); transition: filter 220ms var(--ease); }
+    .legende li:hover img { filter: saturate(1.1); }
+    .legende li + li { padding-left: 22px; border-left: 1px solid rgba(31, 36, 41, 0.25); }
+    .legende h3 { display: flex; align-items: center; gap: 10px; font-size: 1.15em; margin-bottom: 0.45em; }
+    .nr { flex: none; display: inline-grid; place-items: center; width: 28px; height: 28px; border-radius: 50%; background: var(--warm); color: #fff; font-size: 0.8em; font-weight: 800; letter-spacing: 0; }
+    .legende p { color: var(--leise); font-size: 0.95em; margin: 0; }
+    .legende a { position: absolute; inset: 0; z-index: 1; }
+    .legende li:hover h3 { color: var(--kalt); }
 
     /* Abschnitte */
-    .abschnitt { padding: 88px 0; }
-    .abschnitt-weiss { background: var(--weiss); }
-    .abschnitt-kopf {
-      max-width: 640px;
-      margin-bottom: 44px;
-    }
-    .abschnitt-kopf h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-      color: var(--wasser);
-    }
-    .abschnitt-kopf p {
-      color: var(--text-leise);
-      margin: 0;
-    }
+    .abschnitt { padding: 104px 0; }
+    .kopf-text { max-width: 640px; margin-bottom: 48px; }
+    .kopf-text h2, .chef h2 { font-size: clamp(2rem, 3.6vw, 2.9rem); }
+    .kopf-text p { color: var(--leise); margin: 0; }
 
-    /* Leistungen */
-    .raster {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .leistung {
-      background: var(--sand);
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: transform 200ms cubic-bezier(.23, 1, .32, 1), box-shadow 200ms cubic-bezier(.23, 1, .32, 1);
-    }
-    .leistung:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(18, 52, 59, 0.1);
-    }
-    .leistung-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: var(--wasser);
-      color: var(--weiss);
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-    }
-    .leistung h3 {
-      font-size: 1.25em;
-      color: var(--wasser);
-    }
-    .leistung p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.97em;
-    }
+    /* Inhaber als Detailzeichnung */
+    .chef { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 72px; align-items: center; }
+    .detail { position: relative; margin: 0; padding: 30px 0 0 30px; }
+    .detail img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; object-position: center 20%; border: var(--linie); }
+    .mass { position: absolute; color: var(--warm); font-size: 0.78em; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .mass-oben { top: 0; left: 30px; right: 0; height: 22px; border-bottom: 1px solid var(--warm); text-align: center; }
+    .mass-oben::before, .mass-oben::after { content: ""; position: absolute; bottom: -6px; width: 1px; height: 12px; background: var(--warm); transform: rotate(45deg); }
+    .mass-oben::before { left: 0; } .mass-oben::after { right: 0; }
+    .mass-links { top: 30px; bottom: 0; left: 0; width: 22px; border-right: 1px solid var(--warm); }
+    .mass-links span { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%) rotate(-90deg); white-space: nowrap; }
+    .detail figcaption { margin-top: 12px; font-size: 0.85em; color: var(--leise); }
+    .detail figcaption strong { color: var(--tusche); }
+    .chef blockquote { margin: 0 0 22px; font-size: 1.3em; font-weight: 600; line-height: 1.4; }
+    .chef-text > p { color: var(--leise); }
+    .hinweise { margin: 26px 0 0; padding: 0; list-style: none; border-top: var(--linie); }
+    .hinweise li { display: grid; grid-template-columns: 9em 1fr; gap: 16px; padding: 12px 0; border-bottom: 1px solid rgba(31, 36, 41, 0.22); font-size: 0.95em; color: var(--leise); }
+    .hinweise strong { color: var(--tusche); }
 
-    /* Ablauf */
-    .ablauf {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      counter-reset: schritt;
-    }
-    .schritt {
-      border-top: 3px solid var(--kupfer);
-      padding-top: 18px;
-    }
-    .schritt::before {
-      counter-increment: schritt;
-      content: "0" counter(schritt);
-      font-family: var(--schrift-titel);
-      font-size: 1.8em;
-      color: var(--kupfer);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .schritt h3 {
-      font-size: 1.15em;
-      color: var(--wasser);
-    }
-    .schritt p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.97em;
-    }
+    /* Preise als Leistungsverzeichnis, ganze Fläche in Kaltwasser-Türkis */
+    .lv { background: var(--kalt); color: #fff; }
+    .lv .kopf-text p { color: #cfeceb; }
+    .lv-raster { display: grid; grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr); gap: 48px; align-items: start; }
+    .lv table { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+    .lv caption { caption-side: bottom; text-align: left; padding-top: 14px; font-size: 0.82em; color: #cfeceb; }
+    .lv th, .lv td { text-align: left; padding: 16px 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.35); vertical-align: baseline; }
+    .lv thead th { font-size: 0.78em; font-weight: 600; color: #cfeceb; border-bottom: 1.5px solid #fff; padding-top: 0; }
+    .lv tbody th { font-weight: 600; }
+    .lv tbody th small { display: block; font-weight: 400; color: #cfeceb; font-size: 0.85em; }
+    .lv .pos { width: 4.5em; color: #cfeceb; font-weight: 400; }
+    .lv td.preis { text-align: right; font-weight: 800; white-space: nowrap; }
+    .lv thead th:last-child { text-align: right; }
+    .lv .frei td.preis { color: #fff; }
+    .lv .frei { background: rgba(255, 255, 255, 0.1); }
+    .lv .frei small, .lv .frei .pos { color: #fff; }
+    .unsichtbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+    .gut-zu-wissen { border: 1.5px solid #fff; padding: 26px 26px 10px; }
+    .gut-zu-wissen h3 { font-size: 1.25em; }
+    .gut-zu-wissen ul { margin: 0; padding: 0; list-style: none; }
+    .gut-zu-wissen li { position: relative; padding-left: 26px; margin-bottom: 14px; color: #e6f5f4; }
+    .gut-zu-wissen li::before { content: ""; position: absolute; left: 0; top: 0.62em; width: 12px; height: 1.5px; background: #fff; }
 
-    /* Vorher / Nachher */
-    .projekte {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-    }
-    .projekt img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: var(--radius);
-      background: var(--sand-dunkel);
-    }
-    .projekt-daten {
-      display: block;
-      margin-top: 16px;
-      font-size: 0.85em;
-      font-weight: 600;
-      color: var(--kupfer-dunkel);
-    }
-    .projekt h3 {
-      margin-top: 4px;
-      font-size: 1.15em;
-      color: var(--wasser);
-    }
-    .projekt p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .platzhalter-hinweis {
-      margin-top: 28px;
-      font-size: 0.85em;
-      color: var(--text-leise);
-    }
+    /* Ablauf als Bauzeitenplan */
+    .bauzeit { border: var(--linie); background: var(--weiss); }
+    .bz-kopf, .bz-zeile { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.6fr); }
+    .bz-kopf { border-bottom: var(--linie); font-size: 0.78em; color: var(--leise); }
+    .bz-kopf > span { padding: 10px 20px; border-right: var(--linie); }
+    .wochen { display: grid; grid-template-columns: repeat(6, 1fr); }
+    .wochen span { padding: 10px 8px; border-left: 1px solid rgba(31, 36, 41, 0.18); font-variant-numeric: tabular-nums; }
+    .wochen span:first-child { border-left: 0; }
+    .bz-zeile + .bz-zeile { border-top: 1px solid rgba(31, 36, 41, 0.22); }
+    .bz-text { padding: 18px 20px; border-right: var(--linie); }
+    .bz-text h3 { font-size: 1.1em; margin-bottom: 0.3em; }
+    .bz-text p { margin: 0; font-size: 0.92em; color: var(--leise); }
+    .bz-spur { position: relative; display: grid; grid-template-columns: repeat(24, 1fr); align-items: center;
+      background-image: repeating-linear-gradient(90deg, transparent 0 calc(100% / 6 - 1px), rgba(31, 36, 41, 0.18) calc(100% / 6 - 1px) calc(100% / 6)); }
+    .balken { height: 26px; background: var(--kalt); transform-origin: left center; transition: transform 900ms var(--ease); }
+    .balken.lang { background: linear-gradient(90deg, var(--kalt) 0 75%, transparent 75%), repeating-linear-gradient(135deg, var(--kalt) 0 3px, transparent 3px 8px); }
+    .balken-label { grid-row: 1; align-self: center; padding-left: 10px; font-size: 0.82em; font-weight: 600; color: var(--leise); white-space: nowrap; }
+    .js .bauzeit:not(.gezeigt) .balken { transform: scaleX(0.02); }
 
-    /* Kundenstimmen */
-    .stimme {
-      background: var(--weiss);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin: 0;
-    }
-    .stimme p {
-      margin: 10px 0 16px;
-      font-family: var(--schrift-titel);
-      font-size: 1.15em;
-      color: var(--wasser);
-    }
-    .stimme footer {
-      color: var(--text-leise);
-      font-size: 0.9em;
-    }
-    .sterne { color: var(--kupfer); letter-spacing: 2px; }
+    /* Projekte */
+    .projekte { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+    .projekt { margin: 0; background: var(--weiss); border: var(--linie); }
+    .projekt img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-bottom: var(--linie); }
+    .projekt-feld { display: grid; grid-template-columns: 1fr 1fr 1fr; border-bottom: var(--linie); font-size: 0.78em; font-variant-numeric: tabular-nums; }
+    .projekt-feld span { padding: 8px 12px; border-right: 1px solid rgba(31, 36, 41, 0.25); }
+    .projekt-feld span:last-child { border-right: 0; }
+    .projekt-feld b { display: block; font-size: 1.15em; }
+    .projekt figcaption { padding: 16px 18px 20px; }
+    .projekt h3 { font-size: 1.15em; margin-bottom: 0.35em; }
+    .projekt p { margin: 0; font-size: 0.93em; color: var(--leise); }
+    .platzhalter-hinweis { margin-top: 24px; font-size: 0.85em; color: var(--leise); }
 
-    .stimme footer strong { color: var(--wasser); }
-    .sterne { color: var(--kupfer); letter-spacing: 2px; }
-    .bewertung-schnitt {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-top: 18px;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .bewertung-schnitt strong {
-      font-family: var(--schrift-titel);
-      font-size: 2em;
-      color: var(--wasser);
-    }
-
-    /* Siegel in der Vertrauensleiste */
-    .vertrauen .siegel strong { font-size: 1.25em; }
-    .vertrauen .siegel strong::before {
-      content: "";
-      display: inline-block;
-      width: 0.8em;
-      height: 0.8em;
-      margin-right: 8px;
-      border-radius: 50%;
-      background: var(--kupfer);
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
-      vertical-align: 0.02em;
-    }
-
-    /* Inhaber */
-    .chef {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .chef-foto { margin: 0; position: relative; }
-    .chef-foto img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      object-position: center 20%;
-      border-radius: var(--radius);
-      background: var(--sand-dunkel);
-    }
-    .chef-foto figcaption {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      background: var(--weiss);
-      border-radius: 10px;
-      padding: 10px 16px;
-      line-height: 1.3;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-    .chef-foto figcaption strong { display: block; color: var(--wasser); }
-    .chef-foto figcaption span { font-size: 0.88em; color: var(--text-leise); }
-    .chef h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-      color: var(--wasser);
-    }
-    .chef blockquote {
-      margin: 0 0 20px;
-      padding-left: 18px;
-      border-left: 3px solid var(--kupfer);
-      font-family: var(--schrift-titel);
-      font-size: 1.25em;
-      color: var(--wasser);
-    }
-    .chef > div > p { color: var(--text-leise); margin: 0 0 24px; }
-    .nachweise {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .nachweise li {
-      background: var(--weiss);
-      border: 1px solid var(--sand-dunkel);
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .nachweise strong { display: block; color: var(--wasser); }
-
-    /* Preise */
-    .preise-raster {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-    .preistabelle {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--weiss);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--sand-dunkel);
-    }
-    .preistabelle caption {
-      caption-side: bottom;
-      text-align: left;
-      padding-top: 12px;
-      font-size: 0.85em;
-      color: var(--text-leise);
-    }
-    .preistabelle th,
-    .preistabelle td {
-      padding: 15px 20px;
-      text-align: left;
-      border-bottom: 1px solid var(--sand-dunkel);
-      vertical-align: baseline;
-    }
-    .preistabelle tr:last-child th,
-    .preistabelle tr:last-child td { border-bottom: 0; }
-    .preistabelle th { font-weight: 600; color: var(--wasser); }
-    .preistabelle th small {
-      display: block;
-      font-weight: 400;
-      color: var(--text-leise);
-      font-size: 0.88em;
-    }
-    .preistabelle td {
-      text-align: right;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .preistabelle .pflege-zeile { background: #fbefe6; }
-    .preis-hinweis {
-      background: var(--wasser);
-      color: #c7d8db;
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-    .preis-hinweis h3 { color: var(--weiss); font-size: 1.3em; }
-    .preis-hinweis ul { margin: 0; padding-left: 20px; }
-    .preis-hinweis li { margin-bottom: 8px; }
+    /* Kundenstimmen als Abnahmeprotokoll */
+    .schnitt { display: flex; align-items: baseline; gap: 12px; margin-top: 18px; }
+    .schnitt strong { font-size: 2.6em; font-weight: 800; letter-spacing: -0.03em; }
+    .sterne { display: inline-flex; gap: 3px; }
+    .sterne svg { width: 18px; height: 18px; fill: var(--warm); }
+    .abnahmen { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+    .abnahme { margin: 0; background: var(--weiss); border: var(--linie); padding: 24px 24px 20px; display: flex; flex-direction: column; }
+    .abnahme p { font-size: 1.08em; font-weight: 600; line-height: 1.45; margin: 14px 0 22px; flex: 1; }
+    .abnahme footer { border-top: 1px dashed var(--tusche); padding-top: 10px; font-size: 0.85em; color: var(--leise); display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+    .abnahme footer strong { color: var(--tusche); }
 
     /* Fragen */
-    .fragen-raster {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 48px;
-      align-items: start;
-    }
-    .fragen-raster .abschnitt-kopf a { color: var(--wasser); font-weight: 600; white-space: nowrap; }
-    .fragen { display: grid; gap: 10px; }
-    .fragen details {
-      background: var(--sand);
-      border-radius: 12px;
-    }
-    .fragen summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 20px;
-      font-weight: 600;
-      color: var(--wasser);
-    }
+    .fragen-raster { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: 56px; align-items: start; }
+    .fragen-raster .kopf-text a { color: var(--kalt); font-weight: 600; white-space: nowrap; }
+    .fragen { border-top: var(--linie); }
+    .fragen details { border-bottom: 1px solid rgba(31, 36, 41, 0.25); }
+    .fragen summary { list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 18px 0; font-weight: 600; font-size: 1.05em; }
     .fragen summary::-webkit-details-marker { display: none; }
     .fragen summary::after {
-      content: "+";
-      font-size: 1.4em;
-      line-height: 1;
-      color: var(--kupfer);
-      transition: transform 200ms cubic-bezier(.23, 1, .32, 1);
+      content: ""; flex: none; width: 18px; height: 18px; background: var(--kalt);
+      -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4v16M4 12h16' stroke='black' stroke-width='2.4'/%3E%3C/svg%3E") center / contain no-repeat;
+      mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M12 4v16M4 12h16' stroke='black' stroke-width='2.4'/%3E%3C/svg%3E") center / contain no-repeat;
+      transition: transform 220ms var(--ease);
     }
     .fragen details[open] summary::after { transform: rotate(45deg); }
-    .fragen summary:focus-visible {
-      outline: 2px solid var(--kupfer);
-      outline-offset: 2px;
-      border-radius: 12px;
-    }
-    .fragen details p {
-      margin: 0;
-      padding: 0 20px 18px;
-      color: var(--text-leise);
-    }
-
-    /* Einsatzgebiet */
-    .orte {
-      list-style: none;
-      margin: 8px 0 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .orte li {
-      background: var(--weiss);
-      border: 1px solid var(--sand-dunkel);
-      border-radius: 999px;
-      padding: 4px 12px;
-      font-size: 0.9em;
-      color: var(--text);
-    }
-    .orte small { color: var(--text-leise); }
+    .fragen details p { color: var(--leise); padding-right: 40px; }
 
     /* Karriere */
-    .karriere {
-      background: var(--wasser);
-      color: var(--weiss);
-      border-radius: 22px;
-      padding: 56px;
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .karriere h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-    }
-    .karriere p { color: #c7d8db; margin: 0 0 24px; }
-    .karriere ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .karriere li {
-      background: var(--wasser-hell);
-      border-radius: 10px;
-      padding: 12px 16px;
-    }
-    .karriere li::before {
-      content: "✓ ";
-      color: #f0a774;
-      font-weight: 700;
-    }
+    .karriere { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 48px; align-items: center; border: var(--linie); background: var(--weiss); padding: 48px; }
+    .karriere h2 { font-size: clamp(1.8rem, 3.2vw, 2.5rem); }
+    .karriere > div > p { color: var(--leise); }
+    .stellen { list-style: none; margin: 0; padding: 0; border-top: var(--linie); }
+    .stellen li { padding: 14px 0; border-bottom: 1px solid rgba(31, 36, 41, 0.25); font-weight: 600; display: flex; justify-content: space-between; gap: 12px; }
+    .stellen li span { font-weight: 400; color: var(--leise); font-size: 0.9em; }
 
     /* Kontakt */
-    .kontakt {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 48px;
-    }
-    .kontakt-info p { color: var(--text-leise); }
-    .kontakt-info a { color: var(--wasser); font-weight: 600; white-space: nowrap; }
-    .kontakt-info dl { margin: 24px 0 0; }
-    .kontakt-info dt {
-      font-weight: 600;
-      color: var(--wasser);
-    }
-    .kontakt-info dd {
-      margin: 0 0 14px;
-      color: var(--text-leise);
-    }
-    form {
-      background: var(--weiss);
-      box-shadow: 0 12px 30px rgba(18, 52, 59, 0.08);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: grid;
-      gap: 16px;
-    }
-    label {
-      display: grid;
-      gap: 6px;
-      font-weight: 600;
-      font-size: 0.95em;
-      color: var(--wasser);
-    }
-    input, select, textarea {
-      font: inherit;
-      font-weight: 400;
-      color: var(--text);
-      padding: 12px 14px;
-      border: 1px solid #cfc5b6;
-      border-radius: 10px;
-      background: var(--weiss);
-      width: 100%;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid var(--kupfer);
-      outline-offset: 1px;
-      border-color: transparent;
-    }
-    .zwei-spalten {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .einwilligung {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-weight: 400;
-      color: var(--text-leise);
-      font-size: 0.88em;
-    }
-    .einwilligung input { width: auto; margin-top: 4px; }
-    .formular-danke {
-      display: none;
-      background: var(--wasser);
-      color: var(--weiss);
-      padding: 14px 18px;
-      border-radius: 10px;
-    }
+    .kontakt { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr); gap: 56px; }
+    .kontakt-info a { color: var(--kalt); font-weight: 600; }
+    .kontakt-info dl { margin: 28px 0 0; border-top: var(--linie); }
+    .kontakt-info dt { font-size: 0.8em; color: var(--leise); padding-top: 12px; }
+    .kontakt-info dd { margin: 0; padding-bottom: 12px; border-bottom: 1px solid rgba(31, 36, 41, 0.25); font-weight: 600; }
+    .orte { list-style: none; margin: 10px 0 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; font-weight: 400; }
+    .orte li { border: 1px solid rgba(31, 36, 41, 0.35); padding: 3px 10px; font-size: 0.88em; background: var(--weiss); }
+    .orte small { color: var(--leise); font-variant-numeric: tabular-nums; }
+    form { background: var(--weiss); border: var(--linie); padding: 30px; display: grid; gap: 18px; box-shadow: 0 24px 40px -28px rgba(31, 36, 41, 0.45); }
+    label { display: grid; gap: 6px; font-weight: 600; font-size: 0.92em; }
+    input, select, textarea { font: inherit; font-weight: 400; color: var(--tusche); padding: 12px 14px; border: 1.5px solid #8a949a; border-radius: 0; background: #fff; width: 100%; }
+    input:focus, select:focus, textarea:focus { outline: 2px solid var(--kalt); outline-offset: 1px; border-color: var(--tusche); }
+    .zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .einwilligung { display: flex; gap: 10px; align-items: flex-start; font-weight: 400; color: var(--leise); font-size: 0.86em; }
+    .einwilligung input { width: auto; margin-top: 5px; accent-color: var(--kalt); }
+    .formular-danke { display: none; background: var(--kalt); color: #fff; padding: 14px 18px; margin: 0; }
 
     /* Fußzeile */
-    .fuss {
-      background: var(--text);
-      color: #aab3b5;
-      padding: 40px 0 96px;
-      font-size: 0.9em;
-    }
-    .fuss .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 16px;
-    }
+    .fuss { background: var(--tusche); color: #b3bcc0; padding: 44px 0 100px; font-size: 0.88em; }
+    .fuss .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
     .fuss nav { display: flex; gap: 20px; }
-    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.85em; }
+    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.88em; }
 
-    /* Anruf-Knopf nur auf dem Handy */
-    .anruf-mobil {
-      display: none;
-      position: fixed;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
-      z-index: 20;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    }
+    .anruf-mobil { display: none; position: fixed; left: 14px; right: 14px; bottom: 14px; z-index: 20; justify-content: center; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3); }
 
-    @media (max-width: 900px) {
+    @media (max-width: 1000px) {
       .nav { display: none; }
-      .start { padding: 40px 0 56px; }
-      .start .container,
-      .kontakt,
-      .karriere,
-      .chef,
-      .preise-raster,
-      .fragen-raster { grid-template-columns: 1fr; }
-      .chef-foto { max-width: 420px; }
-      .start-bild { aspect-ratio: 1 / 1; }
-      .vertrauen .container,
-      .ablauf { grid-template-columns: 1fr 1fr; }
-      .karriere { padding: 36px 24px; }
-      .abschnitt { padding: 64px 0; }
+      .start-raster, .chef, .lv-raster, .fragen-raster, .karriere, .kontakt { grid-template-columns: minmax(0, 1fr); }
+      .start-text { padding-top: 0; }
+      .start-raster { grid-template-areas: "text" "blatt" "foto"; }
+      .legende { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .legende li:nth-child(3) { padding-left: 0; border-left: 0; }
+      .legende li:nth-child(n+3) { border-top: 1px solid rgba(31, 36, 41, 0.25); }
+      .projekte, .abnahmen { grid-template-columns: minmax(0, 1fr); max-width: 560px; }
+      .detail { max-width: 440px; }
+      .abschnitt { padding: 76px 0; }
+      .karriere { padding: 32px 24px; }
     }
-
-    @media (max-width: 560px) {
-      body { font-size: 16px; }
+    @media (max-width: 600px) {
+      body { font-size: 17px; background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px; }
+      .container { padding: 0 16px; }
       .kopf .knopf { display: none; }
-      .ablauf,
-      .zwei-spalten { grid-template-columns: 1fr; }
-      .anruf-mobil { display: block; }
-      .preistabelle th,
-      .preistabelle td { padding: 14px 16px; }
+      .start { padding: 32px 0 56px; }
+      .start-raster { gap: 36px; }
+      .plan { padding: 8px 8px 0; }
+      .schriftfeld { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .schriftfeld div { border-right: var(--linie); border-bottom: var(--linie); }
+      .schriftfeld div:nth-child(3n) { border-right: var(--linie); }
+      .schriftfeld div:nth-child(2n) { border-right: 0; }
+      .schriftfeld div:nth-last-child(-n+3) { border-bottom: var(--linie); }
+      .schriftfeld div:nth-last-child(-n+2) { border-bottom: 0; }
+      .legende { grid-template-columns: minmax(0, 1fr); margin-top: 40px; }
+      .legende li, .legende li + li { padding: 18px 0 14px; border-left: 0; }
+      .legende li + li { border-top: 1px solid rgba(31, 36, 41, 0.25); }
+      .hinweise li { grid-template-columns: 1fr; gap: 2px; }
+      .bz-kopf, .bz-zeile { grid-template-columns: minmax(0, 1fr); }
+      .bz-kopf > span:first-child { display: none; }
+      .bz-kopf .wochen { margin: 0 16px; }
+      .wochen span { padding: 8px 4px; white-space: nowrap; font-size: 0.92em; }
+      .meister { display: none; }
+      .legende img { aspect-ratio: 16 / 9; }
+      .bz-text { border-right: 0; padding: 16px 16px 8px; }
+      .bz-spur { min-height: 42px; margin: 0 16px 16px; }
+      .lv th, .lv td { padding: 14px 6px; }
+      .lv .pos { display: none; }
+      .zwei { grid-template-columns: 1fr; }
+      form { padding: 22px 18px; }
+      .anruf-mobil { display: flex; }
     }
-
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
-      * { transition: none !important; }
+      *, *::before, *::after { animation: none !important; transition: none !important; }
+      .js .bauzeit:not(.gezeigt) .balken { transform: none; }
     }
   </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-stern" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.2 6.8.8-5 4.7 1.3 6.7L12 17.6l-6 3.3 1.3-6.7-5-4.7 6.8-.8z"/></symbol>
+    <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></symbol>
+  </svg>
 
   <div class="beispiel-hinweis">
     Beispielseite von Hand &amp; Fuß Webseiten – „Bad &amp; Raum Vogt“ ist ein ausgedachtes Unternehmen.
@@ -728,135 +343,195 @@
 
   <header class="kopf">
     <div class="container">
-      <a class="logo" href="#">Bad <span>&amp;</span> Raum Vogt</a>
-      <nav class="nav">
+      <a class="logo" href="#">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" fill="none" stroke="#1f2429" stroke-width="3"/><path d="M8 32V20a12 12 0 0 1 12 12" fill="none" stroke="#0b6f72" stroke-width="2"/><circle cx="23" cy="11" r="4.5" fill="none" stroke="#1f2429" stroke-width="2"/></svg>
+        <span>Bad &amp; Raum Vogt<small>Badsanierung · Musterstadt</small></span>
+      </a>
+      <nav class="nav" aria-label="Hauptmenü">
         <a href="#leistungen">Leistungen</a>
         <a href="#ueber-uns">Über uns</a>
         <a href="#preise">Preise</a>
+        <a href="#ablauf">Ablauf</a>
         <a href="#projekte">Projekte</a>
         <a href="#fragen">Fragen</a>
-        <a href="#karriere">Karriere</a>
       </nav>
-      <a class="knopf" href="tel:+49123456789">0123 456 789</a>
+      <a class="knopf" href="tel:+49123456789"><svg aria-hidden="true"><use href="#i-telefon"/></svg>0123 456 789</a>
     </div>
   </header>
 
   <main>
-    <section class="start">
+    <section class="start" aria-labelledby="titel">
       <div class="container">
-        <div>
-          <span class="start-marke">Meisterbetrieb in Musterstadt</span>
-          <h1>Ihr neues Bad. Aus einer Hand, zum Festpreis.</h1>
-          <p>
-            Von der Planung bis zur letzten Fuge: Wir sanieren Ihr Bad komplett,
-            mit einem festen Ansprechpartner, einem verbindlichen Termin und
-            ohne böse Überraschungen auf der Rechnung.
-          </p>
-          <div class="start-knoepfe">
-            <a class="knopf" href="#kontakt">Kostenlose Beratung anfragen</a>
-            <a class="knopf knopf-hell" href="#projekte">Projekte ansehen</a>
-          </div>
-        </div>
-        <div class="start-bild">
-          <img src="bilder/dusche.jpg" alt="Fertig saniertes Bad mit bodengleicher Dusche, Natursteinwänden und Waschtisch mit Holzunterschrank" width="1000" height="1500">
-          <div class="start-karte">
-            <strong>3–4</strong>
-            <span>Wochen dauert eine Komplettsanierung bei uns im Schnitt</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="vertrauen" aria-label="Zahlen und Fakten">
-      <div class="container">
-        <div class="siegel"><strong>Meisterbetrieb</strong><span>Innungsbetrieb Sanitär, Heizung, Klima</span></div>
-        <div><strong>400+</strong><span>sanierte Bäder seit 2001</span></div>
-        <div><strong>Festpreis</strong><span>schriftlich vor Baubeginn</span></div>
-        <div><strong>4,8 ★</strong><span>aus 112 Google-Bewertungen</span></div>
-      </div>
-    </section>
-
-    <section class="abschnitt abschnitt-weiss" id="leistungen">
-      <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>Was wir für Sie machen</h2>
-          <p>Ob kleines Gästebad oder großes Familienbad: Wir übernehmen alle Gewerke selbst und koordinieren alles für Sie.</p>
-        </div>
-        <div class="raster">
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18v3a5 5 0 0 1-5 5H8a5 5 0 0 1-5-5z"/><path d="M6 12V5a2 2 0 0 1 4 0"/></svg>
+        <div class="start-raster">
+          <div class="start-text">
+            <h1 id="titel">Ihr neues Bad. Aus einer Hand, zum Festpreis.</h1>
+            <p>Von der Planung bis zur letzten Fuge: Wir zeichnen Ihr Bad auf den Zentimeter, bauen es mit einem festen Ansprechpartner und halten den Preis, der im Angebot steht.</p>
+            <div class="start-knoepfe">
+              <a class="knopf" href="#kontakt">Kostenlose Beratung anfragen</a>
+              <a class="knopf knopf-linie" href="tel:+49123456789"><svg aria-hidden="true"><use href="#i-telefon"/></svg>0123 456 789</a>
             </div>
-            <h3>Komplettsanierung</h3>
+          </div>
+
+          <div class="blatt">
+            <svg class="plan" viewBox="-40 -40 680 600" role="img" aria-labelledby="plan-titel plan-text">
+              <title id="plan-titel">Grundriss eines Familienbads, 2,85 mal 2,60 Meter</title>
+              <desc id="plan-text">Bodengleiche Dusche anstelle der alten Wanne, Doppelwaschtisch, WC mit Haltegriff und eine Bewegungsfläche von 1,20 Metern.</desc>
+              <defs>
+                <pattern id="schraffur" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#1f2429" stroke-width="2.2"/></pattern>
+                <pattern id="fliesen" width="48" height="48" patternUnits="userSpaceOnUse" x="72" y="48"><path d="M48 0H0V48" fill="none" stroke="#1f2429" stroke-opacity="0.12" stroke-width="1"/></pattern>
+                <pattern id="fliesen-klein" width="16" height="16" patternUnits="userSpaceOnUse" x="72" y="48"><path d="M16 0H0V16" fill="none" stroke="#0b6f72" stroke-opacity="0.35" stroke-width="1"/></pattern>
+              </defs>
+
+              <!-- Boden -->
+              <rect class="zone z4" x="72" y="48" width="456" height="416" fill="url(#fliesen)" stroke="none"/>
+              <!-- Wände -->
+              <path d="M54 30H546V482H54Z M72 48V464H528V48Z" fill="url(#schraffur)" fill-rule="evenodd"/>
+              <path class="strich raum-umriss zone" d="M54 30H546V482H54Z M72 48H528V464H72Z" fill="none" stroke="#1f2429" stroke-width="2.5"/>
+              <!-- Fenster -->
+              <rect x="290" y="29" width="140" height="20" fill="#fbfcfc"/>
+              <path class="strich" d="M290 30V48M430 30V48M290 36H430M290 42H430" fill="none" stroke="#1f2429" stroke-width="1.5"/>
+              <!-- Tür -->
+              <rect x="110" y="463" width="128" height="20" fill="#fbfcfc"/>
+              <path class="strich" d="M110 464V336" stroke="#1f2429" stroke-width="2.5" fill="none"/>
+              <path class="strich" d="M110 336A128 128 0 0 1 238 464" stroke="#1f2429" stroke-width="1.2" fill="none" stroke-dasharray="4 4"/>
+
+              <!-- Dusche statt Wanne -->
+              <g class="zone z3" fill="none" stroke="#1f2429">
+                <rect class="zone z3" x="72" y="48" width="192" height="192" fill="url(#fliesen-klein)" stroke="none"/>
+                <rect x="72" y="48" width="320" height="120" stroke-dasharray="7 6" stroke-width="1.4" stroke="#c93a2a" fill="none"/>
+                <rect x="88" y="58" width="160" height="8" stroke-width="1.5" fill="#fbfcfc"/>
+                <path class="strich" d="M264 48V204" stroke="#0b6f72" stroke-width="5"/>
+              </g>
+              <text class="spaet" x="276" y="190" font-size="13" fill="#c93a2a">alte Wanne, entfällt</text>
+
+              <!-- Doppelwaschtisch -->
+              <g class="strich" fill="#fbfcfc" stroke="#1f2429" stroke-width="2">
+                <rect x="448" y="70" width="80" height="192"/>
+                <ellipse cx="492" cy="118" rx="22" ry="30"/>
+                <ellipse cx="492" cy="214" rx="22" ry="30"/>
+              </g>
+
+              <!-- WC mit Haltegriff -->
+              <g class="strich" fill="#fbfcfc" stroke="#1f2429" stroke-width="2">
+                <rect x="494" y="300" width="34" height="62"/>
+                <ellipse cx="466" cy="331" rx="32" ry="23"/>
+              </g>
+              <!-- Bewegungsfläche barrierefrei -->
+              <circle class="zone z2" cx="330" cy="350" r="96" fill="rgba(11,111,114,0)" stroke="#1f2429" stroke-width="1.4" stroke-dasharray="3 5"/>
+              <path class="zone z2" d="M436 288H506" stroke="#1f2429" stroke-width="5" stroke-linecap="round" fill="none"/>
+              <text class="spaet" x="330" y="398" font-size="13" text-anchor="middle" fill="#4b555c">Ø 1,20 m frei</text>
+
+              <text class="spaet" x="170" y="296" font-size="22" font-weight="800" fill="#1f2429" text-anchor="middle">Bad</text>
+              <text class="spaet" x="170" y="318" font-size="14" fill="#4b555c" text-anchor="middle">7,41 m²</text>
+
+              <!-- Maßketten -->
+              <g class="spaet" stroke="#c93a2a" stroke-width="1.2" fill="none">
+                <path d="M72 6H528M72 -2V14M528 -2V14M64 14L80 -2M520 14L536 -2"/>
+                <path d="M14 48V464M6 48H22M6 464H22M6 56L22 40M6 472L22 456"/>
+              </g>
+              <text class="spaet" x="300" y="-2" font-size="15" font-weight="600" text-anchor="middle" fill="#c93a2a">2,85</text>
+              <text class="spaet" x="4" y="256" font-size="15" font-weight="600" text-anchor="middle" fill="#c93a2a" transform="rotate(-90 4 256)">2,60</text>
+              <text class="spaet" x="174" y="530" font-size="13" text-anchor="middle" fill="#4b555c">Tür 0,80</text>
+
+              <!-- Nummern zur Legende -->
+              <g class="markierung spaet">
+                <g><circle cx="600" cy="452" r="15"/><text x="600" y="457" text-anchor="middle">1</text></g>
+                <g><circle cx="330" cy="330" r="15"/><text x="330" y="335" text-anchor="middle">2</text></g>
+                <g><circle cx="168" cy="144" r="15"/><text x="168" y="149" text-anchor="middle">3</text></g>
+                <g><circle cx="410" cy="240" r="15"/><text x="410" y="245" text-anchor="middle">4</text></g>
+              </g>
+              <path class="spaet" d="M528 452H585" stroke="#c93a2a" stroke-width="1.2"/>
+              <text class="spaet" x="600" y="500" font-size="12" text-anchor="middle" fill="#4b555c">M 1:20</text>
+            </svg>
+
+            <dl class="schriftfeld">
+              <div><dt>Betrieb</dt><dd>Meisterbetrieb seit 2001</dd></div>
+              <div><dt>Erfahrung</dt><dd>400+ sanierte Bäder</dd></div>
+              <div><dt>Bewertung</dt><dd>4,8 <svg aria-hidden="true"><use href="#i-stern"/></svg> aus 112 auf Google</dd></div>
+              <div><dt>Preis</dt><dd>Festpreis, schriftlich</dd></div>
+              <div><dt>Bauzeit Komplettbad</dt><dd>3–4 Wochen</dd></div>
+              <div><dt>Innung</dt><dd>Sanitär, Heizung, Klima</dd></div>
+            </dl>
+          </div>
+
+          <figure class="ergebnis">
+            <span class="mass mass-oben" aria-hidden="true">so sieht es danach aus</span>
+            <img src="bilder/glasdusche.jpg" alt="Fertiges Bad mit großer Glasdusche, hellen Fliesen und Waschtisch" width="1000" height="665">
+            <figcaption>Beispielfoto. Auf der echten Seite: Fotos aus eigenen Projekten.</figcaption>
+          </figure>
+        </div>
+
+        <h2 class="unsichtbar" id="leistungen-titel">Unsere Leistungen</h2>
+        <ol class="legende" id="leistungen" aria-labelledby="leistungen-titel">
+          <li class="l1">
+            <img src="bilder/komplett.jpg" alt="Baustelle bei einer Sanierung: alte Wand ist abgerissen, Handwerker arbeiten im Raum dahinter" width="1000" height="665" loading="lazy">
+            <h3><span class="nr" aria-hidden="true">1</span>Komplettsanierung</h3>
             <p>Alles raus, alles neu: Leitungen, Fliesen, Sanitär, Licht. Sie bekommen ein fertiges Bad, schlüsselfertig übergeben.</p>
-          </article>
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="2"/><path d="M10 22v-6l-2-4 4-3 4 3-2 4v6"/></svg>
-            </div>
-            <h3>Barrierefreies Bad</h3>
+            <a href="#kontakt" aria-label="Komplettsanierung anfragen"></a>
+          </li>
+          <li class="l2">
+            <img src="bilder/barrierefrei.jpg" alt="Frau im Rollstuhl nutzt die Handbrause in einer bodengleichen, barrierefreien Dusche" width="1000" height="1500" loading="lazy">
+            <h3><span class="nr" aria-hidden="true">2</span>Barrierefreies Bad</h3>
             <p>Bodengleiche Dusche, Haltegriffe, mehr Bewegungsfläche. Wir beraten Sie auch zu Zuschüssen der Pflegekasse.</p>
-          </article>
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h4l2 3"/><path d="M8 4v16"/><path d="M14 10v.01M17 13v.01M14 16v.01M20 16v.01M17 19v.01"/></svg>
-            </div>
-            <h3>Dusche statt Wanne</h3>
+            <a href="#kontakt" aria-label="Barrierefreies Bad anfragen"></a>
+          </li>
+          <li class="l3">
+            <img src="bilder/walkin.jpg" alt="Bodengleiche Glasdusche mit Marmorfliesen neben dem WC" width="1000" height="1500" loading="lazy">
+            <h3><span class="nr" aria-hidden="true">3</span>Dusche statt Wanne</h3>
             <p>Die alte Wanne raus, eine moderne Walk-in-Dusche rein. Meist in nur wenigen Tagen erledigt.</p>
-          </article>
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="8" height="8"/><rect x="13" y="3" width="8" height="8"/><rect x="3" y="13" width="8" height="8"/><rect x="13" y="13" width="8" height="8"/></svg>
-            </div>
-            <h3>Fliesen &amp; Oberflächen</h3>
+            <a href="#kontakt" aria-label="Dusche statt Wanne anfragen"></a>
+          </li>
+          <li class="l4">
+            <img src="bilder/fliesen.jpg" alt="Hände setzen eine weiße Wandfliese in frischen Fliesenkleber" width="1000" height="1500" loading="lazy">
+            <h3><span class="nr" aria-hidden="true">4</span>Fliesen &amp; Oberflächen</h3>
             <p>Großformatige Fliesen, fugenlose Wände oder Naturstein: Wir zeigen Ihnen Muster direkt bei Ihnen zu Hause.</p>
-          </article>
-        </div>
+            <a href="#kontakt" aria-label="Fliesen und Oberflächen anfragen"></a>
+          </li>
+        </ol>
       </div>
     </section>
 
     <section class="abschnitt" id="ueber-uns" aria-labelledby="chef-titel">
       <div class="container chef">
-        <figure class="chef-foto">
+        <figure class="detail">
+          <span class="mass mass-oben" aria-hidden="true">Detail A</span>
+          <span class="mass mass-links" aria-hidden="true"><span>Ihr Ansprechpartner</span></span>
           <img src="bilder/meister.jpg" alt="Stefan Vogt, Installateur- und Heizungsbauermeister, in blauer Arbeitsjacke auf einer Baustelle" width="780" height="1040" loading="lazy">
-          <figcaption><strong>Stefan Vogt</strong><span>Installateur- und Heizungsbauermeister</span></figcaption>
+          <figcaption><strong>Stefan Vogt</strong>, Installateur- und Heizungsbauermeister</figcaption>
         </figure>
-        <div>
-          <h2 id="chef-titel">Stefan Vogt, Ihr Ansprechpartner fürs ganze Bad</h2>
+        <div class="chef-text">
+          <h2 id="chef-titel">Einer plant, einer ist da, einer haftet: Stefan Vogt.</h2>
           <blockquote>„Ich plane Ihr Bad selbst und bin auf der Baustelle jeden Tag dabei. So weiß ich immer, wie weit wir sind.“</blockquote>
-          <p>
-            Ich habe Bad &amp; Raum Vogt 2001 gegründet, nach meiner Meisterprüfung vor der Handwerkskammer.
-            Heute sind wir neun Leute: Installateure, Fliesenleger und ein Elektriker. Deshalb brauchen Sie
-            keine fünf verschiedenen Firmen, sondern nur uns. Und einen festen Preis, der auch am Ende noch stimmt.
-          </p>
-          <ul class="nachweise">
-            <li><strong>Meisterbrief</strong>Installateur- und Heizungsbauermeister, HWK Musterstadt, 2000</li>
-            <li><strong>Innungsbetrieb</strong>Mitglied der Innung Sanitär, Heizung, Klima Musterstadt</li>
-            <li><strong>Fachbetrieb für barrierefreie Bäder</strong>Wir helfen beim Antrag auf Zuschuss bei der Pflegekasse</li>
+          <p>Ich habe Bad &amp; Raum Vogt 2001 gegründet, nach meiner Meisterprüfung vor der Handwerkskammer. Heute sind wir neun Leute: Installateure, Fliesenleger und ein Elektriker. Deshalb brauchen Sie keine fünf verschiedenen Firmen, sondern nur uns. Und einen festen Preis, der auch am Ende noch stimmt.</p>
+          <ul class="hinweise">
+            <li><strong>Meisterbrief</strong><span>Installateur- und Heizungsbauermeister, HWK Musterstadt, 2000</span></li>
+            <li><strong>Innungsbetrieb</strong><span>Mitglied der Innung Sanitär, Heizung, Klima Musterstadt</span></li>
+            <li><strong>Barrierefrei</strong><span>Fachbetrieb für barrierefreie Bäder, wir helfen beim Antrag auf Zuschuss</span></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="abschnitt abschnitt-weiss" id="preise" aria-labelledby="preise-titel">
+    <section class="abschnitt lv" id="preise" aria-labelledby="preise-titel">
       <div class="container">
-        <div class="abschnitt-kopf">
+        <div class="kopf-text">
           <h2 id="preise-titel">Was kostet ein neues Bad?</h2>
           <p>Damit Sie vorher wissen, woran Sie sind. Den genauen Preis bekommen Sie nach der kostenlosen Beratung bei Ihnen zu Hause, als Festpreis.</p>
         </div>
-        <div class="preise-raster">
-          <table class="preistabelle">
+        <div class="lv-raster">
+          <table>
             <caption>Richtwerte inklusive Mehrwertsteuer, Material und Montage, Stand 2026. Beispielpreise.</caption>
+            <thead><tr><th class="pos" scope="col">Pos.</th><th scope="col">Leistung</th><th scope="col">Richtpreis</th></tr></thead>
             <tbody>
-              <tr><th scope="row">Dusche statt Wanne<small>Wanne raus, bodengleiche Dusche rein</small></th><td>6.500–11.000 €</td></tr>
-              <tr><th scope="row">Gäste-WC<small>komplett neu, ca. 2–3&nbsp;m²</small></th><td>8.000–14.000 €</td></tr>
-              <tr><th scope="row">Barrierefreier Umbau<small>Dusche, Griffe, unterfahrbarer Waschtisch</small></th><td>14.000–25.000 €</td></tr>
-              <tr><th scope="row">Komplettsanierung kleines Bad<small>bis ca. 6&nbsp;m²</small></th><td>18.000–28.000 €</td></tr>
-              <tr><th scope="row">Komplettsanierung Familienbad<small>ca. 8–10&nbsp;m², mit Dusche und Wanne</small></th><td>28.000–42.000 €</td></tr>
-              <tr class="pflege-zeile"><th scope="row">Beratung und Badplanung<small>bei Ihnen zu Hause, mit Skizze</small></th><td>kostenlos</td></tr>
+              <tr><td class="pos">01</td><th scope="row">Dusche statt Wanne<small>Wanne raus, bodengleiche Dusche rein</small></th><td class="preis">6.500–11.000 €</td></tr>
+              <tr><td class="pos">02</td><th scope="row">Gäste-WC<small>komplett neu, ca. 2–3&nbsp;m²</small></th><td class="preis">8.000–14.000 €</td></tr>
+              <tr><td class="pos">03</td><th scope="row">Barrierefreier Umbau<small>Dusche, Griffe, unterfahrbarer Waschtisch</small></th><td class="preis">14.000–25.000 €</td></tr>
+              <tr><td class="pos">04</td><th scope="row">Komplettsanierung kleines Bad<small>bis ca. 6&nbsp;m²</small></th><td class="preis">18.000–28.000 €</td></tr>
+              <tr><td class="pos">05</td><th scope="row">Komplettsanierung Familienbad<small>ca. 8–10&nbsp;m², mit Dusche und Wanne</small></th><td class="preis">28.000–42.000 €</td></tr>
+              <tr class="frei"><td class="pos">06</td><th scope="row">Beratung und Badplanung<small>bei Ihnen zu Hause, mit Grundriss</small></th><td class="preis">kostenlos</td></tr>
             </tbody>
           </table>
-          <aside class="preis-hinweis">
+          <aside class="gut-zu-wissen">
             <h3>Gut zu wissen</h3>
             <ul>
               <li>Der Preis im Angebot ist ein Festpreis. Er gilt auch, wenn wir länger brauchen.</li>
@@ -869,87 +544,94 @@
       </div>
     </section>
 
-    <section class="abschnitt" id="ablauf">
+    <section class="abschnitt" id="ablauf" aria-labelledby="ablauf-titel">
       <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>So einfach geht's</h2>
-          <p>Vier Schritte, ein Ansprechpartner. Sie wissen immer, was als Nächstes passiert.</p>
+        <div class="kopf-text">
+          <h2 id="ablauf-titel">Ihr Bauzeitenplan, bevor es losgeht.</h2>
+          <p>Vier Schritte, ein Ansprechpartner. Sie wissen immer, was als Nächstes passiert und wann Ihr Bad wieder fertig ist.</p>
         </div>
-        <div class="ablauf">
-          <div class="schritt">
-            <h3>Anfrage</h3>
-            <p>Sie rufen an oder schreiben uns. Wir melden uns innerhalb von zwei Werktagen.</p>
+        <div class="bauzeit">
+          <div class="bz-kopf" aria-hidden="true">
+            <span>Schritt</span>
+            <div class="wochen"><span>Woche 1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span></div>
           </div>
-          <div class="schritt">
-            <h3>Beratung vor Ort</h3>
-            <p>Wir messen aus, hören zu und zeigen Ihnen Ideen und Materialien.</p>
+          <div class="bz-zeile">
+            <div class="bz-text"><h3>Anfrage</h3><p>Sie rufen an oder schreiben uns. Wir melden uns innerhalb von zwei Werktagen.</p></div>
+            <div class="bz-spur"><span class="balken" style="grid-column: 1 / 3"></span><span class="balken-label" style="grid-column: 3 / 13">2 Werktage</span></div>
           </div>
-          <div class="schritt">
-            <h3>Festpreis-Angebot</h3>
-            <p>Sie bekommen ein klares Angebot mit festem Preis und festem Termin.</p>
+          <div class="bz-zeile">
+            <div class="bz-text"><h3>Beratung vor Ort</h3><p>Wir messen aus, hören zu und zeichnen Ihren Grundriss.</p></div>
+            <div class="bz-spur"><span class="balken" style="grid-column: 3 / 5"></span><span class="balken-label" style="grid-column: 5 / 15">bei Ihnen zu Hause</span></div>
           </div>
-          <div class="schritt">
-            <h3>Ihr neues Bad</h3>
-            <p>Wir bauen sauber und pünktlich. Am Ende übergeben wir Ihnen ein fertiges Bad.</p>
+          <div class="bz-zeile">
+            <div class="bz-text"><h3>Festpreis-Angebot</h3><p>Sie bekommen ein klares Angebot mit festem Preis und festem Termin.</p></div>
+            <div class="bz-spur"><span class="balken" style="grid-column: 5 / 9"></span><span class="balken-label" style="grid-column: 9 / 19">schriftlich</span></div>
+          </div>
+          <div class="bz-zeile">
+            <div class="bz-text"><h3>Ihr neues Bad</h3><p>Wir bauen sauber und pünktlich und übergeben Ihnen ein fertiges Bad.</p></div>
+            <div class="bz-spur"><span class="balken lang" style="grid-column: 9 / 25"></span></div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="abschnitt abschnitt-weiss" id="projekte">
+    <section class="abschnitt" id="projekte" aria-labelledby="projekte-titel">
       <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>Unsere letzten Projekte</h2>
-          <p>Zwei Bäder aus Musterstadt und Umgebung, fertig saniert in diesem Jahr.</p>
+        <div class="kopf-text">
+          <h2 id="projekte-titel">Fertig gebaut, so wie geplant.</h2>
+          <p>Drei Bäder aus Musterstadt und Umgebung, saniert in diesem Jahr.</p>
         </div>
         <div class="projekte">
-          <article class="projekt">
+          <figure class="projekt">
             <img src="bilder/familienbad.jpg" alt="Helles Familienbad mit bodengleicher Glasdusche, Doppelwaschtisch mit dunklem Unterschrank und großem Spiegel" width="1200" height="800" loading="lazy">
-            <span class="projekt-daten">Musterstadt · Mai 2026 · Bauzeit 3 Wochen</span>
-            <h3>Familienbad, 9 m²</h3>
-            <p>Komplettsanierung mit bodengleicher Dusche, Doppelwaschtisch und Holzboden-Optik. Vorher: Wanne mit Stufe und Fliesen aus den 70ern.</p>
-          </article>
-          <article class="projekt">
+            <div class="projekt-feld"><span>Fläche<b>9 m²</b></span><span>Bauzeit<b>3 Wochen</b></span><span>Ort<b>Musterstadt</b></span></div>
+            <figcaption><h3>Familienbad</h3><p>Bodengleiche Dusche, Doppelwaschtisch und Holzboden-Optik. Vorher: Wanne mit Stufe und Fliesen aus den 70ern.</p></figcaption>
+          </figure>
+          <figure class="projekt">
             <img src="bilder/duschbad.jpg" alt="Duschbad mit großformatigen dunkelgrauen Fliesen, Glasdusche und Doppelwaschtisch mit beleuchteten Spiegeln" width="1200" height="800" loading="lazy">
-            <span class="projekt-daten">Neudorf · August 2026 · Bauzeit 2 Wochen</span>
-            <h3>Duschbad in Großformat-Fliesen, 6 m²</h3>
-            <p>Aus einem engen Bad mit Wanne wurde ein Duschbad mit dunklen Fliesen und indirektem Licht. Weniger Fugen, weniger Putzen.</p>
-          </article>
+            <div class="projekt-feld"><span>Fläche<b>6 m²</b></span><span>Bauzeit<b>2 Wochen</b></span><span>Ort<b>Neudorf</b></span></div>
+            <figcaption><h3>Duschbad in Großformat</h3><p>Aus einem engen Bad mit Wanne wurde ein Duschbad mit dunklen Fliesen und indirektem Licht. Weniger Fugen, weniger Putzen.</p></figcaption>
+          </figure>
+          <figure class="projekt">
+            <img src="bilder/dusche.jpg" alt="Bad mit bodengleicher Dusche, Natursteinwänden und Waschtisch mit Holzunterschrank" width="1000" height="1500" loading="lazy">
+            <div class="projekt-feld"><span>Fläche<b>7 m²</b></span><span>Bauzeit<b>3 Wochen</b></span><span>Ort<b>Lindenau</b></span></div>
+            <figcaption><h3>Naturstein-Bad</h3><p>Dusche statt Wanne, Wände in Naturstein-Optik und ein Waschtisch aus Holz. Ohne Stufe, mit viel Platz.</p></figcaption>
+          </figure>
         </div>
-        <p class="platzhalter-hinweis">Beispielseite: Die Fotos stammen von Unsplash. Auf einer echten Seite stehen hier Fotos aus den eigenen Projekten des Betriebs, am besten mit Vorher-Bild.</p>
+        <p class="platzhalter-hinweis">Beispielseite: Die Fotos stammen von Unsplash. Auf einer echten Seite stehen hier Fotos aus den eigenen Projekten des Betriebs.</p>
       </div>
     </section>
 
-    <section class="abschnitt">
+    <section class="abschnitt" aria-labelledby="stimmen-titel">
       <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>Das sagen unsere Kunden</h2>
+        <div class="kopf-text">
+          <h2 id="stimmen-titel">Abgenommen und unterschrieben.</h2>
           <p>Beispielbewertungen. Auf einer echten Seite stehen hier die echten Google-Bewertungen des Betriebs.</p>
-          <p class="bewertung-schnitt"><strong>4,8</strong><span class="sterne" aria-hidden="true">★★★★★</span>112 Bewertungen auf Google</p>
+          <div class="schnitt"><strong>4,8</strong><span class="sterne" aria-hidden="true"><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg></span><span>112 Bewertungen auf Google</span></div>
         </div>
-        <div class="raster">
-          <blockquote class="stimme">
-            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
+        <div class="abnahmen">
+          <blockquote class="abnahme">
+            <span class="sterne" role="img" aria-label="5 von 5 Sternen"><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg></span>
             <p>„Pünktlich fertig, alles sauber hinterlassen und der Preis war genau wie abgesprochen.“</p>
-            <footer><strong>Petra L.</strong> aus Musterstadt · 12. Juni 2026</footer>
+            <footer><strong>Petra L., Musterstadt</strong><span>12. Juni 2026</span></footer>
           </blockquote>
-          <blockquote class="stimme">
-            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
+          <blockquote class="abnahme">
+            <span class="sterne" role="img" aria-label="5 von 5 Sternen"><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg></span>
             <p>„Endlich eine Dusche ohne Stufe. Die Hilfe beim Antrag für den Zuschuss hat uns viel Arbeit erspart.“</p>
-            <footer><strong>Günter und Ilse M.</strong> aus Lindenau · 30. Juli 2026</footer>
+            <footer><strong>Günter und Ilse M., Lindenau</strong><span>30. Juli 2026</span></footer>
           </blockquote>
-          <blockquote class="stimme">
-            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
+          <blockquote class="abnahme">
+            <span class="sterne" role="img" aria-label="5 von 5 Sternen"><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg><svg><use href="#i-stern"/></svg></span>
             <p>„Herr Vogt war jeden Tag kurz da und hat erklärt, was als Nächstes kommt. So entspannt hatten wir uns eine Baustelle nicht vorgestellt.“</p>
-            <footer><strong>Daniel R.</strong> aus Neudorf · 4. September 2026</footer>
+            <footer><strong>Daniel R., Neudorf</strong><span>4. September 2026</span></footer>
           </blockquote>
         </div>
       </div>
     </section>
 
-    <section class="abschnitt abschnitt-weiss" id="fragen" aria-labelledby="fragen-titel">
+    <section class="abschnitt" id="fragen" aria-labelledby="fragen-titel">
       <div class="container fragen-raster">
-        <div class="abschnitt-kopf">
+        <div class="kopf-text">
           <h2 id="fragen-titel">Häufige Fragen</h2>
           <p>Ihre Frage ist nicht dabei? Rufen Sie einfach an: <a href="tel:+49123456789">0123 456 789</a>.</p>
         </div>
@@ -982,33 +664,30 @@
       </div>
     </section>
 
-    <section class="abschnitt" id="karriere">
+    <section class="abschnitt" id="karriere" aria-labelledby="karriere-titel" style="padding-top: 0">
       <div class="container">
         <div class="karriere">
           <div>
-            <h2>Wir suchen Verstärkung</h2>
-            <p>
-              Du arbeitest gern mit den Händen und willst am Ende des Tages sehen,
-              was du geschafft hast? Dann komm in unser Team.
-            </p>
+            <h2 id="karriere-titel">Wir suchen Verstärkung</h2>
+            <p>Du arbeitest gern mit den Händen und willst am Ende des Tages sehen, was du geschafft hast? Dann komm in unser Team.</p>
             <a class="knopf" href="mailto:info@beispiel.de?subject=Bewerbung">Jetzt einfach bewerben</a>
           </div>
-          <ul>
-            <li>Anlagenmechaniker SHK (m/w/d)</li>
-            <li>Fliesenleger (m/w/d)</li>
-            <li>Azubi SHK für 2027 (m/w/d)</li>
-            <li>Bewerbung auch per WhatsApp möglich</li>
+          <ul class="stellen">
+            <li>Anlagenmechaniker SHK <span>m/w/d</span></li>
+            <li>Fliesenleger <span>m/w/d</span></li>
+            <li>Azubi SHK für 2027 <span>m/w/d</span></li>
+            <li>Bewerbung auch per WhatsApp <span>ohne Anschreiben</span></li>
           </ul>
         </div>
       </div>
     </section>
 
-    <section class="abschnitt" id="kontakt">
+    <section class="abschnitt" id="kontakt" aria-labelledby="kontakt-titel" style="padding-top: 0">
       <div class="container kontakt">
         <div class="kontakt-info">
-          <div class="abschnitt-kopf">
-            <h2>Lassen Sie sich beraten</h2>
-            <p>Die Beratung bei Ihnen zu Hause ist kostenlos und unverbindlich.</p>
+          <div class="kopf-text">
+            <h2 id="kontakt-titel">Lassen Sie Ihr Bad zeichnen.</h2>
+            <p>Die Beratung bei Ihnen zu Hause ist kostenlos und unverbindlich. Sie bekommen dabei einen ersten Grundriss.</p>
           </div>
           <p>Am schnellsten erreichen Sie uns telefonisch unter <a href="tel:+49123456789">0123 456 789</a>.</p>
           <dl>
@@ -1031,7 +710,7 @@
           </dl>
         </div>
         <form id="anfrage">
-          <div class="zwei-spalten">
+          <div class="zwei">
             <label>Name<input type="text" name="name" autocomplete="name" required></label>
             <label>Telefon<input type="tel" name="telefon" autocomplete="tel" required></label>
           </div>
@@ -1040,15 +719,17 @@
               <option>Komplettsanierung</option>
               <option>Barrierefreies Bad</option>
               <option>Dusche statt Wanne</option>
+              <option>Fliesen und Oberflächen</option>
               <option>Etwas anderes</option>
             </select>
           </label>
+          <label>Wie groß ist Ihr Bad ungefähr? (optional)<input type="text" name="groesse" placeholder="z. B. 2,5 × 3 m"></label>
           <label>Nachricht (optional)<textarea name="nachricht" rows="4"></textarea></label>
           <label class="einwilligung">
             <input type="checkbox" required>
             Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
           </label>
-          <button class="knopf" type="submit">Anfrage senden</button>
+          <button class="knopf" type="submit">Beratung anfragen</button>
           <p class="formular-danke" role="status">Danke! Auf einer echten Seite würde Ihre Anfrage jetzt verschickt.</p>
         </form>
       </div>
@@ -1067,20 +748,33 @@
         <a href="https://unsplash.com/de/fotos/9OKuf13OidA">Peter Muniz</a>,
         <a href="https://unsplash.com/de/fotos/aKUQGKeYgnY">GN Group</a>,
         <a href="https://unsplash.com/de/fotos/g51F6-WYzyU">Lotus Design N Print</a>,
-        <a href="https://unsplash.com/de/fotos/ckdoA-tv9uw">Clay Banks</a>.
+        <a href="https://unsplash.com/de/fotos/ckdoA-tv9uw">Clay Banks</a>,
+        <a href="https://unsplash.com/de/fotos/Te48TPzdcU8">Milivoj Kuhar</a>,
+        <a href="https://unsplash.com/de/fotos/D2CxpwtgSgQ">Centre for Ageing Better</a>,
+        <a href="https://unsplash.com/de/fotos/ZDB00w2d5hY">Smart Renovations</a>,
+        <a href="https://unsplash.com/de/fotos/c2thq3SXJiA">charlesdeluvio</a>,
+        <a href="https://unsplash.com/de/fotos/48mTwDzizqE">99.films</a>.
+        Schrift: Bricolage Grotesque (SIL Open Font License), lokal eingebunden.
       </p>
     </div>
   </footer>
 
-  <a class="knopf anruf-mobil" href="tel:+49123456789">📞 Jetzt anrufen</a>
+  <a class="knopf anruf-mobil" href="tel:+49123456789"><svg aria-hidden="true"><use href="#i-telefon"/></svg>Jetzt anrufen</a>
 
   <script>
+    document.documentElement.classList.add('js');
     // Beispielseite: Das Formular verschickt nichts, es zeigt nur eine Bestätigung
     document.getElementById('anfrage').addEventListener('submit', function (e) {
       e.preventDefault();
       this.querySelector('.formular-danke').style.display = 'block';
     });
+    // Bauzeitenplan: Balken wachsen, wenn der Plan ins Bild kommt
+    var plan = document.querySelector('.bauzeit');
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (eintraege, beob) {
+        if (eintraege[0].isIntersecting) { plan.classList.add('gezeigt'); beob.disconnect(); }
+      }, { threshold: 0.3 }).observe(plan);
+    } else { plan.classList.add('gezeigt'); }
   </script>
-
 </body>
 </html>

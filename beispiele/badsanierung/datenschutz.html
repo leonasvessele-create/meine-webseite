@@ -8,715 +8,107 @@
   <meta name="description" content="Datenschutzerklärung von Bad &amp; Raum Vogt, Beispielseite von Hand &amp; Fuß Webseiten.">
   <!-- Beispielseite von Hand &amp; Fuß Webseiten. Bad & Raum Vogt ist ein ausgedachtes Unternehmen. -->
   <style>
-    /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
+    /* Schrift lokal eingebunden (keine Google-Server, DSGVO-sicher) */
+    @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-400-normal.woff2") format("woff2"); font-weight: 400; font-display: swap; }
+    @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-600-normal.woff2") format("woff2"); font-weight: 600; font-display: swap; }
+    @font-face { font-family: "Bricolage"; src: url("fonts/bricolage-grotesque-latin-800-normal.woff2") format("woff2"); font-weight: 800; font-display: swap; }
+
     :root {
-      --wasser: #12343b;
-      --wasser-hell: #1f5560;
-      --sand: #f6f1ea;
-      --sand-dunkel: #e8dfd2;
-      --kupfer: #c4692d;
-      --kupfer-dunkel: #a4541f;
-      --text: #1d2426;
-      --text-leise: #5a6568;
-      --weiss: #ffffff;
-      --radius: 14px;
-      --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --schrift-titel: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+      --film: #eef1f0;
+      --film-tief: #e2e7e6;
+      --weiss: #fbfcfc;
+      --tusche: #1f2429;
+      --leise: #4b555c;
+      --raster: rgba(31, 36, 41, 0.055);
+      --raster-grob: rgba(31, 36, 41, 0.09);
+      --kalt: #0b6f72;
+      --kalt-tief: #08585a;
+      --kalt-hell: #8fd3cf;
+      --warm: #c93a2a;
+      --linie: 1.5px solid var(--tusche);
+      --ease: cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
+    html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
-      font-family: var(--schrift);
-      font-size: 17px;
+      font-family: "Bricolage", system-ui, sans-serif;
+      font-size: 18px;
       line-height: 1.6;
-      color: var(--text);
-      background: var(--sand);
+      color: var(--tusche);
+      background-color: var(--film);
+      /* Zeichenfilm mit 1:20-Raster */
+      background-image:
+        linear-gradient(var(--raster-grob) 1px, transparent 1px),
+        linear-gradient(90deg, var(--raster-grob) 1px, transparent 1px),
+        linear-gradient(var(--raster) 1px, transparent 1px),
+        linear-gradient(90deg, var(--raster) 1px, transparent 1px);
+      background-size: 120px 120px, 120px 120px, 24px 24px, 24px 24px;
+      overflow-x: clip;
     }
+    ::selection { background: var(--kalt); color: #fff; }
+    h1, h2, h3 { line-height: 1.12; margin: 0 0 0.5em; font-weight: 800; letter-spacing: -0.02em; text-wrap: balance; }
+    p { margin: 0 0 1em; }
+    a { color: inherit; text-underline-offset: 3px; }
+    img { max-width: 100%; height: auto; display: block; }
+    :focus-visible { outline: 2px solid var(--warm); outline-offset: 3px; }
 
-    h1, h2, h3 {
-      font-family: var(--schrift-titel);
-      line-height: 1.2;
-      margin: 0 0 0.5em;
-    }
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 
-    a { color: inherit; }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .beispiel-hinweis {
-      background: var(--text);
-      color: #d7dcdd;
-      text-align: center;
-      font-size: 0.85em;
-      padding: 8px 16px;
-    }
+    .beispiel-hinweis { background: var(--tusche); color: #d4dadc; text-align: center; font-size: 0.82em; padding: 8px 16px; }
 
     /* Kopfzeile */
-    .kopf {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(246, 241, 234, 0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--sand-dunkel);
-    }
-    .kopf .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      height: 68px;
-    }
-    .logo {
-      font-family: var(--schrift-titel);
-      font-size: 1.35em;
-      font-weight: 700;
-      color: var(--wasser);
-      text-decoration: none;
-    }
-    .logo span { color: var(--kupfer); }
-    .nav {
-      display: flex;
-      gap: 28px;
-      font-size: 0.95em;
-    }
-    .nav a {
-      text-decoration: none;
-      color: var(--text-leise);
-    }
-    .nav a:hover { color: var(--wasser); }
+    .kopf { position: sticky; top: 0; z-index: 10; background: rgba(238, 241, 240, 0.94); border-bottom: var(--linie); }
+    .kopf .container { display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 70px; }
+    .logo { display: flex; align-items: center; gap: 12px; text-decoration: none; font-weight: 800; font-size: 1.2em; letter-spacing: -0.02em; }
+    .logo svg { width: 34px; height: 34px; flex: none; }
+    .logo small { display: block; font-weight: 400; font-size: 0.62em; letter-spacing: 0; color: var(--leise); }
+    .nav { display: flex; gap: 26px; font-size: 0.92em; }
+    .nav a { text-decoration: none; color: var(--leise); padding: 6px 0; border-bottom: 2px solid transparent; }
+    .nav a:hover { color: var(--tusche); border-color: var(--kalt); }
 
     .knopf {
-      display: inline-block;
-      background: var(--kupfer);
-      color: var(--weiss);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 12px 22px;
-      border-radius: 999px;
-      border: none;
-      font-size: 1em;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background 150ms ease, transform 100ms ease-out;
-    }
-    .knopf:hover { background: var(--kupfer-dunkel); }
-    .knopf:active { transform: scale(0.97); }
-    .knopf-hell {
-      background: transparent;
-      color: var(--wasser);
-      border: 2px solid var(--wasser);
-    }
-    .knopf-hell:hover { background: var(--wasser); color: var(--weiss); }
-
-    /* Startbereich */
-    .start {
-      padding: 72px 0 80px;
-    }
-    .start .container {
-      display: grid;
-      grid-template-columns: 1.1fr 1fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .start-marke {
-      display: inline-block;
-      color: var(--kupfer-dunkel);
-      font-weight: 600;
-      font-size: 0.9em;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .start h1 {
-      font-size: clamp(2.2em, 5vw, 3.4em);
-      color: var(--wasser);
-    }
-    .start p {
-      font-size: 1.15em;
-      color: var(--text-leise);
-      max-width: 34em;
-      margin: 0 0 28px;
-    }
-    .start-knoepfe {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .start-bild {
-      position: relative;
-      aspect-ratio: 4 / 5;
-      border-radius: 22px;
-      overflow: hidden;
-      background: var(--sand-dunkel);
-    }
-    .start-bild img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-    .start-karte {
-      position: absolute;
-      left: 20px;
-      right: 20px;
-      bottom: 20px;
-      background: var(--weiss);
-      border-radius: var(--radius);
-      padding: 18px 20px;
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      box-shadow: 0 12px 30px rgba(18, 52, 59, 0.2);
-    }
-    .start-karte strong {
-      font-family: var(--schrift-titel);
-      font-size: 2em;
-      color: var(--kupfer);
-      line-height: 1;
-      white-space: nowrap;
-    }
-    .start-karte span {
-      font-size: 0.95em;
-      color: var(--text-leise);
-    }
-
-    /* Vertrauensleiste */
-    .vertrauen {
-      background: var(--wasser);
-      color: var(--weiss);
-      padding: 28px 0;
-    }
-    .vertrauen .container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      text-align: center;
-    }
-    .vertrauen strong {
-      display: block;
-      font-family: var(--schrift-titel);
-      font-size: 1.6em;
-    }
-    .vertrauen span {
-      color: #b8cdd1;
-      font-size: 0.9em;
-    }
-
-    /* Abschnitte */
-    .abschnitt { padding: 88px 0; }
-    .abschnitt-weiss { background: var(--weiss); }
-    .abschnitt-kopf {
-      max-width: 640px;
-      margin-bottom: 44px;
-    }
-    .abschnitt-kopf h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-      color: var(--wasser);
-    }
-    .abschnitt-kopf p {
-      color: var(--text-leise);
-      margin: 0;
-    }
-
-    /* Leistungen */
-    .raster {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .leistung {
-      background: var(--sand);
-      border-radius: var(--radius);
-      padding: 28px;
-      transition: transform 200ms cubic-bezier(.23, 1, .32, 1), box-shadow 200ms cubic-bezier(.23, 1, .32, 1);
-    }
-    .leistung:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(18, 52, 59, 0.1);
-    }
-    .leistung-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      background: var(--wasser);
-      color: var(--weiss);
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-    }
-    .leistung h3 {
-      font-size: 1.25em;
-      color: var(--wasser);
-    }
-    .leistung p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.97em;
-    }
-
-    /* Ablauf */
-    .ablauf {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      counter-reset: schritt;
-    }
-    .schritt {
-      border-top: 3px solid var(--kupfer);
-      padding-top: 18px;
-    }
-    .schritt::before {
-      counter-increment: schritt;
-      content: "0" counter(schritt);
-      font-family: var(--schrift-titel);
-      font-size: 1.8em;
-      color: var(--kupfer);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .schritt h3 {
-      font-size: 1.15em;
-      color: var(--wasser);
-    }
-    .schritt p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.97em;
-    }
-
-    /* Vorher / Nachher */
-    .projekte {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-    }
-    .projekt img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: var(--radius);
-      background: var(--sand-dunkel);
-    }
-    .projekt-daten {
-      display: block;
-      margin-top: 16px;
-      font-size: 0.85em;
-      font-weight: 600;
-      color: var(--kupfer-dunkel);
-    }
-    .projekt h3 {
-      margin-top: 4px;
-      font-size: 1.15em;
-      color: var(--wasser);
-    }
-    .projekt p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .platzhalter-hinweis {
-      margin-top: 28px;
-      font-size: 0.85em;
-      color: var(--text-leise);
-    }
-
-    /* Kundenstimmen */
-    .stimme {
-      background: var(--weiss);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin: 0;
-    }
-    .stimme p {
-      margin: 10px 0 16px;
-      font-family: var(--schrift-titel);
-      font-size: 1.15em;
-      color: var(--wasser);
-    }
-    .stimme footer {
-      color: var(--text-leise);
-      font-size: 0.9em;
-    }
-    .sterne { color: var(--kupfer); letter-spacing: 2px; }
-
-    .stimme footer strong { color: var(--wasser); }
-    .sterne { color: var(--kupfer); letter-spacing: 2px; }
-    .bewertung-schnitt {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-top: 18px;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .bewertung-schnitt strong {
-      font-family: var(--schrift-titel);
-      font-size: 2em;
-      color: var(--wasser);
-    }
-
-    /* Siegel in der Vertrauensleiste */
-    .vertrauen .siegel strong { font-size: 1.25em; }
-    .vertrauen .siegel strong::before {
-      content: "";
-      display: inline-block;
-      width: 0.8em;
-      height: 0.8em;
-      margin-right: 8px;
-      border-radius: 50%;
-      background: var(--kupfer);
-      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
-      vertical-align: 0.02em;
-    }
-
-    /* Inhaber */
-    .chef {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .chef-foto { margin: 0; position: relative; }
-    .chef-foto img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      object-position: center 20%;
-      border-radius: var(--radius);
-      background: var(--sand-dunkel);
-    }
-    .chef-foto figcaption {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      background: var(--weiss);
-      border-radius: 10px;
-      padding: 10px 16px;
-      line-height: 1.3;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-    .chef-foto figcaption strong { display: block; color: var(--wasser); }
-    .chef-foto figcaption span { font-size: 0.88em; color: var(--text-leise); }
-    .chef h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-      color: var(--wasser);
-    }
-    .chef blockquote {
-      margin: 0 0 20px;
-      padding-left: 18px;
-      border-left: 3px solid var(--kupfer);
-      font-family: var(--schrift-titel);
-      font-size: 1.25em;
-      color: var(--wasser);
-    }
-    .chef > div > p { color: var(--text-leise); margin: 0 0 24px; }
-    .nachweise {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .nachweise li {
-      background: var(--weiss);
-      border: 1px solid var(--sand-dunkel);
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .nachweise strong { display: block; color: var(--wasser); }
-
-    /* Preise */
-    .preise-raster {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-    .preistabelle {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--weiss);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--sand-dunkel);
-    }
-    .preistabelle caption {
-      caption-side: bottom;
-      text-align: left;
-      padding-top: 12px;
-      font-size: 0.85em;
-      color: var(--text-leise);
-    }
-    .preistabelle th,
-    .preistabelle td {
-      padding: 15px 20px;
-      text-align: left;
-      border-bottom: 1px solid var(--sand-dunkel);
-      vertical-align: baseline;
-    }
-    .preistabelle tr:last-child th,
-    .preistabelle tr:last-child td { border-bottom: 0; }
-    .preistabelle th { font-weight: 600; color: var(--wasser); }
-    .preistabelle th small {
-      display: block;
-      font-weight: 400;
-      color: var(--text-leise);
-      font-size: 0.88em;
-    }
-    .preistabelle td {
-      text-align: right;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .preistabelle .pflege-zeile { background: #fbefe6; }
-    .preis-hinweis {
-      background: var(--wasser);
-      color: #c7d8db;
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-    .preis-hinweis h3 { color: var(--weiss); font-size: 1.3em; }
-    .preis-hinweis ul { margin: 0; padding-left: 20px; }
-    .preis-hinweis li { margin-bottom: 8px; }
-
-    /* Fragen */
-    .fragen-raster {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 48px;
-      align-items: start;
-    }
-    .fragen-raster .abschnitt-kopf a { color: var(--wasser); font-weight: 600; white-space: nowrap; }
-    .fragen { display: grid; gap: 10px; }
-    .fragen details {
-      background: var(--sand);
-      border-radius: 12px;
-    }
-    .fragen summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 20px;
-      font-weight: 600;
-      color: var(--wasser);
-    }
-    .fragen summary::-webkit-details-marker { display: none; }
-    .fragen summary::after {
-      content: "+";
-      font-size: 1.4em;
-      line-height: 1;
-      color: var(--kupfer);
-      transition: transform 200ms cubic-bezier(.23, 1, .32, 1);
-    }
-    .fragen details[open] summary::after { transform: rotate(45deg); }
-    .fragen summary:focus-visible {
-      outline: 2px solid var(--kupfer);
-      outline-offset: 2px;
-      border-radius: 12px;
-    }
-    .fragen details p {
-      margin: 0;
-      padding: 0 20px 18px;
-      color: var(--text-leise);
-    }
-
-    /* Einsatzgebiet */
-    .orte {
-      list-style: none;
-      margin: 8px 0 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .orte li {
-      background: var(--weiss);
-      border: 1px solid var(--sand-dunkel);
-      border-radius: 999px;
-      padding: 4px 12px;
-      font-size: 0.9em;
-      color: var(--text);
-    }
-    .orte small { color: var(--text-leise); }
-
-    /* Karriere */
-    .karriere {
-      background: var(--wasser);
-      color: var(--weiss);
-      border-radius: 22px;
-      padding: 56px;
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .karriere h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-    }
-    .karriere p { color: #c7d8db; margin: 0 0 24px; }
-    .karriere ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .karriere li {
-      background: var(--wasser-hell);
-      border-radius: 10px;
-      padding: 12px 16px;
-    }
-    .karriere li::before {
-      content: "✓ ";
-      color: #f0a774;
-      font-weight: 700;
-    }
-
-    /* Kontakt */
-    .kontakt {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 48px;
-    }
-    .kontakt-info p { color: var(--text-leise); }
-    .kontakt-info a { color: var(--wasser); font-weight: 600; white-space: nowrap; }
-    .kontakt-info dl { margin: 24px 0 0; }
-    .kontakt-info dt {
-      font-weight: 600;
-      color: var(--wasser);
-    }
-    .kontakt-info dd {
-      margin: 0 0 14px;
-      color: var(--text-leise);
-    }
-    form {
-      background: var(--weiss);
-      box-shadow: 0 12px 30px rgba(18, 52, 59, 0.08);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: grid;
-      gap: 16px;
-    }
-    label {
-      display: grid;
-      gap: 6px;
-      font-weight: 600;
-      font-size: 0.95em;
-      color: var(--wasser);
-    }
-    input, select, textarea {
-      font: inherit;
-      font-weight: 400;
-      color: var(--text);
-      padding: 12px 14px;
-      border: 1px solid #cfc5b6;
-      border-radius: 10px;
-      background: var(--weiss);
-      width: 100%;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid var(--kupfer);
-      outline-offset: 1px;
-      border-color: transparent;
-    }
-    .zwei-spalten {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .einwilligung {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-weight: 400;
-      color: var(--text-leise);
-      font-size: 0.88em;
-    }
-    .einwilligung input { width: auto; margin-top: 4px; }
-    .formular-danke {
-      display: none;
-      background: var(--wasser);
-      color: var(--weiss);
-      padding: 14px 18px;
-      border-radius: 10px;
-    }
+      display: inline-flex; align-items: center; gap: 10px;
+      background: var(--kalt); color: #fff; text-decoration: none; font: inherit; font-weight: 600;
+      padding: 14px 22px; border: 0; border-radius: 0; cursor: pointer;
+      box-shadow: 0 6px 14px -6px rgba(8, 88, 90, 0.6);
+      transition: background 160ms var(--ease), transform 120ms var(--ease);
+    }
+    .knopf:hover { background: var(--kalt-tief); }
+    .knopf:active { transform: translateY(1px); }
+    .knopf svg { width: 18px; height: 18px; flex: none; }
+    .knopf-linie { background: transparent; color: var(--tusche); box-shadow: none; outline: var(--linie); outline-offset: -1.5px; }
+    .knopf-linie:hover { background: var(--tusche); color: #fff; }
 
     /* Fußzeile */
-    .fuss {
-      background: var(--text);
-      color: #aab3b5;
-      padding: 40px 0 96px;
-      font-size: 0.9em;
-    }
-    .fuss .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 16px;
-    }
+    .fuss { background: var(--tusche); color: #b3bcc0; padding: 44px 0 100px; font-size: 0.88em; }
+    .fuss .container { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 16px; }
     .fuss nav { display: flex; gap: 20px; }
-    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.85em; }
+    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.88em; }
 
-    /* Anruf-Knopf nur auf dem Handy */
-    .anruf-mobil {
-      display: none;
-      position: fixed;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
-      z-index: 20;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    }
+    .anruf-mobil { display: none; position: fixed; left: 14px; right: 14px; bottom: 14px; z-index: 20; justify-content: center; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.3); }
 
-    @media (max-width: 900px) {
-      .nav { display: none; }
-      .start { padding: 40px 0 56px; }
-      .start .container,
-      .kontakt,
-      .karriere,
-      .chef,
-      .preise-raster,
-      .fragen-raster { grid-template-columns: 1fr; }
-      .chef-foto { max-width: 420px; }
-      .start-bild { aspect-ratio: 1 / 1; }
-      .vertrauen .container,
-      .ablauf { grid-template-columns: 1fr 1fr; }
-      .karriere { padding: 36px 24px; }
-      .abschnitt { padding: 64px 0; }
-    }
-
-    @media (max-width: 560px) {
-      body { font-size: 16px; }
+    /* Unterseite: Rechtstext auf einem Planblatt */
+    .unterseite { padding: 56px 0 104px; }
+    .rechtstext { max-width: 820px; }
+    .rechtstext .blatt-text { background: var(--weiss); border: var(--linie); box-shadow: 0 24px 40px -28px rgba(31, 36, 41, 0.45); padding: 40px 48px 28px; }
+    .brotkrumen { font-size: 0.88em; color: var(--leise); margin-bottom: 18px; }
+    .brotkrumen a { color: var(--kalt); font-weight: 600; }
+    .rechtstext h1 { font-size: clamp(2.2rem, 4.4vw, 3.4rem); }
+    .rechtstext h2 { font-size: 1.25em; margin-top: 1.8em; padding-top: 14px; border-top: 1px solid rgba(31, 36, 41, 0.25); }
+    .rechtstext h3 { font-size: 1.05em; margin-top: 1.4em; }
+    .rechtstext p, .rechtstext li { color: var(--leise); }
+    .rechtstext a { color: var(--kalt); }
+    .beispiel-kasten { border: 1.5px solid var(--warm); background: #fbeeec; color: var(--tusche) !important; padding: 14px 18px; }
+    @media (max-width: 1000px) { .nav { display: none; } }
+    @media (max-width: 600px) {
+      body { font-size: 17px; }
+      .container { padding: 0 16px; }
       .kopf .knopf { display: none; }
-      .ablauf,
-      .zwei-spalten { grid-template-columns: 1fr; }
-      .anruf-mobil { display: block; }
-      .preistabelle th,
-      .preistabelle td { padding: 14px 16px; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; }
+      .unterseite { padding: 32px 0 72px; }
+      .rechtstext .blatt-text { padding: 24px 18px 12px; }
+      .anruf-mobil { display: flex; }
     }
   </style>
 
@@ -741,6 +133,11 @@
   </style>
 </head>
 <body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="i-stern" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.2 6.8.8-5 4.7 1.3 6.7L12 17.6l-6 3.3 1.3-6.7-5-4.7 6.8-.8z"/></symbol>
+    <symbol id="i-telefon" viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.25 11.4 11.4 0 0 0 3.6.57 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1z" fill="currentColor"/></symbol>
+  </svg>
+
 
   <div class="beispiel-hinweis">
     Beispielseite von Hand &amp; Fuß Webseiten – „Bad &amp; Raum Vogt“ ist ein ausgedachtes Unternehmen.
@@ -748,16 +145,19 @@
 
   <header class="kopf">
     <div class="container">
-      <a class="logo" href="index.html">Bad <span>&amp;</span> Raum Vogt</a>
-      <nav class="nav">
+      <a class="logo" href="index.html">
+        <svg viewBox="0 0 34 34" aria-hidden="true"><rect x="2" y="2" width="30" height="30" fill="none" stroke="#1f2429" stroke-width="3"/><path d="M8 32V20a12 12 0 0 1 12 12" fill="none" stroke="#0b6f72" stroke-width="2"/><circle cx="23" cy="11" r="4.5" fill="none" stroke="#1f2429" stroke-width="2"/></svg>
+        <span>Bad &amp; Raum Vogt<small>Badsanierung · Musterstadt</small></span>
+      </a>
+      <nav class="nav" aria-label="Hauptmenü">
         <a href="index.html#leistungen">Leistungen</a>
         <a href="index.html#ueber-uns">Über uns</a>
         <a href="index.html#preise">Preise</a>
+        <a href="index.html#ablauf">Ablauf</a>
         <a href="index.html#projekte">Projekte</a>
         <a href="index.html#fragen">Fragen</a>
-        <a href="index.html#karriere">Karriere</a>
       </nav>
-      <a class="knopf" href="tel:+49123456789">0123 456 789</a>
+      <a class="knopf" href="tel:+49123456789"><svg aria-hidden="true"><use href="index.html#i-telefon"/></svg>0123 456 789</a>
     </div>
   </header>
 
@@ -766,6 +166,7 @@
       <div class="container rechtstext">
         <p class="brotkrumen"><a href="index.html">Startseite</a> › Datenschutz</p>
         <h1>Datenschutzerklärung</h1>
+        <div class="blatt-text">
         <p class="beispiel-kasten"><strong>Beispielseite:</strong> So sieht eine Datenschutzerklärung für eine einfache Handwerker-Seite aus: ohne Cookies, ohne Statistik, ohne Google. Alle Namen und Adressen sind erfunden.</p>
 
         <h2>1. Wer ist verantwortlich?</h2>
@@ -792,29 +193,15 @@
         <p>Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei der Aufsichtsbehörde Ihres Bundeslandes.</p>
 
         <p style="margin-top:2em;opacity:0.7">Stand: Oktober 2026</p>
+        </div>
       </div>
     </section>
   </main>
 
 
-  <footer class="fuss">
-    <div class="container">
-      <p>&copy; 2026 Bad &amp; Raum Vogt (Beispiel) · Webseite: Hand &amp; Fuß Webseiten</p>
-      <nav aria-label="Rechtliches">
-        <a href="impressum.html">Impressum</a>
-        <a href="datenschutz.html">Datenschutz</a>
-      </nav>
-      <p class="quellen">
-        Fotos von Unsplash (kostenlose Lizenz):
-        <a href="https://unsplash.com/de/fotos/9OKuf13OidA">Peter Muniz</a>,
-        <a href="https://unsplash.com/de/fotos/aKUQGKeYgnY">GN Group</a>,
-        <a href="https://unsplash.com/de/fotos/g51F6-WYzyU">Lotus Design N Print</a>,
-        <a href="https://unsplash.com/de/fotos/ckdoA-tv9uw">Clay Banks</a>.
-      </p>
-    </div>
-  </footer>
 
-  <a class="knopf anruf-mobil" href="tel:+49123456789">📞 Jetzt anrufen</a>
+
+  <a class="knopf anruf-mobil" href="tel:+49123456789"><svg aria-hidden="true"><use href="#i-telefon"/></svg>Jetzt anrufen</a>
 
 </body>
 </html>
