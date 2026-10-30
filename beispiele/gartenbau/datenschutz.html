@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Datenschutz – Grünwerk Albers</title>
+  <meta name="description" content="Datenschutzerklärung von Grünwerk Albers, Beispielseite von Hand &amp; Fuß Webseiten.">
+  <!-- Beispielseite von Hand &amp; Fuß Webseiten. Grünwerk Albers ist ein ausgedachtes Unternehmen. -->
+  <style>
+    /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
+    :root {
+      --primaer: #23402b;
+      --primaer-hell: #335c3e;
+      --grund: #f4f2ea;
+      --grund-dunkel: #e3dfd0;
+      --akzent: #966616;
+      --akzent-dunkel: #7a520f;
+      --text: #1e231f;
+      --text-leise: #5b625c;
+      --weiss: #ffffff;
+      --radius: 14px;
+      --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --schrift-titel: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      font-family: var(--schrift);
+      font-size: 17px;
+      line-height: 1.6;
+      color: var(--text);
+      background: var(--grund);
+    }
+
+    h1, h2, h3 {
+      font-family: var(--schrift-titel);
+      line-height: 1.2;
+      margin: 0 0 0.5em;
+    }
+
+    a { color: inherit; }
+
+    .container {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    .beispiel-hinweis {
+      background: var(--text);
+      color: #d5dad6;
+      text-align: center;
+      font-size: 0.85em;
+      padding: 8px 16px;
+    }
+
+    /* Kopfzeile */
+    .kopf {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(244, 242, 234, 0.95);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--grund-dunkel);
+    }
+    .kopf .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      height: 68px;
+    }
+    .logo {
+      font-family: var(--schrift-titel);
+      font-size: 1.35em;
+      font-weight: 700;
+      color: var(--primaer);
+      text-decoration: none;
+    }
+    .logo span { color: var(--akzent); }
+    .nav {
+      display: flex;
+      gap: 28px;
+      font-size: 0.95em;
+    }
+    .nav a {
+      text-decoration: none;
+      color: var(--text-leise);
+    }
+    .nav a:hover { color: var(--primaer); }
+
+    .knopf {
+      display: inline-block;
+      background: var(--akzent);
+      color: var(--weiss);
+      text-decoration: none;
+      font-weight: 600;
+      padding: 12px 22px;
+      border-radius: 999px;
+      border: none;
+      font-size: 1em;
+      font-family: inherit;
+      cursor: pointer;
+      transition: background 150ms ease, transform 100ms ease-out;
+    }
+    .knopf:hover { background: var(--akzent-dunkel); }
+    .knopf:active { transform: scale(0.97); }
+    .knopf-hell {
+      background: transparent;
+      color: var(--primaer);
+      border: 2px solid var(--primaer);
+    }
+    .knopf-hell:hover { background: var(--primaer); color: var(--weiss); }
+
+    /* Startbereich: großes Bild über die volle Breite */
+    .start {
+      position: relative;
+      color: var(--weiss);
+      background:
+        linear-gradient(90deg, rgba(20, 38, 25, 0.92) 0%, rgba(20, 38, 25, 0.75) 45%, rgba(20, 38, 25, 0.1) 100%),
+        url("bilder/terrasse.jpg") center 60% / cover, #4f7a3f;
+      padding: 110px 0 120px;
+    }
+    .start-inhalt { max-width: 620px; }
+    .start-marke {
+      display: inline-block;
+      color: #e7c37c;
+      font-weight: 600;
+      font-size: 0.9em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .start h1 {
+      font-size: clamp(2.2em, 5vw, 3.5em);
+    }
+    .start p {
+      font-size: 1.15em;
+      color: #dfe7df;
+      margin: 0 0 28px;
+    }
+    .start-knoepfe {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .start .knopf-hell {
+      color: var(--weiss);
+      border-color: var(--weiss);
+    }
+    .start .knopf-hell:hover { background: var(--weiss); color: var(--primaer); }
+
+    /* Saison-Hinweis */
+    .saison {
+      background: var(--akzent);
+      color: var(--weiss);
+      text-align: center;
+      padding: 14px 20px;
+      font-weight: 600;
+    }
+    .saison a { color: var(--weiss); }
+
+    /* Vertrauensleiste */
+    .vertrauen {
+      background: var(--weiss);
+      padding: 32px 0;
+      border-bottom: 1px solid var(--grund-dunkel);
+    }
+    .vertrauen .container {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      text-align: center;
+    }
+    .vertrauen strong {
+      display: block;
+      font-family: var(--schrift-titel);
+      font-size: 1.6em;
+      color: var(--primaer);
+    }
+    .vertrauen span {
+      color: var(--text-leise);
+      font-size: 0.9em;
+    }
+
+    /* Abschnitte */
+    .abschnitt { padding: 88px 0; }
+    .abschnitt-weiss { background: var(--weiss); }
+    .abschnitt-kopf {
+      max-width: 640px;
+      margin-bottom: 44px;
+    }
+    .abschnitt-kopf h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+      color: var(--primaer);
+    }
+    .abschnitt-kopf p {
+      color: var(--text-leise);
+      margin: 0;
+    }
+
+    /* Leistungen */
+    .raster {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .leistung {
+      background: var(--weiss);
+      border-radius: var(--radius);
+      padding: 28px;
+      border: 1px solid var(--grund-dunkel);
+      transition: transform 200ms cubic-bezier(.23, 1, .32, 1), box-shadow 200ms cubic-bezier(.23, 1, .32, 1);
+    }
+    .leistung:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(35, 64, 43, 0.1);
+    }
+    .leistung-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--primaer);
+      color: var(--weiss);
+      display: grid;
+      place-items: center;
+      margin-bottom: 16px;
+    }
+    .leistung h3 {
+      font-size: 1.25em;
+      color: var(--primaer);
+    }
+    .leistung p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.97em;
+    }
+
+    /* Pflegevertrag */
+    .pflege {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+    .pflege-liste {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 12px;
+    }
+    .pflege-liste li {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      background: var(--grund);
+      border-radius: 10px;
+      padding: 14px 18px;
+    }
+    .pflege-liste span { color: var(--text-leise); white-space: nowrap; }
+
+    /* Ablauf */
+    .ablauf {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px;
+      counter-reset: schritt;
+    }
+    .schritt {
+      border-top: 3px solid var(--akzent);
+      padding-top: 18px;
+    }
+    .schritt::before {
+      counter-increment: schritt;
+      content: "0" counter(schritt);
+      font-family: var(--schrift-titel);
+      font-size: 1.8em;
+      color: var(--akzent);
+      display: block;
+      margin-bottom: 6px;
+    }
+    .schritt h3 {
+      font-size: 1.15em;
+      color: var(--primaer);
+    }
+    .schritt p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.97em;
+    }
+
+    /* Vorher / Nachher */
+    .projekte {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 28px;
+    }
+    .projekt img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--radius);
+      background: var(--grund-dunkel);
+    }
+    .projekt img.unten { object-position: center 85%; }
+    .projekt-daten {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.85em;
+      font-weight: 600;
+      color: var(--akzent-dunkel);
+    }
+    .projekt h3 {
+      margin-top: 4px;
+      font-size: 1.15em;
+      color: var(--primaer);
+    }
+    .projekt p {
+      margin: 0;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .platzhalter-hinweis {
+      margin-top: 28px;
+      font-size: 0.85em;
+      color: var(--text-leise);
+    }
+
+    /* Kundenstimmen */
+    .stimme {
+      background: var(--weiss);
+      border-radius: var(--radius);
+      padding: 28px;
+      margin: 0;
+    }
+    .stimme p {
+      margin: 10px 0 16px;
+      font-family: var(--schrift-titel);
+      font-size: 1.15em;
+      color: var(--primaer);
+    }
+    .stimme footer {
+      color: var(--text-leise);
+      font-size: 0.9em;
+    }
+    .stimme footer strong { color: var(--primaer); }
+    .sterne { color: var(--akzent); letter-spacing: 2px; }
+    .bewertung-schnitt {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 18px;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .bewertung-schnitt strong {
+      font-family: var(--schrift-titel);
+      font-size: 2em;
+      color: var(--primaer);
+    }
+
+    /* Siegel in der Vertrauensleiste */
+    .vertrauen .siegel strong { font-size: 1.25em; }
+    .vertrauen .siegel strong::before {
+      content: "";
+      display: inline-block;
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--akzent);
+      box-shadow: 0 0 0 3px var(--grund-dunkel);
+      vertical-align: 0.02em;
+    }
+
+    /* Inhaber */
+    .chef {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .chef-foto { margin: 0; position: relative; }
+    .chef-foto img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: var(--radius);
+      background: var(--grund-dunkel);
+    }
+    .chef-foto figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: var(--weiss);
+      border-radius: 10px;
+      padding: 10px 16px;
+      line-height: 1.3;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .chef-foto figcaption strong { display: block; color: var(--primaer); }
+    .chef-foto figcaption span { font-size: 0.88em; color: var(--text-leise); }
+    .chef h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+      color: var(--primaer);
+    }
+    .chef blockquote {
+      margin: 0 0 20px;
+      padding-left: 18px;
+      border-left: 3px solid var(--akzent);
+      font-family: var(--schrift-titel);
+      font-size: 1.25em;
+      color: var(--primaer);
+    }
+    .chef > div > p { color: var(--text-leise); margin: 0 0 24px; }
+    .nachweise {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .nachweise li {
+      background: var(--weiss);
+      border: 1px solid var(--grund-dunkel);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .nachweise strong { display: block; color: var(--primaer); }
+
+    /* Preise */
+    .preise-raster {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .preistabelle {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--weiss);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--grund-dunkel);
+    }
+    .preistabelle caption {
+      caption-side: bottom;
+      text-align: left;
+      padding-top: 12px;
+      font-size: 0.85em;
+      color: var(--text-leise);
+    }
+    .preistabelle th,
+    .preistabelle td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--grund-dunkel);
+      vertical-align: baseline;
+    }
+    .preistabelle tr:last-child th,
+    .preistabelle tr:last-child td { border-bottom: 0; }
+    .preistabelle th { font-weight: 600; color: var(--primaer); }
+    .preistabelle th small {
+      display: block;
+      font-weight: 400;
+      color: var(--text-leise);
+      font-size: 0.88em;
+    }
+    .preistabelle td {
+      text-align: right;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .preistabelle .pflege-zeile { background: #f8f3e7; }
+    .preis-hinweis {
+      background: var(--primaer);
+      color: #dfe7df;
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .preis-hinweis h3 { color: var(--weiss); font-size: 1.3em; }
+    .preis-hinweis ul { margin: 0; padding-left: 20px; }
+    .preis-hinweis li { margin-bottom: 8px; }
+
+    /* Fragen */
+    .fragen-raster {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .fragen-raster .abschnitt-kopf a { color: var(--primaer); font-weight: 600; white-space: nowrap; }
+    .fragen { display: grid; gap: 10px; }
+    .fragen details {
+      background: var(--grund);
+      border-radius: 12px;
+    }
+    .fragen summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      font-weight: 600;
+      color: var(--primaer);
+    }
+    .fragen summary::-webkit-details-marker { display: none; }
+    .fragen summary::after {
+      content: "+";
+      font-size: 1.4em;
+      line-height: 1;
+      color: var(--akzent);
+      transition: transform 200ms cubic-bezier(.23, 1, .32, 1);
+    }
+    .fragen details[open] summary::after { transform: rotate(45deg); }
+    .fragen summary:focus-visible {
+      outline: 2px solid var(--akzent);
+      outline-offset: 2px;
+      border-radius: 12px;
+    }
+    .fragen details p {
+      margin: 0;
+      padding: 0 20px 18px;
+      color: var(--text-leise);
+    }
+
+    /* Pflege-Bild */
+    .pflege-bild {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+      background: var(--grund-dunkel);
+    }
+    .pflege-preis {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--grund);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-weight: 600;
+      color: var(--primaer);
+    }
+
+    /* Einsatzgebiet */
+    .orte {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .orte li {
+      background: var(--weiss);
+      border: 1px solid var(--grund-dunkel);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.9em;
+      color: var(--text);
+    }
+    .orte small { color: var(--text-leise); }
+
+    /* Karriere */
+    .karriere {
+      background: var(--primaer);
+      color: var(--weiss);
+      border-radius: 22px;
+      padding: 56px;
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 40px;
+      align-items: center;
+    }
+    .karriere h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+    }
+    .karriere p { color: #cbdacd; margin: 0 0 24px; }
+    .karriere ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .karriere li {
+      background: var(--primaer-hell);
+      border-radius: 10px;
+      padding: 12px 16px;
+    }
+    .karriere li::before {
+      content: "✓ ";
+      color: #e7c37c;
+      font-weight: 700;
+    }
+
+    /* Kontakt */
+    .kontakt {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 48px;
+    }
+    .kontakt-info p { color: var(--text-leise); }
+    .kontakt-info a { color: var(--primaer); font-weight: 600; white-space: nowrap; }
+    .kontakt-info dl { margin: 24px 0 0; }
+    .kontakt-info dt {
+      font-weight: 600;
+      color: var(--primaer);
+    }
+    .kontakt-info dd {
+      margin: 0 0 14px;
+      color: var(--text-leise);
+    }
+    form {
+      background: var(--weiss);
+      box-shadow: 0 12px 30px rgba(35, 64, 43, 0.08);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: grid;
+      gap: 16px;
+    }
+    label {
+      display: grid;
+      gap: 6px;
+      font-weight: 600;
+      font-size: 0.95em;
+      color: var(--primaer);
+    }
+    input, select, textarea {
+      font: inherit;
+      font-weight: 400;
+      color: var(--text);
+      padding: 12px 14px;
+      border: 1px solid #cfcab8;
+      border-radius: 10px;
+      background: var(--weiss);
+      width: 100%;
+    }
+    input:focus, select:focus, textarea:focus {
+      outline: 2px solid var(--akzent);
+      outline-offset: 1px;
+      border-color: transparent;
+    }
+    .zwei-spalten {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .einwilligung {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      font-weight: 400;
+      color: var(--text-leise);
+      font-size: 0.88em;
+    }
+    .einwilligung input { width: auto; margin-top: 4px; }
+    .formular-danke {
+      display: none;
+      background: var(--primaer);
+      color: var(--weiss);
+      padding: 14px 18px;
+      border-radius: 10px;
+    }
+
+    /* Fußzeile */
+    .fuss {
+      background: var(--text);
+      color: #aab2ab;
+      padding: 40px 0 96px;
+      font-size: 0.9em;
+    }
+    .fuss .container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 16px;
+    }
+    .fuss nav { display: flex; gap: 20px; }
+    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.85em; }
+
+    /* Anruf-Knopf nur auf dem Handy */
+    .anruf-mobil {
+      display: none;
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 20;
+      text-align: center;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+    }
+
+    @media (max-width: 900px) {
+      .nav { display: none; }
+      .start { padding: 72px 0 80px; }
+      .start {
+        background:
+          linear-gradient(180deg, rgba(20, 38, 25, 0.88), rgba(20, 38, 25, 0.72)),
+          url("bilder/terrasse.jpg") center / cover, #4f7a3f;
+      }
+      .kontakt,
+      .karriere,
+      .pflege,
+      .chef,
+      .preise-raster,
+      .fragen-raster { grid-template-columns: 1fr; }
+      .chef-foto { max-width: 420px; }
+      .vertrauen .container,
+      .ablauf { grid-template-columns: 1fr 1fr; }
+      .karriere { padding: 36px 24px; }
+      .abschnitt { padding: 64px 0; }
+    }
+
+    @media (max-width: 560px) {
+      body { font-size: 16px; }
+      .kopf .knopf { display: none; }
+      .ablauf,
+      .zwei-spalten { grid-template-columns: 1fr; }
+      .pflege-liste li { flex-direction: column; gap: 2px; }
+      .preistabelle th,
+      .preistabelle td { padding: 14px 16px; }
+      .anruf-mobil { display: block; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      * { transition: none !important; }
+    }
+  </style>
+
+  <style>
+    .unterseite { padding: 48px 0 96px; }
+    .unterseite .brotkrumen { font-size: 0.9em; opacity: 0.75; margin: 0 0 14px; }
+    .unterseite .brotkrumen a { color: inherit; }
+    .unterseite h1 { font-size: clamp(2em, 4.5vw, 2.8em); line-height: 1.1; margin: 0 0 12px; }
+    .unterseite .einleitung { font-size: 1.1em; opacity: 0.85; max-width: 40em; margin: 0 0 32px; }
+    .rechtstext > * { max-width: 760px; }
+    .rechtstext h2 { font-size: 1.3em; margin: 1.8em 0 0.5em; }
+    .rechtstext p, .rechtstext li { line-height: 1.65; }
+    .beispiel-kasten {
+      max-width: 760px;
+      background: #fff3c4;
+      color: #3d3200;
+      border-radius: 10px;
+      padding: 12px 16px;
+      font-size: 0.92em;
+      margin-bottom: 28px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="beispiel-hinweis">
+    Beispielseite von Hand &amp; Fuß Webseiten – „Grünwerk Albers“ ist ein ausgedachtes Unternehmen.
+  </div>
+
+  <header class="kopf">
+    <div class="container">
+      <a class="logo" href="index.html">Grünwerk <span>Albers</span></a>
+      <nav class="nav">
+        <a href="index.html#leistungen">Leistungen</a>
+        <a href="index.html#ueber-uns">Über uns</a>
+        <a href="index.html#preise">Preise</a>
+        <a href="index.html#projekte">Projekte</a>
+        <a href="index.html#fragen">Fragen</a>
+        <a href="index.html#karriere">Karriere</a>
+      </nav>
+      <a class="knopf" href="tel:+49123456780">0123 456 780</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="unterseite">
+      <div class="container rechtstext">
+        <p class="brotkrumen"><a href="index.html">Startseite</a> › Datenschutz</p>
+        <h1>Datenschutzerklärung</h1>
+        <p class="beispiel-kasten"><strong>Beispielseite:</strong> So sieht eine Datenschutzerklärung für eine einfache Handwerker-Seite aus: ohne Cookies, ohne Statistik, ohne Google. Alle Namen und Adressen sind erfunden.</p>
+
+        <h2>1. Wer ist verantwortlich?</h2>
+        <p>
+          Grünwerk Albers, Inhaber Jonas Albers<br>
+          Am Gartenweg 5, 12345 Musterstadt<br>
+          Telefon: 0123 456 780, E-Mail: info@gruenwerk-albers.example
+        </p>
+
+        <h2>2. Kurz gesagt</h2>
+        <p>Diese Webseite setzt keine Cookies, nutzt keine Statistik- oder Werbedienste und lädt keine Inhalte von fremden Servern, auch keine Schriften. Wir verarbeiten nur die Daten, die für den Betrieb der Seite und für Ihre Anfragen nötig sind.</p>
+
+        <h2>3. Hosting und Server-Protokolle</h2>
+        <p>Die Seite liegt bei der Beispiel-Hosting GmbH, Serverstraße 1, 12345 Musterstadt, auf Servern in Deutschland. Beim Aufruf speichert der Server automatisch technische Daten: IP-Adresse, Datum und Uhrzeit, aufgerufene Seite, Browser und Betriebssystem. Das ist nötig, damit die Seite sicher und fehlerfrei funktioniert (Art. 6 Abs. 1 lit. f DSGVO). Die Protokolle werden nach 7 Tagen gelöscht. Mit dem Hoster besteht ein Vertrag zur Auftragsverarbeitung.</p>
+
+        <h2>4. Kontaktformular, E-Mail und Telefon</h2>
+        <p>Wenn Sie uns über das Formular, per E-Mail oder telefonisch kontaktieren, verarbeiten wir Ihre Angaben (zum Beispiel Name, Telefonnummer, Nachricht), um Ihre Anfrage zu beantworten und gegebenenfalls ein Angebot zu erstellen (Art. 6 Abs. 1 lit. b DSGVO). Wir geben die Daten nicht an Dritte weiter. Wir löschen sie, wenn Ihre Anfrage erledigt ist, außer gesetzliche Aufbewahrungspflichten verlangen etwas anderes, zum Beispiel bei Angeboten und Rechnungen.</p>
+
+        <h2>5. Verschlüsselung</h2>
+        <p>Die Seite nutzt eine SSL- bzw. TLS-Verschlüsselung. Sie erkennen das am Schloss in der Adresszeile Ihres Browsers.</p>
+
+        <h2>6. Ihre Rechte</h2>
+        <p>Sie haben das Recht auf Auskunft über Ihre gespeicherten Daten, auf Berichtigung, Löschung und Einschränkung der Verarbeitung, auf Datenübertragbarkeit und auf Widerspruch gegen die Verarbeitung (Art. 15 bis 21 DSGVO). Schreiben Sie uns dazu einfach eine E-Mail.</p>
+        <p>Sie können sich außerdem bei einer Datenschutz-Aufsichtsbehörde beschweren, zum Beispiel bei der Aufsichtsbehörde Ihres Bundeslandes.</p>
+
+        <p style="margin-top:2em;opacity:0.7">Stand: Oktober 2026</p>
+      </div>
+    </section>
+  </main>
+
+
+  <footer class="fuss">
+    <div class="container">
+      <p>&copy; 2026 Grünwerk Albers (Beispiel) · Webseite: Hand &amp; Fuß Webseiten</p>
+      <nav aria-label="Rechtliches">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
+      </nav>
+      <p class="quellen">
+        Fotos von Unsplash (kostenlose Lizenz):
+        <a href="https://unsplash.com/de/fotos/UijIjarr5Gg">Lara John</a>,
+        <a href="https://unsplash.com/de/fotos/yP02OVtq-Ig">Tile Merchant Ireland</a>,
+        <a href="https://unsplash.com/de/fotos/AqCTAOMJUVk">Sergej (@skstrannik)</a>,
+        <a href="https://unsplash.com/de/fotos/PKcTuA_CRAo">Crystal Jo</a>.
+      </p>
+    </div>
+  </footer>
+
+  <a class="knopf anruf-mobil" href="tel:+49123456780">📞 Jetzt anrufen</a>
+
+</body>
+</html>

@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex">
   <title>Grünwerk Albers – Garten- und Landschaftsbau in Musterstadt</title>
   <meta name="description" content="Garten- und Landschaftsbau in Musterstadt und Umgebung: Gartengestaltung, Terrassen, Pflaster, Zäune und Gartenpflege. Alles aus einer Hand.">
-  <!-- Beispielseite von Rework Web. Grünwerk Albers ist ein ausgedachtes Unternehmen. -->
+  <!-- Beispielseite von Hand &amp; Fuß Webseiten. Grünwerk Albers ist ein ausgedachtes Unternehmen. -->
   <style>
     /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
     :root {
@@ -122,10 +122,9 @@
     .start {
       position: relative;
       color: var(--weiss);
-      /* Platzhalter: gemähter Rasen mit Streifen. Später durch ein echtes Gartenfoto ersetzen */
       background:
-        linear-gradient(90deg, rgba(20, 38, 25, 0.92) 0%, rgba(20, 38, 25, 0.75) 45%, rgba(20, 38, 25, 0.15) 100%),
-        repeating-linear-gradient(115deg, #4f7a3f 0 70px, #5d8a4a 70px 140px);
+        linear-gradient(90deg, rgba(20, 38, 25, 0.92) 0%, rgba(20, 38, 25, 0.75) 45%, rgba(20, 38, 25, 0.1) 100%),
+        url("bilder/terrasse.jpg") center 60% / cover, #4f7a3f;
       padding: 110px 0 120px;
     }
     .start-inhalt { max-width: 620px; }
@@ -303,49 +302,25 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 28px;
     }
-    .projekt-bilder {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
+    .projekt img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
       border-radius: var(--radius);
-      overflow: hidden;
+      background: var(--grund-dunkel);
     }
-    .projekt-bilder div {
-      aspect-ratio: 3 / 4;
-      position: relative;
-    }
-    .projekt-bilder em {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-style: normal;
-      font-size: 0.8em;
+    .projekt img.unten { object-position: center 85%; }
+    .projekt-daten {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.85em;
       font-weight: 600;
-      background: rgba(255, 255, 255, 0.92);
-      padding: 3px 10px;
-      border-radius: 999px;
-    }
-    /* Platzhalter-Muster: verwilderte Fläche vorher, Pflaster und Rasen nachher */
-    .vorher {
-      background:
-        radial-gradient(circle at 20% 30%, #7c6a45 0 18%, transparent 19%),
-        radial-gradient(circle at 70% 60%, #6f7d45 0 22%, transparent 23%),
-        radial-gradient(circle at 40% 85%, #8a7a52 0 15%, transparent 16%),
-        #93885f;
-    }
-    .nachher-pflaster {
-      background:
-        repeating-linear-gradient(0deg, transparent 0 38px, #8c8a84 38px 40px),
-        repeating-linear-gradient(90deg, transparent 0 58px, #8c8a84 58px 60px),
-        #bdbab2;
-    }
-    .nachher-rasen {
-      background:
-        linear-gradient(180deg, transparent 62%, #a9a59b 62% 66%, transparent 66%),
-        repeating-linear-gradient(90deg, #5d8a4a 0 30px, #6b9856 30px 60px);
+      color: var(--akzent-dunkel);
     }
     .projekt h3 {
-      margin-top: 16px;
+      margin-top: 4px;
       font-size: 1.15em;
       color: var(--primaer);
     }
@@ -368,7 +343,7 @@
       margin: 0;
     }
     .stimme p {
-      margin: 0 0 16px;
+      margin: 10px 0 16px;
       font-family: var(--schrift-titel);
       font-size: 1.15em;
       color: var(--primaer);
@@ -377,7 +352,232 @@
       color: var(--text-leise);
       font-size: 0.9em;
     }
+    .stimme footer strong { color: var(--primaer); }
     .sterne { color: var(--akzent); letter-spacing: 2px; }
+    .bewertung-schnitt {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 18px;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .bewertung-schnitt strong {
+      font-family: var(--schrift-titel);
+      font-size: 2em;
+      color: var(--primaer);
+    }
+
+    /* Siegel in der Vertrauensleiste */
+    .vertrauen .siegel strong { font-size: 1.25em; }
+    .vertrauen .siegel strong::before {
+      content: "";
+      display: inline-block;
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--akzent);
+      box-shadow: 0 0 0 3px var(--grund-dunkel);
+      vertical-align: 0.02em;
+    }
+
+    /* Inhaber */
+    .chef {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .chef-foto { margin: 0; position: relative; }
+    .chef-foto img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: var(--radius);
+      background: var(--grund-dunkel);
+    }
+    .chef-foto figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: var(--weiss);
+      border-radius: 10px;
+      padding: 10px 16px;
+      line-height: 1.3;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .chef-foto figcaption strong { display: block; color: var(--primaer); }
+    .chef-foto figcaption span { font-size: 0.88em; color: var(--text-leise); }
+    .chef h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+      color: var(--primaer);
+    }
+    .chef blockquote {
+      margin: 0 0 20px;
+      padding-left: 18px;
+      border-left: 3px solid var(--akzent);
+      font-family: var(--schrift-titel);
+      font-size: 1.25em;
+      color: var(--primaer);
+    }
+    .chef > div > p { color: var(--text-leise); margin: 0 0 24px; }
+    .nachweise {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .nachweise li {
+      background: var(--weiss);
+      border: 1px solid var(--grund-dunkel);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .nachweise strong { display: block; color: var(--primaer); }
+
+    /* Preise */
+    .preise-raster {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .preistabelle {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--weiss);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--grund-dunkel);
+    }
+    .preistabelle caption {
+      caption-side: bottom;
+      text-align: left;
+      padding-top: 12px;
+      font-size: 0.85em;
+      color: var(--text-leise);
+    }
+    .preistabelle th,
+    .preistabelle td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--grund-dunkel);
+      vertical-align: baseline;
+    }
+    .preistabelle tr:last-child th,
+    .preistabelle tr:last-child td { border-bottom: 0; }
+    .preistabelle th { font-weight: 600; color: var(--primaer); }
+    .preistabelle th small {
+      display: block;
+      font-weight: 400;
+      color: var(--text-leise);
+      font-size: 0.88em;
+    }
+    .preistabelle td {
+      text-align: right;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .preistabelle .pflege-zeile { background: #f8f3e7; }
+    .preis-hinweis {
+      background: var(--primaer);
+      color: #dfe7df;
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .preis-hinweis h3 { color: var(--weiss); font-size: 1.3em; }
+    .preis-hinweis ul { margin: 0; padding-left: 20px; }
+    .preis-hinweis li { margin-bottom: 8px; }
+
+    /* Fragen */
+    .fragen-raster {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .fragen-raster .abschnitt-kopf a { color: var(--primaer); font-weight: 600; white-space: nowrap; }
+    .fragen { display: grid; gap: 10px; }
+    .fragen details {
+      background: var(--grund);
+      border-radius: 12px;
+    }
+    .fragen summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      font-weight: 600;
+      color: var(--primaer);
+    }
+    .fragen summary::-webkit-details-marker { display: none; }
+    .fragen summary::after {
+      content: "+";
+      font-size: 1.4em;
+      line-height: 1;
+      color: var(--akzent);
+      transition: transform 200ms cubic-bezier(.23, 1, .32, 1);
+    }
+    .fragen details[open] summary::after { transform: rotate(45deg); }
+    .fragen summary:focus-visible {
+      outline: 2px solid var(--akzent);
+      outline-offset: 2px;
+      border-radius: 12px;
+    }
+    .fragen details p {
+      margin: 0;
+      padding: 0 20px 18px;
+      color: var(--text-leise);
+    }
+
+    /* Pflege-Bild */
+    .pflege-bild {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 3 / 2;
+      object-fit: cover;
+      border-radius: var(--radius);
+      margin-bottom: 14px;
+      background: var(--grund-dunkel);
+    }
+    .pflege-preis {
+      display: inline-block;
+      margin-top: 16px;
+      background: var(--grund);
+      border-radius: 999px;
+      padding: 6px 16px;
+      font-weight: 600;
+      color: var(--primaer);
+    }
+
+    /* Einsatzgebiet */
+    .orte {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .orte li {
+      background: var(--weiss);
+      border: 1px solid var(--grund-dunkel);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.9em;
+      color: var(--text);
+    }
+    .orte small { color: var(--text-leise); }
 
     /* Karriere */
     .karriere {
@@ -495,6 +695,7 @@
       gap: 16px;
     }
     .fuss nav { display: flex; gap: 20px; }
+    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.85em; }
 
     /* Anruf-Knopf nur auf dem Handy */
     .anruf-mobil {
@@ -513,12 +714,16 @@
       .start { padding: 72px 0 80px; }
       .start {
         background:
-          linear-gradient(180deg, rgba(20, 38, 25, 0.88), rgba(20, 38, 25, 0.7)),
-          repeating-linear-gradient(115deg, #4f7a3f 0 70px, #5d8a4a 70px 140px);
+          linear-gradient(180deg, rgba(20, 38, 25, 0.88), rgba(20, 38, 25, 0.72)),
+          url("bilder/terrasse.jpg") center / cover, #4f7a3f;
       }
       .kontakt,
       .karriere,
-      .pflege { grid-template-columns: 1fr; }
+      .pflege,
+      .chef,
+      .preise-raster,
+      .fragen-raster { grid-template-columns: 1fr; }
+      .chef-foto { max-width: 420px; }
       .vertrauen .container,
       .ablauf { grid-template-columns: 1fr 1fr; }
       .karriere { padding: 36px 24px; }
@@ -531,6 +736,8 @@
       .ablauf,
       .zwei-spalten { grid-template-columns: 1fr; }
       .pflege-liste li { flex-direction: column; gap: 2px; }
+      .preistabelle th,
+      .preistabelle td { padding: 14px 16px; }
       .anruf-mobil { display: block; }
     }
 
@@ -543,7 +750,7 @@
 <body>
 
   <div class="beispiel-hinweis">
-    Beispielseite von Rework Web – „Grünwerk Albers“ ist ein ausgedachtes Unternehmen.
+    Beispielseite von Hand &amp; Fuß Webseiten – „Grünwerk Albers“ ist ein ausgedachtes Unternehmen.
   </div>
 
   <header class="kopf">
@@ -551,8 +758,10 @@
       <a class="logo" href="#">Grünwerk <span>Albers</span></a>
       <nav class="nav">
         <a href="#leistungen">Leistungen</a>
-        <a href="#pflege">Gartenpflege</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#preise">Preise</a>
         <a href="#projekte">Projekte</a>
+        <a href="#fragen">Fragen</a>
         <a href="#karriere">Karriere</a>
       </nav>
       <a class="knopf" href="tel:+49123456780">0123 456 780</a>
@@ -583,10 +792,10 @@
 
     <section class="vertrauen" aria-label="Zahlen und Fakten">
       <div class="container">
-        <div><strong>18 Jahre</strong><span>im Garten- und Landschaftsbau</span></div>
-        <div><strong>12</strong><span>Leute im Team</span></div>
-        <div><strong>Alles</strong><span>aus einer Hand</span></div>
-        <div><strong>25 km</strong><span>rund um Musterstadt</span></div>
+        <div class="siegel"><strong>Meisterbetrieb</strong><span>Mitglied im Fachverband Garten- und Landschaftsbau</span></div>
+        <div><strong>Seit 2008</strong><span>in Musterstadt, in zweiter Generation</span></div>
+        <div><strong>12</strong><span>Leute im Team, davon 2 Azubis</span></div>
+        <div><strong>4,9 ★</strong><span>aus 87 Google-Bewertungen</span></div>
       </div>
     </section>
 
@@ -637,14 +846,72 @@
             Sie genießen, wir arbeiten. Mit dem Pflegevertrag kommt unser Team regelmäßig vorbei.
             Sie müssen nichts organisieren und haben einen festen Monatspreis.
           </p>
+          <p class="pflege-preis">ab 89 € im Monat, je nach Gartengröße</p>
           <p style="margin-top: 20px;"><a class="knopf" href="#kontakt">Pflegevertrag anfragen</a></p>
         </div>
+        <div>
+        <img class="pflege-bild" src="bilder/heckenschnitt.jpg" alt="Hände in Arbeitshandschuhen schneiden einen Wacholderstrauch mit der Gartenschere" width="1000" height="667" loading="lazy">
         <ul class="pflege-liste">
           <li><strong>Frühjahr</strong><span>Rasen vertikutieren, Beete vorbereiten</span></li>
           <li><strong>Sommer</strong><span>Mähen, Hecken schneiden, Bewässerung</span></li>
           <li><strong>Herbst</strong><span>Laub entfernen, Rückschnitt</span></li>
           <li><strong>Winter</strong><span>Winterschutz, Baumschnitt</span></li>
         </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="ueber-uns" aria-labelledby="chef-titel">
+      <div class="container chef">
+        <figure class="chef-foto">
+          <img src="bilder/gaertner.jpg" alt="Jonas Albers, Gärtnermeister, in blauer Arbeitskleidung mit Spaten in einem Garten" width="780" height="1170" loading="lazy">
+          <figcaption><strong>Jonas Albers</strong><span>Gärtnermeister und Inhaber</span></figcaption>
+        </figure>
+        <div>
+          <h2 id="chef-titel">Jonas Albers, Ihr Gärtnermeister</h2>
+          <blockquote>„Ich komme selbst zum ersten Termin. Wer Ihren Garten plant, sollte ihn auch gesehen haben.“</blockquote>
+          <p>
+            Mein Vater hat Grünwerk Albers 2008 gegründet. Seit 2023 führe ich den Betrieb, nach meiner Meisterprüfung
+            im Garten- und Landschaftsbau. Unser Team kommt aus der Gegend, und Sie haben von der Planung bis zur
+            Rechnung einen festen Ansprechpartner: mich.
+          </p>
+          <ul class="nachweise">
+            <li><strong>Meisterbrief</strong>Gärtnermeister, Fachrichtung Garten- und Landschaftsbau, 2022</li>
+            <li><strong>Fachverband</strong>Mitglied im Landesverband Garten-, Landschafts- und Sportplatzbau</li>
+            <li><strong>Ausbildungsbetrieb</strong>Wir bilden jedes Jahr Landschaftsgärtner aus</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="preise" aria-labelledby="preise-titel">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2 id="preise-titel">Was kostet das ungefähr?</h2>
+          <p>Damit Sie vorher wissen, woran Sie sind. Den genauen Preis bekommen Sie nach dem kostenlosen Termin vor Ort, schriftlich und verbindlich.</p>
+        </div>
+        <div class="preise-raster">
+          <table class="preistabelle">
+            <caption>Richtwerte inklusive Mehrwertsteuer, Stand 2026. Beispielpreise.</caption>
+            <tbody>
+              <tr><th scope="row">Terrasse aus Naturstein<small>pro m², inkl. Unterbau und Verlegung</small></th><td>140–220 €</td></tr>
+              <tr><th scope="row">Pflaster für Einfahrt oder Weg<small>pro m², Betonpflaster, inkl. Unterbau</small></th><td>80–130 €</td></tr>
+              <tr><th scope="row">Rollrasen<small>pro m², inkl. Bodenvorbereitung</small></th><td>12–20 €</td></tr>
+              <tr><th scope="row">Zaun (Doppelstabmatte)<small>pro laufendem Meter, inkl. Pfosten</small></th><td>90–150 €</td></tr>
+              <tr><th scope="row">Heckenschnitt<small>einmalig, inkl. Abfuhr des Schnittguts</small></th><td>ab 120 €</td></tr>
+              <tr class="pflege-zeile"><th scope="row">Pflegevertrag<small>ganzjährig, Garten bis ca. 400 m²</small></th><td>ab 89 € / Monat</td></tr>
+            </tbody>
+          </table>
+          <aside class="preis-hinweis">
+            <h3>Gut zu wissen</h3>
+            <ul>
+              <li>Der Termin vor Ort und der Entwurf sind kostenlos.</li>
+              <li>Sie bekommen immer erst ein schriftliches Angebot.</li>
+              <li>Auf unsere Bauarbeiten geben wir 5 Jahre Gewährleistung.</li>
+              <li>Die Arbeitskosten können Sie zum Teil von der Steuer absetzen. Wir weisen sie auf der Rechnung extra aus.</li>
+            </ul>
+          </aside>
+        </div>
       </div>
     </section>
 
@@ -678,28 +945,24 @@
     <section class="abschnitt abschnitt-weiss" id="projekte">
       <div class="container">
         <div class="abschnitt-kopf">
-          <h2>Vorher und nachher</h2>
-          <p>Ein paar unserer letzten Projekte aus Musterstadt und Umgebung.</p>
+          <h2>Unsere letzten Projekte</h2>
+          <p>Zwei Gärten aus Musterstadt und Umgebung, fertig gebaut in diesem Jahr.</p>
         </div>
         <div class="projekte">
           <article class="projekt">
-            <div class="projekt-bilder">
-              <div class="vorher" role="img" aria-label="Platzhalter: Garten vorher"><em>Vorher</em></div>
-              <div class="nachher-pflaster" role="img" aria-label="Platzhalter: neue Terrasse"><em>Nachher</em></div>
-            </div>
-            <h3>Neue Terrasse, 40 m²</h3>
-            <p>Aus einer verwilderten Ecke wurde eine Terrasse aus Naturstein mit Platz für die ganze Familie. Bauzeit: 2 Wochen.</p>
+            <img src="bilder/terrasse.jpg" alt="Neue Terrasse aus hellen Natursteinplatten mit Sitzgruppe, Rasenfläche, Treppe und Holzsichtschutz" width="1600" height="1067" loading="lazy">
+            <span class="projekt-daten">Musterstadt · Juni 2026 · Bauzeit 3 Wochen</span>
+            <h3>Terrasse mit Treppe und Sichtschutz, 45 m²</h3>
+            <p>Aus einem schiefen Hang wurde eine ebene Terrasse aus Naturstein, mit Treppe zum oberen Garten, Rasen und Sichtschutz aus Holz.</p>
           </article>
           <article class="projekt">
-            <div class="projekt-bilder">
-              <div class="vorher" role="img" aria-label="Platzhalter: Garten vorher"><em>Vorher</em></div>
-              <div class="nachher-rasen" role="img" aria-label="Platzhalter: neuer Rasen mit Weg"><em>Nachher</em></div>
-            </div>
-            <h3>Familiengarten, 300 m²</h3>
-            <p>Neuer Rollrasen, ein Gartenweg und Beete mit pflegeleichten Stauden. Bauzeit: 10 Tage.</p>
+            <img class="unten" src="bilder/stufen.jpg" alt="Geschwungene Stufen aus Betonstein führen zu einem gepflasterten Sitzplatz, davor eine Hecke und Bodendecker" width="900" height="1350" loading="lazy">
+            <span class="projekt-daten">Beispielhausen · September 2026 · Bauzeit 8 Tage</span>
+            <h3>Sitzplatz mit geschwungenen Stufen</h3>
+            <p>Ein gepflasterter Sitzplatz im Grünen, eingefasst von einer Hecke. Die Bodendecker davor halten Unkraut fern und machen kaum Arbeit.</p>
           </article>
         </div>
-        <p class="platzhalter-hinweis">Hinweis: Die Bildflächen sind Platzhalter. Hier kommen die echten Projektfotos des Betriebs hin.</p>
+        <p class="platzhalter-hinweis">Beispielseite: Die Fotos stammen von Unsplash. Auf einer echten Seite stehen hier Fotos aus den eigenen Projekten des Betriebs, am besten mit Vorher-Bild.</p>
       </div>
     </section>
 
@@ -707,22 +970,65 @@
       <div class="container">
         <div class="abschnitt-kopf">
           <h2>Das sagen unsere Kunden</h2>
-          <p>Beispieltexte: Auf einer echten Seite stehen hier echte Bewertungen, zum Beispiel aus Google.</p>
+          <p>Beispielbewertungen. Auf einer echten Seite stehen hier die echten Google-Bewertungen des Betriebs.</p>
+          <p class="bewertung-schnitt"><strong>4,9</strong><span class="sterne" aria-hidden="true">★★★★★</span>87 Bewertungen auf Google</p>
         </div>
         <div class="raster">
           <blockquote class="stimme">
-            <p>„Die Terrasse ist genau so geworden, wie auf dem Entwurf. Und die Baustelle war jeden Abend aufgeräumt.“</p>
-            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkunde aus Musterstadt</footer>
+            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
+            <p>„Die Terrasse ist genau so geworden wie auf dem Entwurf. Und die Baustelle war jeden Abend aufgeräumt.“</p>
+            <footer><strong>Markus W.</strong> aus Musterstadt · 3. Juli 2026</footer>
           </blockquote>
           <blockquote class="stimme">
+            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
             <p>„Seit wir den Pflegevertrag haben, sieht unser Garten das ganze Jahr gut aus, ohne dass wir etwas tun müssen.“</p>
-            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkundin aus dem Umland</footer>
+            <footer><strong>Renate H.</strong> aus Neudorf · 22. August 2026</footer>
+          </blockquote>
+          <blockquote class="stimme">
+            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
+            <p>„Herr Albers kam selbst vorbei und hatte gute Ideen für unseren kleinen Hang. Das Angebot war fair und wurde genau eingehalten.“</p>
+            <footer><strong>Selin K.</strong> aus Beispielhausen · 1. Oktober 2026</footer>
           </blockquote>
         </div>
       </div>
     </section>
 
-    <section class="abschnitt abschnitt-weiss" id="karriere">
+    <section class="abschnitt abschnitt-weiss" id="fragen" aria-labelledby="fragen-titel">
+      <div class="container fragen-raster">
+        <div class="abschnitt-kopf">
+          <h2 id="fragen-titel">Häufige Fragen</h2>
+          <p>Ihre Frage ist nicht dabei? Rufen Sie einfach an: <a href="tel:+49123456780">0123 456 780</a>.</p>
+        </div>
+        <div class="fragen">
+          <details>
+            <summary>Was kostet der erste Termin vor Ort?</summary>
+            <p>Nichts. Wir schauen uns Ihren Garten an, hören uns Ihre Wünsche an und schicken Ihnen danach ein schriftliches Angebot. Sie entscheiden in Ruhe.</p>
+          </details>
+          <details>
+            <summary>Wie lange im Voraus muss ich buchen?</summary>
+            <p>Für Bauarbeiten im Frühjahr am besten bis Januar. Im Sommer und Herbst haben wir meist innerhalb von 4 bis 6 Wochen einen Termin frei.</p>
+          </details>
+          <details>
+            <summary>Arbeiten Sie auch im Winter?</summary>
+            <p>Ja. Solange der Boden nicht gefroren ist, pflastern und bauen wir. Baum- und Gehölzschnitt machen wir sogar am liebsten im Winter.</p>
+          </details>
+          <details>
+            <summary>Kümmern Sie sich auch um kleine Gärten?</summary>
+            <p>Ja. Ein Reihenhausgarten ist für uns ein ganz normaler Auftrag. Der Pflegevertrag lohnt sich schon ab etwa 100 m².</p>
+          </details>
+          <details>
+            <summary>Was passiert mit Erde, Steinen und Grünschnitt?</summary>
+            <p>Das nehmen wir mit und entsorgen es fachgerecht. Die Kosten dafür stehen vorher im Angebot, es gibt keine Überraschungen auf der Rechnung.</p>
+          </details>
+          <details>
+            <summary>Kann ich die Kosten von der Steuer absetzen?</summary>
+            <p>Den Arbeitsanteil oft schon, als Handwerkerleistung. Wir weisen ihn auf der Rechnung getrennt aus. Fragen Sie im Zweifel kurz Ihren Steuerberater.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="karriere">
       <div class="container">
         <div class="karriere">
           <div>
@@ -757,7 +1063,17 @@
             <dt>Bürozeiten</dt>
             <dd>Mo–Fr 7:00–16:00 Uhr</dd>
             <dt>Einsatzgebiet</dt>
-            <dd>Musterstadt und 25 km Umkreis</dd>
+            <dd>
+              Musterstadt und 25 km Umkreis
+              <ul class="orte">
+                <li>Musterstadt</li>
+                <li>Beispielhausen <small>7 km</small></li>
+                <li>Neudorf <small>10 km</small></li>
+                <li>Lindenau <small>14 km</small></li>
+                <li>Bergheim am See <small>18 km</small></li>
+                <li>Oberfeld <small>23 km</small></li>
+              </ul>
+            </dd>
           </dl>
         </div>
         <form id="anfrage">
@@ -778,7 +1094,7 @@
           <label>Nachricht (optional)<textarea name="nachricht" rows="4"></textarea></label>
           <label class="einwilligung">
             <input type="checkbox" required>
-            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der Datenschutzerklärung.
+            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
           </label>
           <button class="knopf" type="submit">Anfrage senden</button>
           <p class="formular-danke" role="status">Danke! Auf einer echten Seite würde Ihre Anfrage jetzt verschickt.</p>
@@ -789,11 +1105,18 @@
 
   <footer class="fuss">
     <div class="container">
-      <p>&copy; 2026 Grünwerk Albers (Beispiel) · Webseite: Rework Web</p>
-      <nav>
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
+      <p>&copy; 2026 Grünwerk Albers (Beispiel) · Webseite: Hand &amp; Fuß Webseiten</p>
+      <nav aria-label="Rechtliches">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
       </nav>
+      <p class="quellen">
+        Fotos von Unsplash (kostenlose Lizenz):
+        <a href="https://unsplash.com/de/fotos/UijIjarr5Gg">Lara John</a>,
+        <a href="https://unsplash.com/de/fotos/yP02OVtq-Ig">Tile Merchant Ireland</a>,
+        <a href="https://unsplash.com/de/fotos/AqCTAOMJUVk">Sergej (@skstrannik)</a>,
+        <a href="https://unsplash.com/de/fotos/PKcTuA_CRAo">Crystal Jo</a>.
+      </p>
     </div>
   </footer>
 

@@ -6,7 +6,7 @@
   <meta name="robots" content="noindex">
   <title>Bad &amp; Raum Vogt – Badsanierung in Musterstadt</title>
   <meta name="description" content="Badsanierung aus einer Hand in Musterstadt und Umgebung: Komplettbad, barrierefreie Bäder, Dusche statt Wanne. Festpreis und fester Termin.">
-  <!-- Beispielseite von Rework Web. Bad & Raum Vogt ist ein ausgedachtes Unternehmen. -->
+  <!-- Beispielseite von Hand &amp; Fuß Webseiten. Bad & Raum Vogt ist ein ausgedachtes Unternehmen. -->
   <style>
     /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
     :root {
@@ -157,12 +157,13 @@
       aspect-ratio: 4 / 5;
       border-radius: 22px;
       overflow: hidden;
-      /* Platzhalter: großformatige Fliesen. Später durch ein echtes Projektfoto ersetzen */
-      background:
-        linear-gradient(160deg, rgba(18, 52, 59, 0) 40%, rgba(18, 52, 59, 0.55)),
-        repeating-linear-gradient(0deg, transparent 0 119px, rgba(255,255,255,0.7) 119px 121px),
-        repeating-linear-gradient(90deg, transparent 0 59px, rgba(255,255,255,0.7) 59px 61px),
-        linear-gradient(160deg, #d9d2c7, #b9b0a3);
+      background: var(--sand-dunkel);
+    }
+    .start-bild img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
     .start-karte {
       position: absolute;
@@ -299,50 +300,24 @@
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 28px;
     }
-    .projekt-bilder {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 6px;
+    .projekt img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
       border-radius: var(--radius);
-      overflow: hidden;
+      background: var(--sand-dunkel);
     }
-    .projekt-bilder div {
-      aspect-ratio: 3 / 4;
-      position: relative;
-    }
-    .projekt-bilder em {
-      position: absolute;
-      top: 10px;
-      left: 10px;
-      font-style: normal;
-      font-size: 0.8em;
+    .projekt-daten {
+      display: block;
+      margin-top: 16px;
+      font-size: 0.85em;
       font-weight: 600;
-      background: rgba(255, 255, 255, 0.92);
-      padding: 3px 10px;
-      border-radius: 999px;
-    }
-    /* Platzhalter-Muster: kleine alte Fliesen vorher, große helle Fliesen nachher */
-    .vorher {
-      background:
-        repeating-linear-gradient(0deg, transparent 0 28px, #8f8676 28px 30px),
-        repeating-linear-gradient(90deg, transparent 0 28px, #8f8676 28px 30px),
-        #b9a98a;
-    }
-    .vorher.gruen { background-color: #8fa58f; }
-    .nachher {
-      background:
-        repeating-linear-gradient(0deg, transparent 0 99px, rgba(255,255,255,0.8) 99px 101px),
-        repeating-linear-gradient(90deg, transparent 0 49px, rgba(255,255,255,0.8) 49px 51px),
-        linear-gradient(180deg, #e4ded4, #cfc6b8);
-    }
-    .nachher.dunkel {
-      background:
-        repeating-linear-gradient(0deg, transparent 0 99px, rgba(255,255,255,0.25) 99px 101px),
-        repeating-linear-gradient(90deg, transparent 0 49px, rgba(255,255,255,0.25) 49px 51px),
-        linear-gradient(180deg, #4f5b5d, #343e40);
+      color: var(--kupfer-dunkel);
     }
     .projekt h3 {
-      margin-top: 16px;
+      margin-top: 4px;
       font-size: 1.15em;
       color: var(--wasser);
     }
@@ -365,7 +340,7 @@
       margin: 0;
     }
     .stimme p {
-      margin: 0 0 16px;
+      margin: 10px 0 16px;
       font-family: var(--schrift-titel);
       font-size: 1.15em;
       color: var(--wasser);
@@ -375,6 +350,212 @@
       font-size: 0.9em;
     }
     .sterne { color: var(--kupfer); letter-spacing: 2px; }
+
+    .stimme footer strong { color: var(--wasser); }
+    .sterne { color: var(--kupfer); letter-spacing: 2px; }
+    .bewertung-schnitt {
+      display: inline-flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-top: 18px;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .bewertung-schnitt strong {
+      font-family: var(--schrift-titel);
+      font-size: 2em;
+      color: var(--wasser);
+    }
+
+    /* Siegel in der Vertrauensleiste */
+    .vertrauen .siegel strong { font-size: 1.25em; }
+    .vertrauen .siegel strong::before {
+      content: "";
+      display: inline-block;
+      width: 0.8em;
+      height: 0.8em;
+      margin-right: 8px;
+      border-radius: 50%;
+      background: var(--kupfer);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25);
+      vertical-align: 0.02em;
+    }
+
+    /* Inhaber */
+    .chef {
+      display: grid;
+      grid-template-columns: 0.85fr 1.15fr;
+      gap: 56px;
+      align-items: center;
+    }
+    .chef-foto { margin: 0; position: relative; }
+    .chef-foto img {
+      display: block;
+      width: 100%;
+      height: auto;
+      aspect-ratio: 4 / 5;
+      object-fit: cover;
+      object-position: center 20%;
+      border-radius: var(--radius);
+      background: var(--sand-dunkel);
+    }
+    .chef-foto figcaption {
+      position: absolute;
+      left: 16px;
+      bottom: 16px;
+      background: var(--weiss);
+      border-radius: 10px;
+      padding: 10px 16px;
+      line-height: 1.3;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    .chef-foto figcaption strong { display: block; color: var(--wasser); }
+    .chef-foto figcaption span { font-size: 0.88em; color: var(--text-leise); }
+    .chef h2 {
+      font-size: clamp(1.8em, 3.5vw, 2.4em);
+      color: var(--wasser);
+    }
+    .chef blockquote {
+      margin: 0 0 20px;
+      padding-left: 18px;
+      border-left: 3px solid var(--kupfer);
+      font-family: var(--schrift-titel);
+      font-size: 1.25em;
+      color: var(--wasser);
+    }
+    .chef > div > p { color: var(--text-leise); margin: 0 0 24px; }
+    .nachweise {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+    }
+    .nachweise li {
+      background: var(--weiss);
+      border: 1px solid var(--sand-dunkel);
+      border-radius: 10px;
+      padding: 12px 16px;
+      color: var(--text-leise);
+      font-size: 0.95em;
+    }
+    .nachweise strong { display: block; color: var(--wasser); }
+
+    /* Preise */
+    .preise-raster {
+      display: grid;
+      grid-template-columns: 1.6fr 1fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .preistabelle {
+      width: 100%;
+      border-collapse: collapse;
+      background: var(--weiss);
+      border-radius: var(--radius);
+      overflow: hidden;
+      border: 1px solid var(--sand-dunkel);
+    }
+    .preistabelle caption {
+      caption-side: bottom;
+      text-align: left;
+      padding-top: 12px;
+      font-size: 0.85em;
+      color: var(--text-leise);
+    }
+    .preistabelle th,
+    .preistabelle td {
+      padding: 15px 20px;
+      text-align: left;
+      border-bottom: 1px solid var(--sand-dunkel);
+      vertical-align: baseline;
+    }
+    .preistabelle tr:last-child th,
+    .preistabelle tr:last-child td { border-bottom: 0; }
+    .preistabelle th { font-weight: 600; color: var(--wasser); }
+    .preistabelle th small {
+      display: block;
+      font-weight: 400;
+      color: var(--text-leise);
+      font-size: 0.88em;
+    }
+    .preistabelle td {
+      text-align: right;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .preistabelle .pflege-zeile { background: #fbefe6; }
+    .preis-hinweis {
+      background: var(--wasser);
+      color: #c7d8db;
+      border-radius: var(--radius);
+      padding: 28px;
+    }
+    .preis-hinweis h3 { color: var(--weiss); font-size: 1.3em; }
+    .preis-hinweis ul { margin: 0; padding-left: 20px; }
+    .preis-hinweis li { margin-bottom: 8px; }
+
+    /* Fragen */
+    .fragen-raster {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 48px;
+      align-items: start;
+    }
+    .fragen-raster .abschnitt-kopf a { color: var(--wasser); font-weight: 600; white-space: nowrap; }
+    .fragen { display: grid; gap: 10px; }
+    .fragen details {
+      background: var(--sand);
+      border-radius: 12px;
+    }
+    .fragen summary {
+      list-style: none;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 20px;
+      font-weight: 600;
+      color: var(--wasser);
+    }
+    .fragen summary::-webkit-details-marker { display: none; }
+    .fragen summary::after {
+      content: "+";
+      font-size: 1.4em;
+      line-height: 1;
+      color: var(--kupfer);
+      transition: transform 200ms cubic-bezier(.23, 1, .32, 1);
+    }
+    .fragen details[open] summary::after { transform: rotate(45deg); }
+    .fragen summary:focus-visible {
+      outline: 2px solid var(--kupfer);
+      outline-offset: 2px;
+      border-radius: 12px;
+    }
+    .fragen details p {
+      margin: 0;
+      padding: 0 20px 18px;
+      color: var(--text-leise);
+    }
+
+    /* Einsatzgebiet */
+    .orte {
+      list-style: none;
+      margin: 8px 0 0;
+      padding: 0;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .orte li {
+      background: var(--weiss);
+      border: 1px solid var(--sand-dunkel);
+      border-radius: 999px;
+      padding: 4px 12px;
+      font-size: 0.9em;
+      color: var(--text);
+    }
+    .orte small { color: var(--text-leise); }
 
     /* Karriere */
     .karriere {
@@ -492,6 +673,7 @@
       gap: 16px;
     }
     .fuss nav { display: flex; gap: 20px; }
+    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.85em; }
 
     /* Anruf-Knopf nur auf dem Handy */
     .anruf-mobil {
@@ -510,8 +692,12 @@
       .start { padding: 40px 0 56px; }
       .start .container,
       .kontakt,
-      .karriere { grid-template-columns: 1fr; }
-      .start-bild { aspect-ratio: 4 / 3; }
+      .karriere,
+      .chef,
+      .preise-raster,
+      .fragen-raster { grid-template-columns: 1fr; }
+      .chef-foto { max-width: 420px; }
+      .start-bild { aspect-ratio: 1 / 1; }
       .vertrauen .container,
       .ablauf { grid-template-columns: 1fr 1fr; }
       .karriere { padding: 36px 24px; }
@@ -524,6 +710,8 @@
       .ablauf,
       .zwei-spalten { grid-template-columns: 1fr; }
       .anruf-mobil { display: block; }
+      .preistabelle th,
+      .preistabelle td { padding: 14px 16px; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -535,7 +723,7 @@
 <body>
 
   <div class="beispiel-hinweis">
-    Beispielseite von Rework Web – „Bad &amp; Raum Vogt“ ist ein ausgedachtes Unternehmen.
+    Beispielseite von Hand &amp; Fuß Webseiten – „Bad &amp; Raum Vogt“ ist ein ausgedachtes Unternehmen.
   </div>
 
   <header class="kopf">
@@ -543,8 +731,10 @@
       <a class="logo" href="#">Bad <span>&amp;</span> Raum Vogt</a>
       <nav class="nav">
         <a href="#leistungen">Leistungen</a>
-        <a href="#ablauf">Ablauf</a>
+        <a href="#ueber-uns">Über uns</a>
+        <a href="#preise">Preise</a>
         <a href="#projekte">Projekte</a>
+        <a href="#fragen">Fragen</a>
         <a href="#karriere">Karriere</a>
       </nav>
       <a class="knopf" href="tel:+49123456789">0123 456 789</a>
@@ -567,7 +757,8 @@
             <a class="knopf knopf-hell" href="#projekte">Projekte ansehen</a>
           </div>
         </div>
-        <div class="start-bild" role="img" aria-label="Platzhalter für ein Foto eines fertigen Badezimmers">
+        <div class="start-bild">
+          <img src="bilder/dusche.jpg" alt="Fertig saniertes Bad mit bodengleicher Dusche, Natursteinwänden und Waschtisch mit Holzunterschrank" width="1000" height="1500">
           <div class="start-karte">
             <strong>3–4</strong>
             <span>Wochen dauert eine Komplettsanierung bei uns im Schnitt</span>
@@ -578,10 +769,10 @@
 
     <section class="vertrauen" aria-label="Zahlen und Fakten">
       <div class="container">
-        <div><strong>25 Jahre</strong><span>Erfahrung im Handwerk</span></div>
-        <div><strong>400+</strong><span>sanierte Bäder</span></div>
-        <div><strong>Festpreis</strong><span>vor Baubeginn</span></div>
-        <div><strong>30 km</strong><span>rund um Musterstadt</span></div>
+        <div class="siegel"><strong>Meisterbetrieb</strong><span>Innungsbetrieb Sanitär, Heizung, Klima</span></div>
+        <div><strong>400+</strong><span>sanierte Bäder seit 2001</span></div>
+        <div><strong>Festpreis</strong><span>schriftlich vor Baubeginn</span></div>
+        <div><strong>4,8 ★</strong><span>aus 112 Google-Bewertungen</span></div>
       </div>
     </section>
 
@@ -624,6 +815,60 @@
       </div>
     </section>
 
+    <section class="abschnitt" id="ueber-uns" aria-labelledby="chef-titel">
+      <div class="container chef">
+        <figure class="chef-foto">
+          <img src="bilder/meister.jpg" alt="Stefan Vogt, Installateur- und Heizungsbauermeister, in blauer Arbeitsjacke auf einer Baustelle" width="780" height="1040" loading="lazy">
+          <figcaption><strong>Stefan Vogt</strong><span>Installateur- und Heizungsbauermeister</span></figcaption>
+        </figure>
+        <div>
+          <h2 id="chef-titel">Stefan Vogt, Ihr Ansprechpartner fürs ganze Bad</h2>
+          <blockquote>„Ich plane Ihr Bad selbst und bin auf der Baustelle jeden Tag dabei. So weiß ich immer, wie weit wir sind.“</blockquote>
+          <p>
+            Ich habe Bad &amp; Raum Vogt 2001 gegründet, nach meiner Meisterprüfung vor der Handwerkskammer.
+            Heute sind wir neun Leute: Installateure, Fliesenleger und ein Elektriker. Deshalb brauchen Sie
+            keine fünf verschiedenen Firmen, sondern nur uns. Und einen festen Preis, der auch am Ende noch stimmt.
+          </p>
+          <ul class="nachweise">
+            <li><strong>Meisterbrief</strong>Installateur- und Heizungsbauermeister, HWK Musterstadt, 2000</li>
+            <li><strong>Innungsbetrieb</strong>Mitglied der Innung Sanitär, Heizung, Klima Musterstadt</li>
+            <li><strong>Fachbetrieb für barrierefreie Bäder</strong>Wir helfen beim Antrag auf Zuschuss bei der Pflegekasse</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt abschnitt-weiss" id="preise" aria-labelledby="preise-titel">
+      <div class="container">
+        <div class="abschnitt-kopf">
+          <h2 id="preise-titel">Was kostet ein neues Bad?</h2>
+          <p>Damit Sie vorher wissen, woran Sie sind. Den genauen Preis bekommen Sie nach der kostenlosen Beratung bei Ihnen zu Hause, als Festpreis.</p>
+        </div>
+        <div class="preise-raster">
+          <table class="preistabelle">
+            <caption>Richtwerte inklusive Mehrwertsteuer, Material und Montage, Stand 2026. Beispielpreise.</caption>
+            <tbody>
+              <tr><th scope="row">Dusche statt Wanne<small>Wanne raus, bodengleiche Dusche rein</small></th><td>6.500–11.000 €</td></tr>
+              <tr><th scope="row">Gäste-WC<small>komplett neu, ca. 2–3&nbsp;m²</small></th><td>8.000–14.000 €</td></tr>
+              <tr><th scope="row">Barrierefreier Umbau<small>Dusche, Griffe, unterfahrbarer Waschtisch</small></th><td>14.000–25.000 €</td></tr>
+              <tr><th scope="row">Komplettsanierung kleines Bad<small>bis ca. 6&nbsp;m²</small></th><td>18.000–28.000 €</td></tr>
+              <tr><th scope="row">Komplettsanierung Familienbad<small>ca. 8–10&nbsp;m², mit Dusche und Wanne</small></th><td>28.000–42.000 €</td></tr>
+              <tr class="pflege-zeile"><th scope="row">Beratung und Badplanung<small>bei Ihnen zu Hause, mit Skizze</small></th><td>kostenlos</td></tr>
+            </tbody>
+          </table>
+          <aside class="preis-hinweis">
+            <h3>Gut zu wissen</h3>
+            <ul>
+              <li>Der Preis im Angebot ist ein Festpreis. Er gilt auch, wenn wir länger brauchen.</li>
+              <li>Für ein barrierefreies Bad zahlt die Pflegekasse oft einen Zuschuss. Wir helfen beim Antrag.</li>
+              <li>5 Jahre Gewährleistung auf unsere Arbeit.</li>
+              <li>Bezahlung in Raten: ein Teil bei Baubeginn, der Rest nach der Übergabe.</li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </section>
+
     <section class="abschnitt" id="ablauf">
       <div class="container">
         <div class="abschnitt-kopf">
@@ -654,28 +899,24 @@
     <section class="abschnitt abschnitt-weiss" id="projekte">
       <div class="container">
         <div class="abschnitt-kopf">
-          <h2>Vorher und nachher</h2>
-          <p>Ein paar unserer letzten Projekte aus Musterstadt und Umgebung.</p>
+          <h2>Unsere letzten Projekte</h2>
+          <p>Zwei Bäder aus Musterstadt und Umgebung, fertig saniert in diesem Jahr.</p>
         </div>
         <div class="projekte">
           <article class="projekt">
-            <div class="projekt-bilder">
-              <div class="vorher" role="img" aria-label="Platzhalter: Bad vorher"><em>Vorher</em></div>
-              <div class="nachher" role="img" aria-label="Platzhalter: Bad nachher"><em>Nachher</em></div>
-            </div>
+            <img src="bilder/familienbad.jpg" alt="Helles Familienbad mit bodengleicher Glasdusche, Doppelwaschtisch mit dunklem Unterschrank und großem Spiegel" width="1200" height="800" loading="lazy">
+            <span class="projekt-daten">Musterstadt · Mai 2026 · Bauzeit 3 Wochen</span>
             <h3>Familienbad, 9 m²</h3>
-            <p>Komplettsanierung mit bodengleicher Dusche und Doppelwaschtisch. Bauzeit: 3 Wochen.</p>
+            <p>Komplettsanierung mit bodengleicher Dusche, Doppelwaschtisch und Holzboden-Optik. Vorher: Wanne mit Stufe und Fliesen aus den 70ern.</p>
           </article>
           <article class="projekt">
-            <div class="projekt-bilder">
-              <div class="vorher gruen" role="img" aria-label="Platzhalter: Bad vorher"><em>Vorher</em></div>
-              <div class="nachher dunkel" role="img" aria-label="Platzhalter: Bad nachher"><em>Nachher</em></div>
-            </div>
-            <h3>Gästebad, 4 m²</h3>
-            <p>Aus dem grünen 80er-Jahre-Bad wurde ein modernes Gäste-WC mit dunklen Fliesen. Bauzeit: 8 Tage.</p>
+            <img src="bilder/duschbad.jpg" alt="Duschbad mit großformatigen dunkelgrauen Fliesen, Glasdusche und Doppelwaschtisch mit beleuchteten Spiegeln" width="1200" height="800" loading="lazy">
+            <span class="projekt-daten">Neudorf · August 2026 · Bauzeit 2 Wochen</span>
+            <h3>Duschbad in Großformat-Fliesen, 6 m²</h3>
+            <p>Aus einem engen Bad mit Wanne wurde ein Duschbad mit dunklen Fliesen und indirektem Licht. Weniger Fugen, weniger Putzen.</p>
           </article>
         </div>
-        <p class="platzhalter-hinweis">Hinweis: Die Bildflächen sind Platzhalter. Hier kommen die echten Projektfotos des Betriebs hin.</p>
+        <p class="platzhalter-hinweis">Beispielseite: Die Fotos stammen von Unsplash. Auf einer echten Seite stehen hier Fotos aus den eigenen Projekten des Betriebs, am besten mit Vorher-Bild.</p>
       </div>
     </section>
 
@@ -683,22 +924,65 @@
       <div class="container">
         <div class="abschnitt-kopf">
           <h2>Das sagen unsere Kunden</h2>
-          <p>Beispieltexte: Auf einer echten Seite stehen hier echte Bewertungen, zum Beispiel aus Google.</p>
+          <p>Beispielbewertungen. Auf einer echten Seite stehen hier die echten Google-Bewertungen des Betriebs.</p>
+          <p class="bewertung-schnitt"><strong>4,8</strong><span class="sterne" aria-hidden="true">★★★★★</span>112 Bewertungen auf Google</p>
         </div>
         <div class="raster">
           <blockquote class="stimme">
+            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
             <p>„Pünktlich fertig, alles sauber hinterlassen und der Preis war genau wie abgesprochen.“</p>
-            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkundin aus Musterstadt</footer>
+            <footer><strong>Petra L.</strong> aus Musterstadt · 12. Juni 2026</footer>
           </blockquote>
           <blockquote class="stimme">
-            <p>„Endlich eine Dusche ohne Stufe. Die Beratung zu den Zuschüssen hat uns sehr geholfen.“</p>
-            <footer><span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span><br>Beispielkunde aus dem Umland</footer>
+            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
+            <p>„Endlich eine Dusche ohne Stufe. Die Hilfe beim Antrag für den Zuschuss hat uns viel Arbeit erspart.“</p>
+            <footer><strong>Günter und Ilse M.</strong> aus Lindenau · 30. Juli 2026</footer>
+          </blockquote>
+          <blockquote class="stimme">
+            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
+            <p>„Herr Vogt war jeden Tag kurz da und hat erklärt, was als Nächstes kommt. So entspannt hatten wir uns eine Baustelle nicht vorgestellt.“</p>
+            <footer><strong>Daniel R.</strong> aus Neudorf · 4. September 2026</footer>
           </blockquote>
         </div>
       </div>
     </section>
 
-    <section class="abschnitt abschnitt-weiss" id="karriere">
+    <section class="abschnitt abschnitt-weiss" id="fragen" aria-labelledby="fragen-titel">
+      <div class="container fragen-raster">
+        <div class="abschnitt-kopf">
+          <h2 id="fragen-titel">Häufige Fragen</h2>
+          <p>Ihre Frage ist nicht dabei? Rufen Sie einfach an: <a href="tel:+49123456789">0123 456 789</a>.</p>
+        </div>
+        <div class="fragen">
+          <details>
+            <summary>Wie lange bin ich ohne Bad?</summary>
+            <p>Bei einer Komplettsanierung meist 3 bis 4 Wochen, bei „Dusche statt Wanne“ nur wenige Tage. Ihre Toilette bauen wir so spät wie möglich ab und so früh wie möglich wieder an.</p>
+          </details>
+          <details>
+            <summary>Wird das ganze Haus staubig?</summary>
+            <p>Nein. Wir kleben den Weg zum Bad mit Folie ab, stellen eine Staubschutzwand auf und saugen jeden Abend. Der Bauschutt kommt am selben Tag weg.</p>
+          </details>
+          <details>
+            <summary>Ist der Festpreis wirklich fest?</summary>
+            <p>Ja. Was im Angebot steht, zahlen Sie. Nur wenn Sie während der Arbeit etwas Zusätzliches möchten, gibt es dafür vorher ein eigenes, schriftliches Angebot.</p>
+          </details>
+          <details>
+            <summary>Gibt es Zuschüsse für ein barrierefreies Bad?</summary>
+            <p>Oft ja. Mit Pflegegrad zahlt die Pflegekasse einen Zuschuss für den Umbau. Wir sagen Ihnen bei der Beratung, was möglich ist, und helfen beim Antrag. Wichtig: Der Antrag muss vor Baubeginn gestellt werden.</p>
+          </details>
+          <details>
+            <summary>Kann ich Fliesen und Armaturen selbst aussuchen?</summary>
+            <p>Gern. Wir bringen Muster zu Ihnen nach Hause oder gehen mit Ihnen zum Fachhandel. Wenn Sie schon etwas gefunden haben, bauen wir auch das ein.</p>
+          </details>
+          <details>
+            <summary>Kann ich die Kosten von der Steuer absetzen?</summary>
+            <p>Den Arbeitsanteil oft schon, als Handwerkerleistung. Wir weisen ihn auf der Rechnung getrennt aus. Fragen Sie im Zweifel kurz Ihren Steuerberater.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <section class="abschnitt" id="karriere">
       <div class="container">
         <div class="karriere">
           <div>
@@ -733,7 +1017,17 @@
             <dt>Öffnungszeiten Büro</dt>
             <dd>Mo–Fr 7:30–16:30 Uhr</dd>
             <dt>Einsatzgebiet</dt>
-            <dd>Musterstadt und 30 km Umkreis</dd>
+            <dd>
+              Musterstadt und 30 km Umkreis
+              <ul class="orte">
+                <li>Musterstadt</li>
+                <li>Neudorf <small>8 km</small></li>
+                <li>Beispielhausen <small>12 km</small></li>
+                <li>Lindenau <small>15 km</small></li>
+                <li>Kirchwalde <small>21 km</small></li>
+                <li>Oberfeld <small>27 km</small></li>
+              </ul>
+            </dd>
           </dl>
         </div>
         <form id="anfrage">
@@ -752,7 +1046,7 @@
           <label>Nachricht (optional)<textarea name="nachricht" rows="4"></textarea></label>
           <label class="einwilligung">
             <input type="checkbox" required>
-            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der Datenschutzerklärung.
+            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
           </label>
           <button class="knopf" type="submit">Anfrage senden</button>
           <p class="formular-danke" role="status">Danke! Auf einer echten Seite würde Ihre Anfrage jetzt verschickt.</p>
@@ -763,11 +1057,18 @@
 
   <footer class="fuss">
     <div class="container">
-      <p>&copy; 2026 Bad &amp; Raum Vogt (Beispiel) · Webseite: Rework Web</p>
-      <nav>
-        <a href="#">Impressum</a>
-        <a href="#">Datenschutz</a>
+      <p>&copy; 2026 Bad &amp; Raum Vogt (Beispiel) · Webseite: Hand &amp; Fuß Webseiten</p>
+      <nav aria-label="Rechtliches">
+        <a href="impressum.html">Impressum</a>
+        <a href="datenschutz.html">Datenschutz</a>
       </nav>
+      <p class="quellen">
+        Fotos von Unsplash (kostenlose Lizenz):
+        <a href="https://unsplash.com/de/fotos/9OKuf13OidA">Peter Muniz</a>,
+        <a href="https://unsplash.com/de/fotos/aKUQGKeYgnY">GN Group</a>,
+        <a href="https://unsplash.com/de/fotos/g51F6-WYzyU">Lotus Design N Print</a>,
+        <a href="https://unsplash.com/de/fotos/ckdoA-tv9uw">Clay Banks</a>.
+      </p>
     </div>
   </footer>
 
