@@ -1,0 +1,153 @@
+/* Bad & Raum Vogt: gemeinsame Grundlage für Startseite, Impressum und Datenschutz.
+   Schrift lokal eingebunden (keine Google-Server). Archivo, SIL Open Font License. */
+@font-face {
+  font-family: "Archivo";
+  src: url("fonts/archivo-latin-wdth-normal.woff2") format("woff2");
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+}
+
+:root {
+  --kalk: #f4f5f2;          /* Grundfläche: weiße Fliese, leicht kühl */
+  --kalk-tief: #e7e9e4;     /* Fuge */
+  --weiss: #ffffff;
+  --tinte: #182024;         /* Text */
+  --leise: #4a565b;         /* Nebentext, 7:1 auf Kalk */
+  --linie: rgba(24, 32, 36, 0.16);
+  --petrol: #0f5a5e;        /* Wasser, kaltes Glas */
+  --petrol-tief: #0a4447;
+  --petrol-hell: #bfe0dd;
+  --messing: #b08a45;       /* Armaturen, nur Linien und Marken */
+  --messing-hell: #d9b874;
+  --schiefer: #1b2225;      /* dunkle Kontrastflächen */
+  --schiefer-text: #b8c3c6;
+  --rand: clamp(16px, 4vw, 56px);
+  --breite: 1440px;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --radius: 6px;
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; scroll-padding-top: 84px; }
+@media (prefers-reduced-motion: no-preference) { html { scroll-behavior: smooth; } }
+body {
+  margin: 0;
+  font-family: "Archivo", "Helvetica Neue", Arial, sans-serif;
+  font-stretch: 100%;
+  font-size: 18px;
+  line-height: 1.6;
+  color: var(--tinte);
+  background: var(--kalk);
+  overflow-x: clip;
+  -webkit-font-smoothing: antialiased;
+}
+::selection { background: var(--petrol); color: #fff; }
+h1, h2, h3 {
+  font-stretch: 118%;
+  font-weight: 760;
+  line-height: 1.06;
+  letter-spacing: -0.025em;
+  margin: 0 0 0.45em;
+  text-wrap: balance;
+}
+h2 { font-size: clamp(2rem, 3.6vw, 3.4rem); }
+h3 { font-size: 1.2rem; letter-spacing: -0.01em; line-height: 1.2; }
+p { margin: 0 0 1em; text-wrap: pretty; }
+a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
+img { max-width: 100%; height: auto; display: block; }
+:focus-visible { outline: 2px solid var(--messing); outline-offset: 3px; border-radius: 2px; }
+[hidden] { display: none !important; }
+a, button, summary, label { -webkit-tap-highlight-color: rgba(15, 90, 94, 0.15); }
+.sprung { position: absolute; left: 12px; top: -60px; z-index: 50; background: var(--tinte); color: #fff; padding: 10px 16px; border-radius: var(--radius); text-decoration: none; font-weight: 650; }
+.sprung:focus-visible { top: 12px; }
+
+.rahmen { max-width: var(--breite); margin: 0 auto; padding: 0 var(--rand); }
+.unsichtbar { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+.zahl { font-variant-numeric: tabular-nums; }
+
+/* Hinweis ganz oben */
+.beispiel-hinweis {
+  background: var(--schiefer); color: var(--schiefer-text);
+  text-align: center; font-size: 0.8rem; line-height: 1.4; padding: 7px 16px;
+}
+
+/* Kopfleiste */
+.kopf {
+  position: sticky; top: 0; z-index: 30;
+  background: rgba(244, 245, 242, 0.97);
+  border-bottom: 1px solid var(--linie);
+}
+.kopf .rahmen { display: flex; align-items: center; justify-content: space-between; gap: 24px; height: 72px; }
+.marke { display: flex; align-items: center; gap: 12px; text-decoration: none; min-width: 0; }
+.marke svg { width: 38px; height: 38px; flex: none; }
+.marke span { font-stretch: 112%; font-weight: 760; font-size: 1.08rem; letter-spacing: -0.02em; line-height: 1.1; white-space: nowrap; }
+.marke small { display: block; font-stretch: 100%; font-weight: 450; font-size: 0.74rem; letter-spacing: 0; color: var(--leise); margin-top: 2px; }
+.nav { display: flex; gap: 28px; font-size: 0.94rem; }
+.nav a { text-decoration: none; color: var(--leise); padding: 8px 0; position: relative; }
+.nav a::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 2px; height: 2px;
+  background: var(--messing); transform: scaleX(0); transform-origin: left;
+  transition: transform 260ms var(--ease);
+}
+.nav a:hover { color: var(--tinte); }
+.nav a:hover::after { transform: scaleX(1); }
+.kopf-tel { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; font-weight: 650; white-space: nowrap; }
+.kopf-tel .rund {
+  display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 50%;
+  background: var(--petrol); color: #fff; transition: transform 200ms var(--ease), background-color 200ms;
+}
+.kopf-tel:hover .rund { transform: scale(1.06); background: var(--petrol-tief); }
+.kopf-tel svg { width: 18px; height: 18px; }
+
+/* Über dem Startfoto: Leiste durchsichtig, Schrift weiß */
+.kopf.ueber-foto { background: transparent; border-color: transparent; color: #fff; }
+.kopf.ueber-foto .nav a, .kopf.ueber-foto .marke small { color: rgba(255, 255, 255, 0.86); }
+.kopf.ueber-foto .marke .rahmen-linie { stroke: #fff; }
+
+/* Knöpfe */
+.knopf {
+  display: inline-flex; align-items: center; justify-content: center; gap: 10px;
+  min-height: 52px; padding: 14px 24px;
+  background: var(--petrol); color: #fff; text-decoration: none;
+  font: inherit; font-weight: 650; font-size: 1rem; line-height: 1.2;
+  border: 0; border-radius: var(--radius); cursor: pointer;
+  box-shadow: 0 10px 22px -12px rgba(10, 68, 71, 0.7);
+  transition: background-color 180ms var(--ease), transform 180ms var(--ease);
+  touch-action: manipulation;
+}
+.knopf:hover { background: var(--petrol-tief); transform: translateY(-1px); box-shadow: 0 14px 26px -12px rgba(10, 68, 71, 0.75); }
+.knopf:active { transform: translateY(1px); }
+.knopf svg { width: 18px; height: 18px; flex: none; }
+.knopf-hell { background: #fff; color: var(--tinte); box-shadow: 0 10px 22px -14px rgba(0, 0, 0, 0.6); }
+.knopf-hell:hover { background: var(--kalk); }
+.knopf-geist { background: transparent; color: inherit; box-shadow: inset 0 0 0 1.5px currentColor; }
+.knopf-geist:hover { background: rgba(255, 255, 255, 0.12); box-shadow: inset 0 0 0 1.5px currentColor; }
+
+/* Fußzeile */
+.fuss { background: var(--schiefer); color: var(--schiefer-text); padding: 56px 0 40px; font-size: 0.9rem; }
+.fuss-raster { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr) minmax(0, 1fr); gap: 40px; }
+.fuss .marke { color: #fff; }
+.fuss .marke small { color: var(--schiefer-text); }
+.fuss h2 { font-size: 0.82rem; font-stretch: 100%; font-weight: 650; letter-spacing: 0.02em; color: #fff; margin: 0 0 10px; }
+.fuss p { margin: 0 0 6px; }
+.fuss a { color: #fff; }
+.fuss-links a { display: inline-flex; align-items: center; min-height: 44px; margin-right: 22px; }
+.fuss .quellen { grid-column: 1 / -1; margin: 12px 0 0; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.14); font-size: 0.8rem; line-height: 1.7; }
+.fuss .quellen a { color: var(--schiefer-text); }
+
+@media (max-width: 1060px) {
+  .nav { display: none; }
+}
+@media (max-width: 700px) {
+  body { font-size: 17px; }
+  .kopf .rahmen { height: 62px; }
+  .marke svg { width: 34px; height: 34px; }
+  .marke span { font-size: 1rem; }
+  .kopf-tel .nummer { display: none; }
+  .fuss-raster { grid-template-columns: minmax(0, 1fr); gap: 28px; }
+  .fuss { padding-bottom: 96px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 1ms !important; animation-iteration-count: 1 !important; transition-duration: 1ms !important; }
+}

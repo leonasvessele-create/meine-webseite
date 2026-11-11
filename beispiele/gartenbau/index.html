@@ -2,1069 +2,325 @@
 <html lang="de">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex">
-  <title>Grünwerk Albers – Garten- und Landschaftsbau in Musterstadt</title>
-  <meta name="description" content="Garten- und Landschaftsbau in Musterstadt und Umgebung: Gartengestaltung, Terrassen, Pflaster, Zäune und Gartenpflege. Alles aus einer Hand.">
-  <!-- Beispielseite von Hand &amp; Fuß Webseiten. Grünwerk Albers ist ein ausgedachtes Unternehmen. -->
-  <style>
-    /* Keine Google Fonts: Systemschriften laden sofort und sind DSGVO-sicher */
-    :root {
-      --primaer: #23402b;
-      --primaer-hell: #335c3e;
-      --grund: #f4f2ea;
-      --grund-dunkel: #e3dfd0;
-      --akzent: #966616;
-      --akzent-dunkel: #7a520f;
-      --text: #1e231f;
-      --text-leise: #5b625c;
-      --weiss: #ffffff;
-      --radius: 14px;
-      --schrift: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      --schrift-titel: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-    }
-
-    * { box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
-
-    body {
-      margin: 0;
-      font-family: var(--schrift);
-      font-size: 17px;
-      line-height: 1.6;
-      color: var(--text);
-      background: var(--grund);
-    }
-
-    h1, h2, h3 {
-      font-family: var(--schrift-titel);
-      line-height: 1.2;
-      margin: 0 0 0.5em;
-    }
-
-    a { color: inherit; }
-
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 20px;
-    }
-
-    .beispiel-hinweis {
-      background: var(--text);
-      color: #d5dad6;
-      text-align: center;
-      font-size: 0.85em;
-      padding: 8px 16px;
-    }
-
-    /* Kopfzeile */
-    .kopf {
-      position: sticky;
-      top: 0;
-      z-index: 10;
-      background: rgba(244, 242, 234, 0.95);
-      backdrop-filter: blur(8px);
-      -webkit-backdrop-filter: blur(8px);
-      border-bottom: 1px solid var(--grund-dunkel);
-    }
-    .kopf .container {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-      height: 68px;
-    }
-    .logo {
-      font-family: var(--schrift-titel);
-      font-size: 1.35em;
-      font-weight: 700;
-      color: var(--primaer);
-      text-decoration: none;
-    }
-    .logo span { color: var(--akzent); }
-    .nav {
-      display: flex;
-      gap: 28px;
-      font-size: 0.95em;
-    }
-    .nav a {
-      text-decoration: none;
-      color: var(--text-leise);
-    }
-    .nav a:hover { color: var(--primaer); }
-
-    .knopf {
-      display: inline-block;
-      background: var(--akzent);
-      color: var(--weiss);
-      text-decoration: none;
-      font-weight: 600;
-      padding: 12px 22px;
-      border-radius: 999px;
-      border: none;
-      font-size: 1em;
-      font-family: inherit;
-      cursor: pointer;
-      transition: background 150ms ease, transform 100ms ease-out;
-    }
-    .knopf:hover { background: var(--akzent-dunkel); }
-    .knopf:active { transform: scale(0.97); }
-    .knopf-hell {
-      background: transparent;
-      color: var(--primaer);
-      border: 2px solid var(--primaer);
-    }
-    .knopf-hell:hover { background: var(--primaer); color: var(--weiss); }
-
-    /* Startbereich: großes Bild über die volle Breite */
-    .start {
-      position: relative;
-      color: var(--weiss);
-      background:
-        linear-gradient(90deg, rgba(20, 38, 25, 0.92) 0%, rgba(20, 38, 25, 0.75) 45%, rgba(20, 38, 25, 0.1) 100%),
-        url("bilder/terrasse.jpg") center 60% / cover, #4f7a3f;
-      padding: 110px 0 120px;
-    }
-    .start-inhalt { max-width: 620px; }
-    .start-marke {
-      display: inline-block;
-      color: #e7c37c;
-      font-weight: 600;
-      font-size: 0.9em;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      margin-bottom: 14px;
-    }
-    .start h1 {
-      font-size: clamp(2.2em, 5vw, 3.5em);
-    }
-    .start p {
-      font-size: 1.15em;
-      color: #dfe7df;
-      margin: 0 0 28px;
-    }
-    .start-knoepfe {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-    }
-    .start .knopf-hell {
-      color: var(--weiss);
-      border-color: var(--weiss);
-    }
-    .start .knopf-hell:hover { background: var(--weiss); color: var(--primaer); }
-
-    /* Saison-Hinweis */
-    .saison {
-      background: var(--akzent);
-      color: var(--weiss);
-      text-align: center;
-      padding: 14px 20px;
-      font-weight: 600;
-    }
-    .saison a { color: var(--weiss); }
-
-    /* Vertrauensleiste */
-    .vertrauen {
-      background: var(--weiss);
-      padding: 32px 0;
-      border-bottom: 1px solid var(--grund-dunkel);
-    }
-    .vertrauen .container {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
-      text-align: center;
-    }
-    .vertrauen strong {
-      display: block;
-      font-family: var(--schrift-titel);
-      font-size: 1.6em;
-      color: var(--primaer);
-    }
-    .vertrauen span {
-      color: var(--text-leise);
-      font-size: 0.9em;
-    }
-
-    /* Abschnitte */
-    .abschnitt { padding: 88px 0; }
-    .abschnitt-weiss { background: var(--weiss); }
-    .abschnitt-kopf {
-      max-width: 640px;
-      margin-bottom: 44px;
-    }
-    .abschnitt-kopf h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-      color: var(--primaer);
-    }
-    .abschnitt-kopf p {
-      color: var(--text-leise);
-      margin: 0;
-    }
-
-    /* Leistungen */
-    .raster {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px;
-    }
-    .leistung {
-      background: var(--weiss);
-      border-radius: var(--radius);
-      padding: 28px;
-      border: 1px solid var(--grund-dunkel);
-      transition: transform 200ms cubic-bezier(.23, 1, .32, 1), box-shadow 200ms cubic-bezier(.23, 1, .32, 1);
-    }
-    .leistung:hover {
-      transform: translateY(-4px);
-      box-shadow: 0 12px 24px rgba(35, 64, 43, 0.1);
-    }
-    .leistung-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      background: var(--primaer);
-      color: var(--weiss);
-      display: grid;
-      place-items: center;
-      margin-bottom: 16px;
-    }
-    .leistung h3 {
-      font-size: 1.25em;
-      color: var(--primaer);
-    }
-    .leistung p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.97em;
-    }
-
-    /* Pflegevertrag */
-    .pflege {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: center;
-    }
-    .pflege-liste {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 12px;
-    }
-    .pflege-liste li {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      background: var(--grund);
-      border-radius: 10px;
-      padding: 14px 18px;
-    }
-    .pflege-liste span { color: var(--text-leise); white-space: nowrap; }
-
-    /* Ablauf */
-    .ablauf {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 24px;
-      counter-reset: schritt;
-    }
-    .schritt {
-      border-top: 3px solid var(--akzent);
-      padding-top: 18px;
-    }
-    .schritt::before {
-      counter-increment: schritt;
-      content: "0" counter(schritt);
-      font-family: var(--schrift-titel);
-      font-size: 1.8em;
-      color: var(--akzent);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .schritt h3 {
-      font-size: 1.15em;
-      color: var(--primaer);
-    }
-    .schritt p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.97em;
-    }
-
-    /* Vorher / Nachher */
-    .projekte {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 28px;
-    }
-    .projekt img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 3;
-      object-fit: cover;
-      border-radius: var(--radius);
-      background: var(--grund-dunkel);
-    }
-    .projekt img.unten { object-position: center 85%; }
-    .projekt-daten {
-      display: block;
-      margin-top: 16px;
-      font-size: 0.85em;
-      font-weight: 600;
-      color: var(--akzent-dunkel);
-    }
-    .projekt h3 {
-      margin-top: 4px;
-      font-size: 1.15em;
-      color: var(--primaer);
-    }
-    .projekt p {
-      margin: 0;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .platzhalter-hinweis {
-      margin-top: 28px;
-      font-size: 0.85em;
-      color: var(--text-leise);
-    }
-
-    /* Kundenstimmen */
-    .stimme {
-      background: var(--weiss);
-      border-radius: var(--radius);
-      padding: 28px;
-      margin: 0;
-    }
-    .stimme p {
-      margin: 10px 0 16px;
-      font-family: var(--schrift-titel);
-      font-size: 1.15em;
-      color: var(--primaer);
-    }
-    .stimme footer {
-      color: var(--text-leise);
-      font-size: 0.9em;
-    }
-    .stimme footer strong { color: var(--primaer); }
-    .sterne { color: var(--akzent); letter-spacing: 2px; }
-    .bewertung-schnitt {
-      display: inline-flex;
-      align-items: baseline;
-      gap: 10px;
-      margin-top: 18px;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .bewertung-schnitt strong {
-      font-family: var(--schrift-titel);
-      font-size: 2em;
-      color: var(--primaer);
-    }
-
-    /* Siegel in der Vertrauensleiste */
-    .vertrauen .siegel strong { font-size: 1.25em; }
-    .vertrauen .siegel strong::before {
-      content: "";
-      display: inline-block;
-      width: 0.8em;
-      height: 0.8em;
-      margin-right: 8px;
-      border-radius: 50%;
-      background: var(--akzent);
-      box-shadow: 0 0 0 3px var(--grund-dunkel);
-      vertical-align: 0.02em;
-    }
-
-    /* Inhaber */
-    .chef {
-      display: grid;
-      grid-template-columns: 0.85fr 1.15fr;
-      gap: 56px;
-      align-items: center;
-    }
-    .chef-foto { margin: 0; position: relative; }
-    .chef-foto img {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 4 / 5;
-      object-fit: cover;
-      object-position: center 20%;
-      border-radius: var(--radius);
-      background: var(--grund-dunkel);
-    }
-    .chef-foto figcaption {
-      position: absolute;
-      left: 16px;
-      bottom: 16px;
-      background: var(--weiss);
-      border-radius: 10px;
-      padding: 10px 16px;
-      line-height: 1.3;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
-    }
-    .chef-foto figcaption strong { display: block; color: var(--primaer); }
-    .chef-foto figcaption span { font-size: 0.88em; color: var(--text-leise); }
-    .chef h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-      color: var(--primaer);
-    }
-    .chef blockquote {
-      margin: 0 0 20px;
-      padding-left: 18px;
-      border-left: 3px solid var(--akzent);
-      font-family: var(--schrift-titel);
-      font-size: 1.25em;
-      color: var(--primaer);
-    }
-    .chef > div > p { color: var(--text-leise); margin: 0 0 24px; }
-    .nachweise {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .nachweise li {
-      background: var(--weiss);
-      border: 1px solid var(--grund-dunkel);
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: var(--text-leise);
-      font-size: 0.95em;
-    }
-    .nachweise strong { display: block; color: var(--primaer); }
-
-    /* Preise */
-    .preise-raster {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr;
-      gap: 28px;
-      align-items: start;
-    }
-    .preistabelle {
-      width: 100%;
-      border-collapse: collapse;
-      background: var(--weiss);
-      border-radius: var(--radius);
-      overflow: hidden;
-      border: 1px solid var(--grund-dunkel);
-    }
-    .preistabelle caption {
-      caption-side: bottom;
-      text-align: left;
-      padding-top: 12px;
-      font-size: 0.85em;
-      color: var(--text-leise);
-    }
-    .preistabelle th,
-    .preistabelle td {
-      padding: 15px 20px;
-      text-align: left;
-      border-bottom: 1px solid var(--grund-dunkel);
-      vertical-align: baseline;
-    }
-    .preistabelle tr:last-child th,
-    .preistabelle tr:last-child td { border-bottom: 0; }
-    .preistabelle th { font-weight: 600; color: var(--primaer); }
-    .preistabelle th small {
-      display: block;
-      font-weight: 400;
-      color: var(--text-leise);
-      font-size: 0.88em;
-    }
-    .preistabelle td {
-      text-align: right;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .preistabelle .pflege-zeile { background: #f8f3e7; }
-    .preis-hinweis {
-      background: var(--primaer);
-      color: #dfe7df;
-      border-radius: var(--radius);
-      padding: 28px;
-    }
-    .preis-hinweis h3 { color: var(--weiss); font-size: 1.3em; }
-    .preis-hinweis ul { margin: 0; padding-left: 20px; }
-    .preis-hinweis li { margin-bottom: 8px; }
-
-    /* Fragen */
-    .fragen-raster {
-      display: grid;
-      grid-template-columns: 0.8fr 1.2fr;
-      gap: 48px;
-      align-items: start;
-    }
-    .fragen-raster .abschnitt-kopf a { color: var(--primaer); font-weight: 600; white-space: nowrap; }
-    .fragen { display: grid; gap: 10px; }
-    .fragen details {
-      background: var(--grund);
-      border-radius: 12px;
-    }
-    .fragen summary {
-      list-style: none;
-      cursor: pointer;
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      padding: 16px 20px;
-      font-weight: 600;
-      color: var(--primaer);
-    }
-    .fragen summary::-webkit-details-marker { display: none; }
-    .fragen summary::after {
-      content: "+";
-      font-size: 1.4em;
-      line-height: 1;
-      color: var(--akzent);
-      transition: transform 200ms cubic-bezier(.23, 1, .32, 1);
-    }
-    .fragen details[open] summary::after { transform: rotate(45deg); }
-    .fragen summary:focus-visible {
-      outline: 2px solid var(--akzent);
-      outline-offset: 2px;
-      border-radius: 12px;
-    }
-    .fragen details p {
-      margin: 0;
-      padding: 0 20px 18px;
-      color: var(--text-leise);
-    }
-
-    /* Pflege-Bild */
-    .pflege-bild {
-      display: block;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 3 / 2;
-      object-fit: cover;
-      border-radius: var(--radius);
-      margin-bottom: 14px;
-      background: var(--grund-dunkel);
-    }
-    .pflege-preis {
-      display: inline-block;
-      margin-top: 16px;
-      background: var(--grund);
-      border-radius: 999px;
-      padding: 6px 16px;
-      font-weight: 600;
-      color: var(--primaer);
-    }
-
-    /* Einsatzgebiet */
-    .orte {
-      list-style: none;
-      margin: 8px 0 0;
-      padding: 0;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .orte li {
-      background: var(--weiss);
-      border: 1px solid var(--grund-dunkel);
-      border-radius: 999px;
-      padding: 4px 12px;
-      font-size: 0.9em;
-      color: var(--text);
-    }
-    .orte small { color: var(--text-leise); }
-
-    /* Karriere */
-    .karriere {
-      background: var(--primaer);
-      color: var(--weiss);
-      border-radius: 22px;
-      padding: 56px;
-      display: grid;
-      grid-template-columns: 1.3fr 1fr;
-      gap: 40px;
-      align-items: center;
-    }
-    .karriere h2 {
-      font-size: clamp(1.8em, 3.5vw, 2.4em);
-    }
-    .karriere p { color: #cbdacd; margin: 0 0 24px; }
-    .karriere ul {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: grid;
-      gap: 10px;
-    }
-    .karriere li {
-      background: var(--primaer-hell);
-      border-radius: 10px;
-      padding: 12px 16px;
-    }
-    .karriere li::before {
-      content: "✓ ";
-      color: #e7c37c;
-      font-weight: 700;
-    }
-
-    /* Kontakt */
-    .kontakt {
-      display: grid;
-      grid-template-columns: 1fr 1.2fr;
-      gap: 48px;
-    }
-    .kontakt-info p { color: var(--text-leise); }
-    .kontakt-info a { color: var(--primaer); font-weight: 600; white-space: nowrap; }
-    .kontakt-info dl { margin: 24px 0 0; }
-    .kontakt-info dt {
-      font-weight: 600;
-      color: var(--primaer);
-    }
-    .kontakt-info dd {
-      margin: 0 0 14px;
-      color: var(--text-leise);
-    }
-    form {
-      background: var(--weiss);
-      box-shadow: 0 12px 30px rgba(35, 64, 43, 0.08);
-      border-radius: var(--radius);
-      padding: 28px;
-      display: grid;
-      gap: 16px;
-    }
-    label {
-      display: grid;
-      gap: 6px;
-      font-weight: 600;
-      font-size: 0.95em;
-      color: var(--primaer);
-    }
-    input, select, textarea {
-      font: inherit;
-      font-weight: 400;
-      color: var(--text);
-      padding: 12px 14px;
-      border: 1px solid #cfcab8;
-      border-radius: 10px;
-      background: var(--weiss);
-      width: 100%;
-    }
-    input:focus, select:focus, textarea:focus {
-      outline: 2px solid var(--akzent);
-      outline-offset: 1px;
-      border-color: transparent;
-    }
-    .zwei-spalten {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-    .einwilligung {
-      display: flex;
-      gap: 10px;
-      align-items: flex-start;
-      font-weight: 400;
-      color: var(--text-leise);
-      font-size: 0.88em;
-    }
-    .einwilligung input { width: auto; margin-top: 4px; }
-    .formular-danke {
-      display: none;
-      background: var(--primaer);
-      color: var(--weiss);
-      padding: 14px 18px;
-      border-radius: 10px;
-    }
-
-    /* Fußzeile */
-    .fuss {
-      background: var(--text);
-      color: #aab2ab;
-      padding: 40px 0 96px;
-      font-size: 0.9em;
-    }
-    .fuss .container {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      gap: 16px;
-    }
-    .fuss nav { display: flex; gap: 20px; }
-    .fuss .quellen { flex-basis: 100%; margin: 0; font-size: 0.85em; }
-
-    /* Anruf-Knopf nur auf dem Handy */
-    .anruf-mobil {
-      display: none;
-      position: fixed;
-      left: 16px;
-      right: 16px;
-      bottom: 16px;
-      z-index: 20;
-      text-align: center;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-    }
-
-    @media (max-width: 900px) {
-      .nav { display: none; }
-      .start { padding: 72px 0 80px; }
-      .start {
-        background:
-          linear-gradient(180deg, rgba(20, 38, 25, 0.88), rgba(20, 38, 25, 0.72)),
-          url("bilder/terrasse.jpg") center / cover, #4f7a3f;
-      }
-      .kontakt,
-      .karriere,
-      .pflege,
-      .chef,
-      .preise-raster,
-      .fragen-raster { grid-template-columns: 1fr; }
-      .chef-foto { max-width: 420px; }
-      .vertrauen .container,
-      .ablauf { grid-template-columns: 1fr 1fr; }
-      .karriere { padding: 36px 24px; }
-      .abschnitt { padding: 64px 0; }
-    }
-
-    @media (max-width: 560px) {
-      body { font-size: 16px; }
-      .kopf .knopf { display: none; }
-      .ablauf,
-      .zwei-spalten { grid-template-columns: 1fr; }
-      .pflege-liste li { flex-direction: column; gap: 2px; }
-      .preistabelle th,
-      .preistabelle td { padding: 14px 16px; }
-      .anruf-mobil { display: block; }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      * { transition: none !important; }
-    }
-  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Grünwerk Albers · Garten- und Landschaftsbau in Musterstadt</title>
+  <meta name="description" content="Garten- und Landschaftsbau in Musterstadt und Umgebung: Gartengestaltung, Terrassen, Pflaster, Zäune und Gartenpflege. Alles aus einer Hand, vom Gärtnermeister.">
+  <meta name="theme-color" content="#0b2216">
+  <!-- Beispielseite von Hand & Fuß Webseiten. Grünwerk Albers ist ein ausgedachtes Unternehmen. -->
+  <link rel="preload" href="fonts/archivo-latin-standard-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="bilder/terrasse.jpg" as="image">
+  <link rel="stylesheet" href="css/stil.css">
+  <script>document.documentElement.classList.add('js');</script>
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-pfeil" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square"/></symbol>
+  <symbol id="i-tel" viewBox="0 0 24 24"><path d="M6.6 3.5h3l1.5 4.2-2.1 1.5a12 12 0 0 0 5.8 5.8l1.5-2.1 4.2 1.5v3a2 2 0 0 1-2.2 2A17 17 0 0 1 4.6 5.7a2 2 0 0 1 2-2.2Z" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></symbol>
+  <symbol id="i-haken" viewBox="0 0 24 24"><path d="M4 12.5l5 5L20 6.5" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="square"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 4v16M4 12h16" fill="none" stroke="currentColor" stroke-width="2.2"/></symbol>
+  <symbol id="i-stern" viewBox="0 0 24 24"><path d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.6L12 17.3l-5.9 3.3 1.3-6.6-4.9-4.6 6.6-.8Z" fill="currentColor"/></symbol>
+  <symbol id="i-ort" viewBox="0 0 24 24"><path d="M12 21s-7-6.2-7-11.5a7 7 0 0 1 14 0C19 14.8 12 21 12 21Z M12 12.2a2.6 2.6 0 1 0 0-5.2 2.6 2.6 0 0 0 0 5.2Z" fill="none" stroke="currentColor" stroke-width="2"/></symbol>
+  <symbol id="i-marke" viewBox="0 0 48 48"><rect width="48" height="48" fill="#1d5a33"/><path d="M8 38h10v-7h10v-7h12" fill="none" stroke="#fff" stroke-width="3.2" stroke-linecap="square"/><path d="M33 22c0-7 3.5-11.5 9-12.5-.3 6.6-3.8 11.2-9 12.5Z" fill="#c4e36b"/><path d="M33 22c-.6-4.6-3.4-7.5-8-8 .2 4.3 3.1 7.4 8 8Z" fill="#c4e36b"/></symbol>
+</svg>
 
-  <div class="beispiel-hinweis">
-    Beispielseite von Hand &amp; Fuß Webseiten – „Grünwerk Albers“ ist ein ausgedachtes Unternehmen.
+<a class="springen" href="#inhalt">Zum Inhalt springen</a>
+<div class="beispiel-hinweis">Beispielseite von Hand &amp; Fuß Webseiten. „Grünwerk Albers“ ist ein ausgedachtes Unternehmen.</div>
+
+<header class="kopf" id="kopf">
+  <div class="wrap kopf-innen">
+    <a class="marke" href="#inhalt" aria-label="Grünwerk Albers, zum Seitenanfang">
+      <svg aria-hidden="true"><use href="#i-marke"/></svg>
+      <span class="marke-text"><b translate="no">Grünwerk Albers</b><span>Garten- und Landschaftsbau</span></span>
+    </a>
+    <nav class="nav" aria-label="Hauptnavigation">
+      <a href="#leistungen">Leistungen</a>
+      <a href="#pflege">Gartenpflege</a>
+      <a href="#projekte">Projekte</a>
+      <a href="#ueber-uns">Über uns</a>
+      <a href="#fragen">Fragen</a>
+    </nav>
+    <a class="knopf kopf-tel" href="tel:+49123456780"><svg aria-hidden="true"><use href="#i-tel"/></svg>0123 456 780</a>
+    <button class="menue-knopf" type="button" aria-expanded="false" aria-controls="menue" aria-label="Menü öffnen"><span></span></button>
   </div>
-
-  <header class="kopf">
-    <div class="container">
-      <a class="logo" href="#">Grünwerk <span>Albers</span></a>
-      <nav class="nav">
+  <div class="menue" id="menue" hidden>
+    <div class="wrap">
+      <nav aria-label="Menü">
         <a href="#leistungen">Leistungen</a>
-        <a href="#ueber-uns">Über uns</a>
-        <a href="#preise">Preise</a>
+        <a href="#pflege">Gartenpflege</a>
         <a href="#projekte">Projekte</a>
+        <a href="#ueber-uns">Über uns</a>
         <a href="#fragen">Fragen</a>
-        <a href="#karriere">Karriere</a>
+        <a class="knopf" href="#kontakt">Vor-Ort-Termin anfragen</a>
       </nav>
-      <a class="knopf" href="tel:+49123456780">0123 456 780</a>
     </div>
-  </header>
+  </div>
+</header>
 
-  <main>
-    <section class="start">
-      <div class="container">
-        <div class="start-inhalt">
-          <span class="start-marke">Garten- und Landschaftsbau in Musterstadt</span>
-          <h1>Ihr Garten. Fertig zum Genießen.</h1>
-          <p>
-            Wir planen und bauen Gärten, Terrassen und Wege, die zu Ihnen passen.
-            Und wenn Sie wollen, pflegen wir sie danach auch das ganze Jahr.
-          </p>
-          <div class="start-knoepfe">
-            <a class="knopf" href="#kontakt">Kostenlosen Vor-Ort-Termin anfragen</a>
-            <a class="knopf knopf-hell" href="#projekte">Projekte ansehen</a>
+<main id="inhalt">
+  <!-- Hero: das fertige Projekt, davor die Bautafel -->
+  <section class="hero" id="start" aria-labelledby="titel">
+    <div class="hero-bild">
+      <img src="bilder/terrasse.jpg" alt="Neue Terrasse aus hellen Natursteinplatten mit Sitzgruppe, Rasenfläche, Treppe und Holzsichtschutz" width="1600" height="1067" fetchpriority="high">
+      <a class="im-bild" href="#projekte">
+        <span><span class="feld-titel">Im Bild</span>Terrasse mit Treppe, 45 m², Musterstadt 2026</span>
+        <svg aria-hidden="true"><use href="#i-pfeil"/></svg>
+      </a>
+    </div>
+    <div class="hero-wrap">
+      <div class="wrap">
+        <div class="tafel">
+          <div class="tafel-kopf">
+            <p>Hier baut für Sie: Grünwerk Albers</p>
+            <span class="feld-titel">Meisterbetrieb</span>
           </div>
+          <div class="tafel-koerper">
+            <h1 id="titel">Ihr Garten. Fertig zum Genießen.</h1>
+            <p class="lead">Wir planen und bauen Gärten, Terrassen und Wege, die zu Ihnen passen. Und wenn Sie wollen, pflegen wir sie danach auch das ganze Jahr.</p>
+            <div class="tafel-knoepfe">
+              <a class="knopf" href="#kontakt"><span><span class="nur-gross">Kostenlosen </span>Vor-Ort-Termin anfragen</span><svg class="pfeil" aria-hidden="true"><use href="#i-pfeil"/></svg></a>
+              <a class="knopf knopf-rand" href="tel:+49123456780"><svg aria-hidden="true"><use href="#i-tel"/></svg>0123 456 780</a>
+            </div>
+          </div>
+          <div class="tafel-felder">
+            <div><span class="feld-titel">Ausführung</span><b>Gärtnermeister seit 2008</b></div>
+            <div><span class="feld-titel">Google</span><b>4,9 von 5 · 87 Bewertungen</b></div>
+            <div><span class="feld-titel">Einsatzgebiet</span><b>Musterstadt und 25 km</b></div>
+          </div>
+          <p class="saison">Jetzt für das Frühjahr 2027 planen: Die Termine für März und April sind schnell vergeben. <a href="#kontakt">Termin sichern</a></p>
+          <span class="tafel-pfosten l" aria-hidden="true"></span><span class="tafel-pfosten r" aria-hidden="true"></span>
         </div>
       </div>
-    </section>
-
-    <div class="saison">
-      🌱 Jetzt für das Frühjahr 2027 planen: Die Termine für März und April sind schnell vergeben. <a href="#kontakt">Termin sichern</a>
     </div>
+  </section>
 
-    <section class="vertrauen" aria-label="Zahlen und Fakten">
-      <div class="container">
-        <div class="siegel"><strong>Meisterbetrieb</strong><span>Mitglied im Fachverband Garten- und Landschaftsbau</span></div>
-        <div><strong>Seit 2008</strong><span>in Musterstadt, in zweiter Generation</span></div>
-        <div><strong>12</strong><span>Leute im Team, davon 2 Azubis</span></div>
-        <div><strong>4,9 ★</strong><span>aus 87 Google-Bewertungen</span></div>
+  <section class="fakten" aria-label="Zahlen und Fakten">
+    <div class="wrap">
+      <ul>
+        <li class="auf"><strong>Meisterbetrieb</strong><span>Mitglied im Fachverband Garten- und Landschaftsbau</span></li>
+        <li class="auf v1"><strong>Seit 2008</strong><span>in Musterstadt, in zweiter Generation</span></li>
+        <li class="auf v2"><strong>12 Leute</strong><span>im Team, davon 2 Azubis</span></li>
+        <li class="auf v3"><strong>4,9<svg class="stern" aria-hidden="true"><use href="#i-stern"/></svg></strong><span>aus 87 Google-Bewertungen</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Leistungen mit Richtpreisen -->
+  <section class="abschnitt" id="leistungen" aria-labelledby="leistungen-titel">
+    <div class="wrap">
+      <div class="kopf-zeile">
+        <h2 id="leistungen-titel" class="auf">Was wir bauen. Und was es ungefähr kostet.</h2>
+        <p class="lead auf v1">Vom ersten Entwurf bis zur letzten Pflanze übernehmen wir alles. Die Preise sind Richtwerte, damit Sie vorher wissen, woran Sie sind. Den genauen Preis bekommen Sie nach dem kostenlosen Termin vor Ort, schriftlich und verbindlich.</p>
       </div>
-    </section>
-
-    <section class="abschnitt" id="leistungen">
-      <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>Was wir für Sie machen</h2>
-          <p>Vom ersten Entwurf bis zur letzten Pflanze: Wir übernehmen alles, damit Sie sich um nichts kümmern müssen.</p>
-        </div>
-        <div class="raster">
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22V12"/><path d="M12 12C12 7 8 4 3 4c0 5 4 8 9 8z"/><path d="M12 12c0-4 3-7 8-7 0 4-3 7-8 7z"/></svg>
-            </div>
-            <h3>Gartengestaltung</h3>
-            <p>Wir planen Ihren Garten neu: Beete, Rasen, Bäume und Sitzplätze. Mit Entwurf, damit Sie vorher sehen, wie es wird.</p>
-          </article>
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="5"/><rect x="14" y="3" width="7" height="5"/><rect x="3" y="12" width="11" height="5"/><rect x="17" y="12" width="4" height="5"/><path d="M3 21h18"/></svg>
-            </div>
-            <h3>Terrassen &amp; Pflaster</h3>
-            <p>Terrassen aus Naturstein, Holz oder Keramik, dazu Einfahrten und Gartenwege. Sauber verlegt und für Jahrzehnte gemacht.</p>
-          </article>
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21V7l2-3 2 3v14"/><path d="M16 21V7l2-3 2 3v14"/><path d="M8 10h8M8 16h8"/></svg>
-            </div>
-            <h3>Zäune &amp; Sichtschutz</h3>
-            <p>Damit Ihr Garten Ihnen gehört: Zäune, Tore, Sichtschutzwände und Hecken, passend zu Haus und Grundstück.</p>
-          </article>
-          <article class="leistung">
-            <div class="leistung-icon" aria-hidden="true">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v7a6 6 0 0 0 12 0V3"/><path d="M12 16v5"/><path d="M9 21h6"/></svg>
-            </div>
-            <h3>Gartenpflege</h3>
-            <p>Rasen mähen, Hecken schneiden, Laub entfernen: einmalig oder fest im Jahresvertrag.</p>
-          </article>
-        </div>
+      <ul class="leistungen-liste" id="preise">
+        <li class="leistung auf">
+          <h3>Gartengestaltung</h3>
+          <p>Wir planen Ihren Garten neu: Beete, Rasen, Bäume und Sitzplätze. Mit Entwurf, damit Sie vorher sehen, wie es wird.</p>
+          <div class="preise-zelle">
+            <div class="preis"><small>Termin vor Ort und Entwurf</small><span class="kurz" aria-hidden="true">Termin und Entwurf</span><b>kostenlos</b></div>
+            <div class="preis"><small>Rollrasen pro m², inkl. Bodenvorbereitung</small><span class="kurz" aria-hidden="true">Rollrasen pro m²</span><b>12–20 €</b></div>
+          </div>
+        </li>
+        <li class="leistung auf">
+          <h3>Terrassen und Pflaster</h3>
+          <p>Terrassen aus Naturstein, Holz oder Keramik, dazu Einfahrten und Gartenwege. Sauber verlegt und für Jahrzehnte gemacht.</p>
+          <div class="preise-zelle">
+            <div class="preis"><small>Terrasse aus Naturstein pro m², inkl. Unterbau und Verlegung</small><span class="kurz" aria-hidden="true">Naturstein pro m²</span><b>140–220 €</b></div>
+            <div class="preis"><small>Pflaster für Einfahrt oder Weg pro m², Betonpflaster, inkl. Unterbau</small><span class="kurz" aria-hidden="true">Pflaster pro m²</span><b>80–130 €</b></div>
+          </div>
+        </li>
+        <li class="leistung auf">
+          <h3>Zäune und Sichtschutz</h3>
+          <p>Damit Ihr Garten Ihnen gehört: Zäune, Tore, Sichtschutzwände und Hecken, passend zu Haus und Grundstück.</p>
+          <div class="preise-zelle">
+            <div class="preis"><small>Zaun (Doppelstabmatte) pro laufendem Meter, inkl. Pfosten</small><span class="kurz" aria-hidden="true">Zaun pro Meter</span><b>90–150 €</b></div>
+          </div>
+        </li>
+        <li class="leistung auf">
+          <h3>Gartenpflege</h3>
+          <p>Rasen mähen, Hecken schneiden, Laub entfernen: einmalig oder fest im Jahresvertrag.</p>
+          <div class="preise-zelle">
+            <div class="preis"><small>Heckenschnitt einmalig, inkl. Abfuhr des Schnittguts</small><span class="kurz" aria-hidden="true">Heckenschnitt</span><b>ab 120 €</b></div>
+            <div class="preis"><small>Pflegevertrag ganzjährig, Garten bis ca. 400 m²</small><span class="kurz" aria-hidden="true">Pflegevertrag</span><b>ab 89 € / Monat</b></div>
+          </div>
+        </li>
+      </ul>
+      <div class="preis-fuss">
+        <p class="klein">Richtwerte inklusive Mehrwertsteuer, Stand 2026. Beispielpreise.</p>
+        <ul class="gut-zu-wissen" aria-label="Gut zu wissen">
+          <li><svg aria-hidden="true"><use href="#i-haken"/></svg>Der Termin vor Ort und der Entwurf sind kostenlos.</li>
+          <li><svg aria-hidden="true"><use href="#i-haken"/></svg>Sie bekommen immer erst ein schriftliches Angebot.</li>
+          <li><svg aria-hidden="true"><use href="#i-haken"/></svg>Auf unsere Bauarbeiten geben wir 5 Jahre Gewährleistung.</li>
+          <li><svg aria-hidden="true"><use href="#i-haken"/></svg>Die Arbeitskosten können Sie zum Teil von der Steuer absetzen. Wir weisen sie auf der Rechnung extra aus.</li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="abschnitt abschnitt-weiss" id="pflege">
-      <div class="container pflege">
-        <div class="abschnitt-kopf">
-          <h2>Gartenpflege im Jahresvertrag</h2>
-          <p>
-            Sie genießen, wir arbeiten. Mit dem Pflegevertrag kommt unser Team regelmäßig vorbei.
-            Sie müssen nichts organisieren und haben einen festen Monatspreis.
-          </p>
-          <p class="pflege-preis">ab 89 € im Monat, je nach Gartengröße</p>
-          <p style="margin-top: 20px;"><a class="knopf" href="#kontakt">Pflegevertrag anfragen</a></p>
-        </div>
-        <div>
-        <img class="pflege-bild" src="bilder/heckenschnitt.jpg" alt="Hände in Arbeitshandschuhen schneiden einen Wacholderstrauch mit der Gartenschere" width="1000" height="667" loading="lazy">
-        <ul class="pflege-liste">
+  <!-- Pflegevertrag: dunkler Kontrapunkt -->
+  <section class="dunkel" id="pflege" aria-labelledby="pflege-titel">
+    <div class="pflege">
+      <div class="pflege-foto">
+        <img src="bilder/heckenschnitt.jpg" alt="Hände in Arbeitshandschuhen schneiden einen Wacholderstrauch mit der Gartenschere" width="1000" height="667" loading="lazy">
+      </div>
+      <div class="pflege-text">
+        <h2 id="pflege-titel" class="auf">Gartenpflege im Jahresvertrag</h2>
+        <p class="lead auf v1">Sie genießen, wir arbeiten. Mit dem Pflegevertrag kommt unser Team regelmäßig vorbei. Sie müssen nichts organisieren und haben einen festen Monatspreis.</p>
+        <p class="pflege-preis auf v2"><b>ab 89 €</b><span>im Monat, je nach Gartengröße</span></p>
+        <ul class="jahr auf v2" aria-label="Was im Jahr passiert">
           <li><strong>Frühjahr</strong><span>Rasen vertikutieren, Beete vorbereiten</span></li>
           <li><strong>Sommer</strong><span>Mähen, Hecken schneiden, Bewässerung</span></li>
           <li><strong>Herbst</strong><span>Laub entfernen, Rückschnitt</span></li>
           <li><strong>Winter</strong><span>Winterschutz, Baumschnitt</span></li>
         </ul>
-        </div>
+        <a class="knopf knopf-trieb auf v3" href="#kontakt" data-vorhaben="Gartenpflege">Pflegevertrag anfragen<svg class="pfeil" aria-hidden="true"><use href="#i-pfeil"/></svg></a>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="abschnitt" id="ueber-uns" aria-labelledby="chef-titel">
-      <div class="container chef">
-        <figure class="chef-foto">
-          <img src="bilder/gaertner.jpg" alt="Jonas Albers, Gärtnermeister, in blauer Arbeitskleidung mit Spaten in einem Garten" width="780" height="1170" loading="lazy">
-          <figcaption><strong>Jonas Albers</strong><span>Gärtnermeister und Inhaber</span></figcaption>
+  <!-- Projekte als Bautafeln -->
+  <section class="abschnitt" id="projekte" aria-labelledby="projekte-titel">
+    <div class="wrap">
+      <div class="kopf-zeile">
+        <h2 id="projekte-titel" class="auf">Unsere letzten Projekte</h2>
+        <p class="lead auf v1">Zwei Gärten aus Musterstadt und Umgebung, fertig gebaut in diesem Jahr.</p>
+      </div>
+      <div class="projekte">
+        <figure class="projekt-foto auf" style="margin:0">
+          <img src="bilder/stufen.jpg" alt="Geschwungene Stufen aus Betonstein führen zu einem gepflasterten Sitzplatz, davor eine Hecke und Bodendecker" width="900" height="1350" loading="lazy">
         </figure>
-        <div>
-          <h2 id="chef-titel">Jonas Albers, Ihr Gärtnermeister</h2>
-          <blockquote>„Ich komme selbst zum ersten Termin. Wer Ihren Garten plant, sollte ihn auch gesehen haben.“</blockquote>
-          <p>
-            Mein Vater hat Grünwerk Albers 2008 gegründet. Seit 2023 führe ich den Betrieb, nach meiner Meisterprüfung
-            im Garten- und Landschaftsbau. Unser Team kommt aus der Gegend, und Sie haben von der Planung bis zur
-            Rechnung einen festen Ansprechpartner: mich.
-          </p>
-          <ul class="nachweise">
-            <li><strong>Meisterbrief</strong>Gärtnermeister, Fachrichtung Garten- und Landschaftsbau, 2022</li>
-            <li><strong>Fachverband</strong>Mitglied im Landesverband Garten-, Landschafts- und Sportplatzbau</li>
-            <li><strong>Ausbildungsbetrieb</strong>Wir bilden jedes Jahr Landschaftsgärtner aus</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <section class="abschnitt abschnitt-weiss" id="preise" aria-labelledby="preise-titel">
-      <div class="container">
-        <div class="abschnitt-kopf">
-          <h2 id="preise-titel">Was kostet das ungefähr?</h2>
-          <p>Damit Sie vorher wissen, woran Sie sind. Den genauen Preis bekommen Sie nach dem kostenlosen Termin vor Ort, schriftlich und verbindlich.</p>
-        </div>
-        <div class="preise-raster">
-          <table class="preistabelle">
-            <caption>Richtwerte inklusive Mehrwertsteuer, Stand 2026. Beispielpreise.</caption>
-            <tbody>
-              <tr><th scope="row">Terrasse aus Naturstein<small>pro m², inkl. Unterbau und Verlegung</small></th><td>140–220 €</td></tr>
-              <tr><th scope="row">Pflaster für Einfahrt oder Weg<small>pro m², Betonpflaster, inkl. Unterbau</small></th><td>80–130 €</td></tr>
-              <tr><th scope="row">Rollrasen<small>pro m², inkl. Bodenvorbereitung</small></th><td>12–20 €</td></tr>
-              <tr><th scope="row">Zaun (Doppelstabmatte)<small>pro laufendem Meter, inkl. Pfosten</small></th><td>90–150 €</td></tr>
-              <tr><th scope="row">Heckenschnitt<small>einmalig, inkl. Abfuhr des Schnittguts</small></th><td>ab 120 €</td></tr>
-              <tr class="pflege-zeile"><th scope="row">Pflegevertrag<small>ganzjährig, Garten bis ca. 400 m²</small></th><td>ab 89 € / Monat</td></tr>
-            </tbody>
-          </table>
-          <aside class="preis-hinweis">
-            <h3>Gut zu wissen</h3>
-            <ul>
-              <li>Der Termin vor Ort und der Entwurf sind kostenlos.</li>
-              <li>Sie bekommen immer erst ein schriftliches Angebot.</li>
-              <li>Auf unsere Bauarbeiten geben wir 5 Jahre Gewährleistung.</li>
-              <li>Die Arbeitskosten können Sie zum Teil von der Steuer absetzen. Wir weisen sie auf der Rechnung extra aus.</li>
-            </ul>
-          </aside>
-        </div>
-      </div>
-    </section>
-
-    <section class="abschnitt" id="ablauf">
-      <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>So läuft's ab</h2>
-          <p>Vier Schritte bis zu Ihrem neuen Garten.</p>
-        </div>
-        <div class="ablauf">
-          <div class="schritt">
-            <h3>Anfrage</h3>
-            <p>Sie rufen an oder schreiben uns. Wir melden uns innerhalb von zwei Werktagen.</p>
-          </div>
-          <div class="schritt">
-            <h3>Termin vor Ort</h3>
-            <p>Wir schauen uns Ihren Garten an und besprechen Ihre Wünsche.</p>
-          </div>
-          <div class="schritt">
-            <h3>Entwurf &amp; Angebot</h3>
-            <p>Sie bekommen einen Plan und ein klares Angebot mit festem Termin.</p>
-          </div>
-          <div class="schritt">
-            <h3>Wir legen los</h3>
-            <p>Unser Team baut zügig und sauber. Am Ende räumen wir alles auf.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <section class="abschnitt abschnitt-weiss" id="projekte">
-      <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>Unsere letzten Projekte</h2>
-          <p>Zwei Gärten aus Musterstadt und Umgebung, fertig gebaut in diesem Jahr.</p>
-        </div>
-        <div class="projekte">
-          <article class="projekt">
-            <img src="bilder/terrasse.jpg" alt="Neue Terrasse aus hellen Natursteinplatten mit Sitzgruppe, Rasenfläche, Treppe und Holzsichtschutz" width="1600" height="1067" loading="lazy">
-            <span class="projekt-daten">Musterstadt · Juni 2026 · Bauzeit 3 Wochen</span>
-            <h3>Terrasse mit Treppe und Sichtschutz, 45 m²</h3>
-            <p>Aus einem schiefen Hang wurde eine ebene Terrasse aus Naturstein, mit Treppe zum oberen Garten, Rasen und Sichtschutz aus Holz.</p>
+        <div class="projekt-stapel">
+          <article class="bautafel auf v1">
+            <div class="bautafel-kopf"><span>Bauvorhaben</span><span>Im großen Foto</span></div>
+            <div class="bautafel-koerper">
+              <h3>Sitzplatz mit geschwungenen Stufen</h3>
+              <p>Ein gepflasterter Sitzplatz im Grünen, eingefasst von einer Hecke. Die Bodendecker davor halten Unkraut fern und machen kaum Arbeit.</p>
+              <dl>
+                <div><dt>Ort</dt><dd>Beispielhausen</dd></div>
+                <div><dt>Bauzeit</dt><dd>8 Tage</dd></div>
+                <div><dt>Fertig</dt><dd>Sept. 2026</dd></div>
+              </dl>
+            </div>
           </article>
-          <article class="projekt">
-            <img class="unten" src="bilder/stufen.jpg" alt="Geschwungene Stufen aus Betonstein führen zu einem gepflasterten Sitzplatz, davor eine Hecke und Bodendecker" width="900" height="1350" loading="lazy">
-            <span class="projekt-daten">Beispielhausen · September 2026 · Bauzeit 8 Tage</span>
-            <h3>Sitzplatz mit geschwungenen Stufen</h3>
-            <p>Ein gepflasterter Sitzplatz im Grünen, eingefasst von einer Hecke. Die Bodendecker davor halten Unkraut fern und machen kaum Arbeit.</p>
+          <article class="bautafel auf v2">
+            <div class="bautafel-kopf"><span>Bauvorhaben</span><span>Titelfoto der Seite</span></div>
+            <div class="bautafel-koerper">
+              <h3>Terrasse mit Treppe und Sichtschutz, 45 m²</h3>
+              <p>Aus einem schiefen Hang wurde eine ebene Terrasse aus Naturstein, mit Treppe zum oberen Garten, Rasen und Sichtschutz aus Holz.</p>
+              <dl>
+                <div><dt>Ort</dt><dd>Musterstadt</dd></div>
+                <div><dt>Bauzeit</dt><dd>3 Wochen</dd></div>
+                <div><dt>Fertig</dt><dd>Juni 2026</dd></div>
+              </dl>
+              <a class="verweis" href="#start">Foto oben auf der Seite<svg aria-hidden="true"><use href="#i-pfeil"/></svg></a>
+            </div>
           </article>
         </div>
-        <p class="platzhalter-hinweis">Beispielseite: Die Fotos stammen von Unsplash. Auf einer echten Seite stehen hier Fotos aus den eigenen Projekten des Betriebs, am besten mit Vorher-Bild.</p>
       </div>
-    </section>
+      <p class="foto-hinweis">Beispielseite: Die Fotos stammen von Unsplash. Auf einer echten Seite stehen hier Fotos aus den eigenen Projekten des Betriebs, am besten mit Vorher-Bild.</p>
+    </div>
+  </section>
 
-    <section class="abschnitt">
-      <div class="container">
-        <div class="abschnitt-kopf">
-          <h2>Das sagen unsere Kunden</h2>
-          <p>Beispielbewertungen. Auf einer echten Seite stehen hier die echten Google-Bewertungen des Betriebs.</p>
-          <p class="bewertung-schnitt"><strong>4,9</strong><span class="sterne" aria-hidden="true">★★★★★</span>87 Bewertungen auf Google</p>
-        </div>
-        <div class="raster">
-          <blockquote class="stimme">
-            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
-            <p>„Die Terrasse ist genau so geworden wie auf dem Entwurf. Und die Baustelle war jeden Abend aufgeräumt.“</p>
-            <footer><strong>Markus W.</strong> aus Musterstadt · 3. Juli 2026</footer>
-          </blockquote>
-          <blockquote class="stimme">
-            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
-            <p>„Seit wir den Pflegevertrag haben, sieht unser Garten das ganze Jahr gut aus, ohne dass wir etwas tun müssen.“</p>
-            <footer><strong>Renate H.</strong> aus Neudorf · 22. August 2026</footer>
-          </blockquote>
-          <blockquote class="stimme">
-            <span class="sterne" aria-label="5 von 5 Sternen">★★★★★</span>
-            <p>„Herr Albers kam selbst vorbei und hatte gute Ideen für unseren kleinen Hang. Das Angebot war fair und wurde genau eingehalten.“</p>
-            <footer><strong>Selin K.</strong> aus Beispielhausen · 1. Oktober 2026</footer>
-          </blockquote>
-        </div>
+  <!-- Über uns -->
+  <section class="abschnitt" id="ueber-uns" aria-labelledby="chef-titel" style="padding-top:0">
+    <div class="wrap chef">
+      <figure class="chef-foto auf">
+        <img src="bilder/gaertner.jpg" alt="Jonas Albers, Gärtnermeister, in blauer Arbeitskleidung mit Spaten in einem Garten" width="780" height="1170" loading="lazy">
+        <figcaption><b>Jonas Albers</b><span>Gärtnermeister und Inhaber</span></figcaption>
+      </figure>
+      <div class="chef-text">
+        <h2 id="chef-titel" class="auf">Jonas Albers, Ihr Gärtnermeister</h2>
+        <blockquote class="zitat auf v1">„Ich komme selbst zum ersten Termin. Wer Ihren Garten plant, sollte ihn auch gesehen haben.“</blockquote>
+        <p class="auf v2">Mein Vater hat Grünwerk Albers 2008 gegründet. Seit 2023 führe ich den Betrieb, nach meiner Meisterprüfung im Garten- und Landschaftsbau. Unser Team kommt aus der Gegend, und Sie haben von der Planung bis zur Rechnung einen festen Ansprechpartner: mich.</p>
+        <ul class="nachweise auf v2">
+          <li><strong>Meisterbrief</strong><span>Gärtnermeister, Fachrichtung Garten- und Landschaftsbau, 2022</span></li>
+          <li><strong>Fachverband</strong><span>Mitglied im Landesverband Garten-, Landschafts- und Sportplatzbau</span></li>
+          <li><strong>Ausbildungsbetrieb</strong><span>Wir bilden jedes Jahr Landschaftsgärtner aus</span></li>
+        </ul>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <section class="abschnitt abschnitt-weiss" id="fragen" aria-labelledby="fragen-titel">
-      <div class="container fragen-raster">
-        <div class="abschnitt-kopf">
-          <h2 id="fragen-titel">Häufige Fragen</h2>
-          <p>Ihre Frage ist nicht dabei? Rufen Sie einfach an: <a href="tel:+49123456780">0123 456 780</a>.</p>
-        </div>
-        <div class="fragen">
-          <details>
-            <summary>Was kostet der erste Termin vor Ort?</summary>
-            <p>Nichts. Wir schauen uns Ihren Garten an, hören uns Ihre Wünsche an und schicken Ihnen danach ein schriftliches Angebot. Sie entscheiden in Ruhe.</p>
-          </details>
-          <details>
-            <summary>Wie lange im Voraus muss ich buchen?</summary>
-            <p>Für Bauarbeiten im Frühjahr am besten bis Januar. Im Sommer und Herbst haben wir meist innerhalb von 4 bis 6 Wochen einen Termin frei.</p>
-          </details>
-          <details>
-            <summary>Arbeiten Sie auch im Winter?</summary>
-            <p>Ja. Solange der Boden nicht gefroren ist, pflastern und bauen wir. Baum- und Gehölzschnitt machen wir sogar am liebsten im Winter.</p>
-          </details>
-          <details>
-            <summary>Kümmern Sie sich auch um kleine Gärten?</summary>
-            <p>Ja. Ein Reihenhausgarten ist für uns ein ganz normaler Auftrag. Der Pflegevertrag lohnt sich schon ab etwa 100 m².</p>
-          </details>
-          <details>
-            <summary>Was passiert mit Erde, Steinen und Grünschnitt?</summary>
-            <p>Das nehmen wir mit und entsorgen es fachgerecht. Die Kosten dafür stehen vorher im Angebot, es gibt keine Überraschungen auf der Rechnung.</p>
-          </details>
-          <details>
-            <summary>Kann ich die Kosten von der Steuer absetzen?</summary>
-            <p>Den Arbeitsanteil oft schon, als Handwerkerleistung. Wir weisen ihn auf der Rechnung getrennt aus. Fragen Sie im Zweifel kurz Ihren Steuerberater.</p>
-          </details>
-        </div>
-      </div>
-    </section>
-
-    <section class="abschnitt" id="karriere">
-      <div class="container">
-        <div class="karriere">
+  <!-- Stimmen -->
+  <section class="abschnitt stimmen-bereich" aria-labelledby="stimmen-titel">
+    <div class="wrap">
+      <div class="kopf-zeile">
+        <h2 id="stimmen-titel" class="auf">Das sagen unsere Kunden</h2>
+        <div class="schnitt auf v1">
+          <b>4,9</b>
           <div>
-            <h2>Arbeiten an der frischen Luft?</h2>
-            <p>
-              Bei uns sitzt du nicht im Büro. Du baust Gärten, die Menschen jeden Tag genießen.
-              Wir suchen Leute, die mit anpacken wollen.
-            </p>
-            <a class="knopf" href="mailto:info@beispiel.de?subject=Bewerbung">Jetzt einfach bewerben</a>
+            <span class="sterne" role="img" aria-label="4,9 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span>
+            <span class="klein">87 Bewertungen auf Google</span>
           </div>
-          <ul>
-            <li>Landschaftsgärtner (m/w/d)</li>
-            <li>Helfer im Garten- und Landschaftsbau (m/w/d)</li>
-            <li>Azubi Landschaftsgärtner für 2027 (m/w/d)</li>
-            <li>Bewerbung auch per WhatsApp möglich</li>
-          </ul>
         </div>
       </div>
-    </section>
+      <div class="stimmen">
+        <blockquote class="stimme gross auf">
+          <span class="sterne" role="img" aria-label="5 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span>
+          <p>„Herr Albers kam selbst vorbei und hatte gute Ideen für unseren kleinen Hang. Das Angebot war fair und wurde genau eingehalten.“</p>
+          <footer><strong>Selin K.</strong> aus Beispielhausen · 1. Oktober 2026</footer>
+        </blockquote>
+        <blockquote class="stimme auf v1">
+          <span class="sterne" role="img" aria-label="5 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span>
+          <p>„Die Terrasse ist genau so geworden wie auf dem Entwurf. Und die Baustelle war jeden Abend aufgeräumt.“</p>
+          <footer><strong>Markus W.</strong> aus Musterstadt · 3. Juli 2026</footer>
+        </blockquote>
+        <blockquote class="stimme auf v2">
+          <span class="sterne" role="img" aria-label="5 von 5 Sternen"><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg><svg aria-hidden="true"><use href="#i-stern"/></svg></span>
+          <p>„Seit wir den Pflegevertrag haben, sieht unser Garten das ganze Jahr gut aus, ohne dass wir etwas tun müssen.“</p>
+          <footer><strong>Renate H.</strong> aus Neudorf · 22. August 2026</footer>
+        </blockquote>
+      </div>
+      <p class="stimmen-hinweis">Beispielbewertungen. Auf einer echten Seite stehen hier die echten Google-Bewertungen des Betriebs.</p>
+    </div>
+  </section>
 
-    <section class="abschnitt" id="kontakt">
-      <div class="container kontakt">
-        <div class="kontakt-info">
-          <div class="abschnitt-kopf">
-            <h2>Lassen Sie uns über Ihren Garten sprechen</h2>
-            <p>Der erste Termin vor Ort ist kostenlos und unverbindlich.</p>
-          </div>
-          <p>Am schnellsten erreichen Sie uns telefonisch unter <a href="tel:+49123456780">0123 456 780</a>.</p>
-          <dl>
-            <dt>Adresse</dt>
-            <dd>Am Gartenweg 5, 12345 Musterstadt</dd>
-            <dt>Bürozeiten</dt>
-            <dd>Mo–Fr 7:00–16:00 Uhr</dd>
-            <dt>Einsatzgebiet</dt>
-            <dd>
-              Musterstadt und 25 km Umkreis
+  <!-- Fragen -->
+  <section class="abschnitt" id="fragen" aria-labelledby="fragen-titel">
+    <div class="wrap fragen-raster">
+      <div>
+        <h2 id="fragen-titel" class="auf">Häufige Fragen</h2>
+        <p class="lead auf v1">Ihre Frage ist nicht dabei? Rufen Sie einfach an: <a href="tel:+49123456780">0123 456 780</a>.</p>
+      </div>
+      <div class="fragen auf v1">
+        <details>
+          <summary>Was kostet der erste Termin vor Ort?<span class="plus" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Nichts. Wir schauen uns Ihren Garten an, hören uns Ihre Wünsche an und schicken Ihnen danach ein schriftliches Angebot. Sie entscheiden in Ruhe.</p>
+        </details>
+        <details>
+          <summary>Wie lange im Voraus muss ich buchen?<span class="plus" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Für Bauarbeiten im Frühjahr am besten bis Januar. Im Sommer und Herbst haben wir meist innerhalb von 4 bis 6 Wochen einen Termin frei.</p>
+        </details>
+        <details>
+          <summary>Kümmern Sie sich auch um kleine Gärten?<span class="plus" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Ja. Ein Reihenhausgarten ist für uns ein ganz normaler Auftrag. Der Pflegevertrag lohnt sich schon ab etwa 100 m².</p>
+        </details>
+        <details>
+          <summary>Was passiert mit Erde, Steinen und Grünschnitt?<span class="plus" aria-hidden="true"><svg><use href="#i-plus"/></svg></span></summary>
+          <p>Das nehmen wir mit und entsorgen es fachgerecht. Die Kosten dafür stehen vorher im Angebot, es gibt keine Überraschungen auf der Rechnung.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt und Anfrage -->
+  <section class="abschnitt" id="kontakt" aria-labelledby="kontakt-titel">
+    <div class="wrap kontakt">
+      <div class="kontakt-info">
+        <h2 id="kontakt-titel" class="auf">Lassen Sie uns über Ihren Garten sprechen</h2>
+        <p class="lead auf v1">Der erste Termin vor Ort ist kostenlos und unverbindlich. Am schnellsten erreichen Sie uns telefonisch.</p>
+        <a class="tel-gross auf v1" href="tel:+49123456780"><svg aria-hidden="true"><use href="#i-tel"/></svg>0123 456 780</a>
+        <p class="tel-zeit">Mo–Fr 7:00–16:00 Uhr</p>
+        <ol class="ablauf auf v2" aria-label="So läuft es ab">
+          <li><strong>Anfrage</strong><span>Sie rufen an oder schreiben uns. Wir melden uns innerhalb von zwei Werktagen.</span></li>
+          <li><strong>Termin vor Ort, Entwurf und Angebot</strong><span>Wir schauen uns Ihren Garten an und besprechen Ihre Wünsche. Danach bekommen Sie einen Plan und ein klares Angebot mit festem Termin.</span></li>
+          <li><strong>Wir legen los</strong><span>Unser Team baut zügig und sauber. Am Ende räumen wir alles auf.</span></li>
+        </ol>
+        <dl class="angaben">
+          <div class="nur-gross-block"><dt class="feld-titel">Adresse</dt><dd>Am Gartenweg 5, 12345 Musterstadt</dd></div>
+          <div>
+            <dt class="feld-titel">Einsatzgebiet</dt>
+            <dd>Musterstadt und 25 km Umkreis
               <ul class="orte">
                 <li>Musterstadt</li>
                 <li>Beispielhausen <small>7 km</small></li>
@@ -1074,61 +330,102 @@
                 <li>Oberfeld <small>23 km</small></li>
               </ul>
             </dd>
-          </dl>
-        </div>
-        <form id="anfrage">
-          <div class="zwei-spalten">
-            <label>Name<input type="text" name="name" autocomplete="name" required></label>
-            <label>Telefon<input type="tel" name="telefon" autocomplete="tel" required></label>
           </div>
-          <label>Was haben Sie vor?
-            <select name="vorhaben">
-              <option>Garten neu gestalten</option>
-              <option>Terrasse oder Pflaster</option>
-              <option>Zaun oder Sichtschutz</option>
-              <option>Gartenpflege</option>
-              <option>Etwas anderes</option>
-            </select>
-          </label>
-          <label>Wie groß ist Ihr Garten ungefähr? (optional)<input type="text" name="groesse" placeholder="z. B. 200 m²"></label>
-          <label>Nachricht (optional)<textarea name="nachricht" rows="4"></textarea></label>
+        </dl>
+      </div>
+
+      <div class="formular auf v1">
+        <div class="tafel-kopf"><p>Ihr Bauvorhaben</p><span class="feld-titel">Dauert 1 Minute</span></div>
+        <form id="anfrage" novalidate>
+          <fieldset>
+            <legend>Was haben Sie vor?</legend>
+            <div class="wahl">
+              <label><input type="radio" name="vorhaben" value="Garten neu gestalten" checked><span>Garten neu gestalten</span></label>
+              <label><input type="radio" name="vorhaben" value="Terrasse oder Pflaster"><span>Terrasse oder Pflaster</span></label>
+              <label><input type="radio" name="vorhaben" value="Zaun oder Sichtschutz"><span>Zaun oder Sichtschutz</span></label>
+              <label><input type="radio" name="vorhaben" value="Gartenpflege"><span>Gartenpflege</span></label>
+              <label><input type="radio" name="vorhaben" value="Etwas anderes"><span>Etwas anderes</span></label>
+            </div>
+          </fieldset>
+          <div class="zwei">
+            <div class="feld">
+              <label for="f-name">Name</label>
+              <input id="f-name" type="text" name="name" autocomplete="name" required placeholder="z. B. Maria Huber…">
+            </div>
+            <div class="feld">
+              <label for="f-tel">Telefon</label>
+              <input id="f-tel" type="tel" name="telefon" autocomplete="tel" inputmode="tel" required placeholder="z. B. 0171 2345678…">
+            </div>
+          </div>
+          <details class="mehr">
+            <summary><svg aria-hidden="true"><use href="#i-plus"/></svg>Mehr angeben (optional)</summary>
+            <div class="mehr-felder">
+              <div class="feld">
+                <label for="f-groesse">Wie groß ist Ihr Garten ungefähr?</label>
+                <input id="f-groesse" type="text" name="groesse" placeholder="z. B. 200 m²…" autocomplete="off">
+              </div>
+              <div class="feld">
+                <label for="f-nachricht">Nachricht</label>
+                <textarea id="f-nachricht" name="nachricht" rows="4"></textarea>
+              </div>
+            </div>
+          </details>
           <label class="einwilligung">
-            <input type="checkbox" required>
-            Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.
+            <input type="checkbox" name="einwilligung" required>
+            <span>Ich bin einverstanden, dass meine Angaben zur Bearbeitung meiner Anfrage gespeichert werden. Mehr dazu in der <a href="datenschutz.html">Datenschutzerklärung</a>.</span>
           </label>
-          <button class="knopf" type="submit">Anfrage senden</button>
-          <p class="formular-danke" role="status">Danke! Auf einer echten Seite würde Ihre Anfrage jetzt verschickt.</p>
+          <p class="form-hinweis">Beispielseite: Dieses Formular verschickt nichts. Auf einer echten Seite geht die Anfrage direkt an den Betrieb.</p>
+          <button class="knopf" type="submit">Anfrage senden<svg class="pfeil" aria-hidden="true"><use href="#i-pfeil"/></svg></button>
+          <p class="danke" role="status" hidden>Danke! Auf einer echten Seite würde Ihre Anfrage jetzt verschickt.</p>
         </form>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+</main>
 
-  <footer class="fuss">
-    <div class="container">
+<footer class="fuss">
+  <div class="wrap">
+    <div class="fuss-raster">
+      <div>
+        <span class="marke">
+          <svg aria-hidden="true"><use href="#i-marke"/></svg>
+          <span class="marke-text"><b translate="no">Grünwerk Albers</b><span>Garten- und Landschaftsbau</span></span>
+        </span>
+        <p style="margin-top:18px;max-width:28em">Meisterbetrieb in Musterstadt seit 2008. Gärten planen, bauen und pflegen, im Umkreis von 25 km.</p>
+      </div>
+      <div>
+        <h2>Kontakt</h2>
+        <a class="link-zeile" href="tel:+49123456780">0123 456 780</a><br>
+        <a class="link-zeile" href="mailto:info@gruenwerk-albers.example">info@gruenwerk-albers.example</a>
+      </div>
+      <div>
+        <h2>Adresse</h2>
+        <p>Am Gartenweg 5<br>12345 Musterstadt<br>Mo–Fr 7:00–16:00 Uhr</p>
+      </div>
+    </div>
+    <div class="fuss-unten">
       <p>&copy; 2026 Grünwerk Albers (Beispiel) · Webseite: Hand &amp; Fuß Webseiten</p>
       <nav aria-label="Rechtliches">
         <a href="impressum.html">Impressum</a>
         <a href="datenschutz.html">Datenschutz</a>
       </nav>
-      <p class="quellen">
-        Fotos von Unsplash (kostenlose Lizenz):
-        <a href="https://unsplash.com/de/fotos/UijIjarr5Gg">Lara John</a>,
-        <a href="https://unsplash.com/de/fotos/yP02OVtq-Ig">Tile Merchant Ireland</a>,
-        <a href="https://unsplash.com/de/fotos/AqCTAOMJUVk">Sergej (@skstrannik)</a>,
-        <a href="https://unsplash.com/de/fotos/PKcTuA_CRAo">Crystal Jo</a>.
-      </p>
     </div>
-  </footer>
+    <p class="quellen">
+      Fotos von Unsplash (kostenlose Lizenz):
+      <a href="https://unsplash.com/de/fotos/UijIjarr5Gg">Lara John</a>,
+      <a href="https://unsplash.com/de/fotos/yP02OVtq-Ig">Tile Merchant Ireland</a>,
+      <a href="https://unsplash.com/de/fotos/AqCTAOMJUVk">Sergej (@skstrannik)</a>,
+      <a href="https://unsplash.com/de/fotos/PKcTuA_CRAo">Crystal Jo</a>.
+      Schrift: Archivo (SIL Open Font License), lokal eingebunden.
+    </p>
+  </div>
+</footer>
 
-  <a class="knopf anruf-mobil" href="tel:+49123456780">📞 Jetzt anrufen</a>
+<div class="dock" id="dock">
+  <a class="knopf knopf-rand" href="tel:+49123456780"><svg aria-hidden="true"><use href="#i-tel"/></svg>Anrufen</a>
+  <a class="knopf" href="#kontakt">Anfrage</a>
+</div>
 
-  <script>
-    // Beispielseite: Das Formular verschickt nichts, es zeigt nur eine Bestätigung
-    document.getElementById('anfrage').addEventListener('submit', function (e) {
-      e.preventDefault();
-      this.querySelector('.formular-danke').style.display = 'block';
-    });
-  </script>
-
+<script src="js/seite.js" defer></script>
 </body>
 </html>
